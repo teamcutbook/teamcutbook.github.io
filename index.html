@@ -1538,62 +1538,16 @@
         }
 
         /* Responsive Utilities */
-        @media (max-width: 1024px) {
+        @media (max-width: 1200px) {
             .hero {
-                padding: 60px 0;
+                overflow: visible;
+                padding: 0;
+                position: relative;
             }
             .hero-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-                text-align: center;
-            }
-            .hero-content {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-            .hero p {
-                margin: 0 auto 30px auto;
-            }
-            .hero-metrics {
-                justify-content: center;
-            }
-            .hero-ctas {
-                justify-content: center;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .hero h1 {
-                font-size: 38px;
-            }
-            .mockups-dual-container {
-                transform: scale(0.85);
-                transform-origin: center;
-                height: 520px;
-            }
-        }
-
-        @media (max-width: 520px) {
-            .hero h1 {
-                font-size: 30px;
-            }
-            .mockups-dual-container {
-                transform: scale(0.7);
-                transform-origin: center;
-                height: 430px;
-            }
-        }
-
-        @media (max-width: 400px) {
-            .hero h1 {
-                font-size: 26px;
-            }
-            .mockups-dual-container {
-                transform: scale(0.55);
-                transform-origin: center;
-                height: 340px;
+                width: 1152px;
+                transform-origin: top left;
+                position: absolute;
             }
         }
 
@@ -2476,7 +2430,29 @@
 
         revealElements.forEach(el => observer.observe(el));
 
-
+        // Resizing hero part proportional to screen ratio
+        function resizeHero() {
+            const hero = document.querySelector('.hero');
+            const heroGrid = document.querySelector('.hero-grid');
+            if (!hero || !heroGrid) return;
+            
+            const width = window.innerWidth;
+            if (width < 1200) {
+                const scale = width / 1200;
+                heroGrid.style.transform = `scale(${scale})`;
+                hero.style.height = (740 * scale) + 'px';
+                heroGrid.style.left = (24 * scale) + 'px';
+                heroGrid.style.top = (80 * scale) + 'px';
+            } else {
+                heroGrid.style.transform = '';
+                hero.style.height = '';
+                heroGrid.style.left = '';
+                heroGrid.style.top = '';
+            }
+        }
+        window.addEventListener('resize', resizeHero);
+        window.addEventListener('load', resizeHero);
+        resizeHero();
     </script>
 </body>
 </html>
