@@ -2438,10 +2438,12 @@
             
             const width = window.innerWidth;
             if (width < 1200) {
-                const scale = width / 1200;
+                // Calculate scale based on container content width (W - 48px padding) relative to 1152px unscaled content width
+                const scale = (width - 48) / 1152;
                 heroGrid.style.transform = `scale(${scale})`;
-                hero.style.height = (740 * scale) + 'px';
-                heroGrid.style.left = (24 * scale) + 'px';
+                // Calculate height proportional to scale, including top offset space and mockups height
+                hero.style.height = (820 * scale) + 'px';
+                heroGrid.style.left = '24px';
                 heroGrid.style.top = (80 * scale) + 'px';
             } else {
                 heroGrid.style.transform = '';
