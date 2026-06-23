@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - CutBook POS</title>
+    <meta name="description" content="Privacy Policy for CutBook Salon Management & POS System. Learn how we handle and protect your salon's operational data.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #04151f;
+            --primary: #c44900; /* Burnt Orange */
+            --primary-rgb: 196, 73, 0;
+            --secondary: #efd6ac; /* Wheat */
+            --secondary-rgb: 239, 214, 172;
+            --slate-grey: #183a37; /* Dark Slate Grey */
+            --slate-grey-rgb: 24, 58, 55;
+            --violet: #432534; /* Midnight Violet */
+            --violet-rgb: 67, 37, 52;
+            --card-border: rgba(239, 214, 172, 0.08);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(239, 214, 172, 0.7);
+            --success: #10b981;
+            --error: #ef4444;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        /* Mouse Follower Ambient Glow */
+        .cursor-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(var(--primary-rgb), 0.08) 0%, rgba(var(--slate-grey-rgb), 0.06) 50%, rgba(0,0,0,0) 85%);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Ambient Background Glows */
+        .glow-1 {
+            position: absolute;
+            top: -200px;
+            right: -100px;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(var(--primary-rgb), 0.12) 0%, rgba(0,0,0,0) 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .glow-2 {
+            position: absolute;
+            top: 500px;
+            left: -200px;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(var(--slate-grey-rgb), 0.15) 0%, rgba(0,0,0,0) 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--card-border);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(4, 21, 31, 0.8);
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(239, 214, 172, 0.15);
+            background: rgba(4, 21, 31, 0.95);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            transition: var(--transition);
+        }
+
+        .logo img {
+            height: 42px;
+            width: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(var(--primary-rgb), 0.3);
+            border: 1.5px solid rgba(239, 214, 172, 0.2);
+            transition: var(--transition);
+        }
+
+        .logo:hover img {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 0 20px rgba(var(--primary-rgb), 0.6);
+            border-color: var(--secondary);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        nav a:not(.btn)::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: var(--transition);
+        }
+
+        nav a:not(.btn):hover {
+            color: var(--text-primary);
+        }
+
+        nav a:not(.btn):hover::after {
+            width: 100%;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 26px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 15px;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), #a33c00);
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(var(--primary-rgb), 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 28px rgba(var(--primary-rgb), 0.55);
+            filter: brightness(1.15);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 110;
+        }
+
+        .menu-toggle svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        /* Mobile Nav Drawer */
+        .mobile-drawer {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100vh;
+            background: rgba(4, 21, 31, 0.98);
+            border-left: 1px solid var(--card-border);
+            z-index: 99;
+            padding: 100px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(20px);
+        }
+
+        .mobile-drawer.active {
+            right: 0;
+        }
+
+        .mobile-drawer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            font-family: 'Outfit', sans-serif;
+            transition: var(--transition);
+        }
+
+        .mobile-drawer a:hover {
+            color: var(--secondary);
+            padding-left: 8px;
+        }
+
+        /* Content Layout */
+        .content-hero {
+            padding: 80px 0 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .content-hero h1 {
+            font-size: 48px;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #ffffff 30%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .content-hero p {
+            color: var(--text-secondary);
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .content-body {
+            padding-bottom: 100px;
+        }
+
+        .content-card {
+            background: rgba(24, 58, 55, 0.15);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 48px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .content-section {
+            margin-bottom: 40px;
+        }
+
+        .content-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .content-section h2 {
+            font-size: 24px;
+            color: var(--secondary);
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .content-section h2::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        .content-section p {
+            color: var(--text-secondary);
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .content-section ul {
+            list-style: none;
+            padding-left: 8px;
+            margin-bottom: 16px;
+        }
+
+        .content-section ul li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 12px;
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .content-section ul li::before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 20px;
+            position: absolute;
+            left: 4px;
+            top: -2px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0 40px;
+            border-top: 1px solid var(--card-border);
+            color: var(--text-secondary);
+            font-size: 14px;
+            background: rgba(4, 21, 31, 0.85);
+            backdrop-filter: blur(5px);
+            margin-top: auto;
+        }
+
+        .footer-grid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 32px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Outfit', sans-serif;
+            font-size: 26px;
+            font-weight: 800;
+        }
+
+        .footer-logo img {
+            height: 42px;
+            border-radius: 10px;
+            border: 1px solid rgba(239, 214, 172, 0.2);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-copyright {
+            color: rgba(239, 214, 172, 0.3);
+            border-top: 1px solid rgba(239, 214, 172, 0.05);
+            padding-top: 24px;
+            width: 100%;
+        }
+
+        /* Global App Notification Toast */
+        .global-toast {
+            position: fixed;
+            bottom: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(24, 58, 55, 0.95);
+            border: 1px solid var(--secondary);
+            padding: 16px 28px;
+            border-radius: 40px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+        }
+
+        .global-toast.show {
+            bottom: 40px;
+        }
+
+        .global-toast svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--secondary);
+            fill: none;
+        }
+
+        /* Responsive Utilities */
+        @media (max-width: 768px) {
+            .content-hero {
+                padding: 60px 0 30px;
+            }
+            .content-hero h1 {
+                font-size: 36px;
+            }
+            .content-card {
+                padding: 24px;
+                border-radius: 16px;
+            }
+            nav {
+                display: none;
+            }
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-links {
+                flex-direction: column;
+                gap: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Glow Effects -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo">
+                <img src="../CutBook_logo.png" alt="CutBook Logo">
+                CutBook
+            </a>
+            <nav>
+                <a href="../index.html#features">Features</a>
+                <a href="../index.html#calculator">Calculator</a>
+                <a href="../index.html#pricing">Pricing</a>
+                <a href="../index.html#tutorial">Tutorial</a>
+                <a href="https://play.google.com/store/apps/details?id=com.cutbook" class="btn btn-primary">Download App</a>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path d="M4 6h16M4 12h16M4 18h16" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+        <a href="../index.html#features" class="drawer-link">Features</a>
+        <a href="../index.html#calculator" class="drawer-link">Calculator</a>
+        <a href="../index.html#pricing" class="drawer-link">Pricing</a>
+        <a href="../index.html#tutorial" class="drawer-link">Tutorial</a>
+        <a href="https://play.google.com/store/apps/details?id=com.cutbook" class="btn btn-primary" style="margin-top: 20px;">Download App</a>
+    </div>
+
+    <!-- Content Section -->
+    <div class="container content-hero">
+        <h1>Privacy Policy</h1>
+        <p>Last Updated: June 23, 2026</p>
+    </div>
+
+    <div class="container content-body">
+        <div class="content-card">
+            <section class="content-section">
+                <h2>1. Introduction</h2>
+                <p>Welcome to CutBook. We value your privacy and are committed to protecting the operational data of your salon, stylists, and clients. This Privacy Policy details how we collect, process, and safeguard the information you trust us with when utilizing the CutBook App and website.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>2. Data Collection & Offline-First Design</h2>
+                <p>CutBook is built as an offline-first system to ensure your business remains active at all times. All transactions, commission ledgers, and payout logs are saved locally in a secure SQLite database stored on your device.</p>
+                <p>When an active network connection is detected, CutBook automatically synchronizes your local data with our secure servers. This includes:</p>
+                <ul>
+                    <li>Stylist profiles (names, custom commissions, and roles).</li>
+                    <li>Operational logs (service item price tags, logs of hair cuts, styling, payments, and tips).</li>
+                    <li>Owner metrics and historical logs to facilitate multi-device updates and secure backups.</li>
+                </ul>
+            </section>
+
+            <section class="content-section">
+                <h2>3. How We Use Your Information</h2>
+                <p>The information processed by CutBook is used strictly to provide the core system functionality:</p>
+                <ul>
+                    <li>Real-time salon operational analytics and performance reporting.</li>
+                    <li>Accurate commission calculations and payout request records for salon staff.</li>
+                    <li>Synchronizing device ledgers across multiple authorized user logins.</li>
+                    <li>Sending transactional, synchronization, or upcoming service notifications.</li>
+                </ul>
+            </section>
+
+            <section class="content-section">
+                <h2>4. Data Security</h2>
+                <p>We deploy standard industry practices to ensure your data is safe. Connection pipelines between local devices and our sync servers use secure Transport Layer Security (TLS) and WebSocket connections. Databases hosted on our production cloud servers utilize enterprise-grade encryption standard practices to protect your data from unauthorized access or breaches.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>5. Third-Party Integrations</h2>
+                <p>CutBook does not share or sell salon ledgers or customer transactional history to advertising companies. We may use verified services (such as Google Analytics for mobile crash reports, Firebase, or similar) strictly to track performance improvements, app latency, and offline sync bugs.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>6. Your Control Over Data</h2>
+                <p>You have full authority over your data. As a salon owner, you can edit, clear, or request absolute deletion of your synchronized salon record profiles and accounts directly from the setting screen of the application or by writing to support.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>7. Contact Information</h2>
+                <p>If you have any inquiries, suggestions, or concerns regarding our Privacy Policy or need help with database management, please reach out to us at:</p>
+                <p><strong>Email:</strong> support@cutbook.app</p>
+            </section>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <a href="../index.html" class="footer-logo">
+                <img src="../CutBook_logo.png" alt="CutBook Logo">
+                CutBook
+            </a>
+            
+            <div class="footer-links">
+                <a href="../index.html#features">Features</a>
+                <a href="../index.html#calculator">Calculator</a>
+                <a href="../index.html#pricing">Pricing</a>
+                <a href="../index.html#tutorial">Tutorial</a>
+                <a href="../Terms/index.html">Terms of Service</a>
+                <a href="index.html">Privacy Policy</a>
+            </div>
+            
+            <p class="footer-copyright">&copy; 2026 CutBook Project. All Rights Reserved. Hosted on GitHub Pages.</p>
+        </div>
+    </footer>
+
+    <!-- Global App Notification Toast -->
+    <div class="global-toast" id="globalAppToast">
+        <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" stroke-width="2"/>
+            <line x1="12" y1="16" x2="12" y2="12" stroke-width="2"/>
+            <line x1="12" y1="8" x2="12.01" y2="8" stroke-width="2"/>
+        </svg>
+        <span>iOS version is upcoming! We're launching soon.</span>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Mouse Following Glow Effect
+        const cursorGlow = document.getElementById('cursorGlow');
+        document.addEventListener('mousemove', (e) => {
+            cursorGlow.style.opacity = '1';
+            cursorGlow.style.left = e.clientX + 'px';
+            cursorGlow.style.top = e.clientY + 'px';
+        });
+        document.addEventListener('mouseleave', () => {
+            cursorGlow.style.opacity = '0';
+        });
+
+        // Header Scrolled styling
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile drawer navigation
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileDrawer = document.getElementById('mobileDrawer');
+        
+        menuToggle.addEventListener('click', () => {
+            mobileDrawer.classList.toggle('active');
+        });
+
+        // Close drawer when clicking a link
+        document.querySelectorAll('.drawer-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileDrawer.classList.remove('active');
+            });
+        });
+
+        // Live App Store Upcoming Toast
+        function triggerUpcomingAppToast() {
+            const toast = document.getElementById('globalAppToast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
