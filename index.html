@@ -1538,7 +1538,7 @@
         }
 
         /* Responsive Utilities */
-        @media (max-width: 1200px) {
+        @media (min-width: 768px) and (max-width: 1200px) {
             .hero {
                 overflow: visible;
                 padding: 0;
@@ -1578,6 +1578,47 @@
             .pricing-grid {
                 grid-template-columns: 1fr !important;
             }
+
+            /* Mobile Hero styling */
+            .hero {
+                padding: 40px 0 60px;
+                overflow: hidden;
+            }
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+            .hero-content {
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .hero h1 {
+                font-size: 36px;
+                margin-bottom: 16px;
+            }
+            .hero p {
+                font-size: 16px;
+                margin-bottom: 24px;
+                max-width: 100%;
+            }
+            .hero-metrics {
+                justify-content: center;
+                gap: 24px;
+                margin-bottom: 24px;
+                width: 100%;
+            }
+            .hero-ctas {
+                justify-content: center;
+            }
+            .mockups-dual-container {
+                max-width: 100%;
+                margin-top: 20px;
+                transform: scale(0.85);
+                transform-origin: center center;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1588,6 +1629,11 @@
             .footer-links {
                 flex-direction: column;
                 gap: 16px;
+            }
+            .mockups-dual-container {
+                transform: scale(0.62);
+                margin-top: -80px;
+                margin-bottom: -80px;
             }
         }
     </style>
@@ -2518,7 +2564,7 @@
             if (!hero || !heroGrid) return;
             
             const width = window.innerWidth;
-            if (width < 1200) {
+            if (width >= 768 && width < 1200) {
                 // Calculate scale based on container content width (W - 48px padding) relative to 1152px unscaled content width
                 const scale = (width - 48) / 1152;
                 heroGrid.style.transform = `scale(${scale})`;
