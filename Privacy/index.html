@@ -526,57 +526,105 @@
     <!-- Content Section -->
     <div class="container content-hero">
         <h1>Privacy Policy</h1>
-        <p>Last Updated: June 23, 2026</p>
+        <p>Last Updated: June 29, 2026</p>
     </div>
 
     <div class="container content-body">
         <div class="content-card">
             <section class="content-section">
-                <h2>1. Introduction</h2>
-                <p>Welcome to CutBook. We value your privacy and are committed to protecting the operational data of your salon, stylists, and clients. This Privacy Policy details how we collect, process, and safeguard the information you trust us with when utilizing the CutBook App and website.</p>
+                <h2>1. Introduction & Scope</h2>
+                <p>Welcome to CutBook POS (referred to as "CutBook", "we", "us", or "our"). We value your privacy and are committed to protecting the personal and operational data of your salon, stylists, and clients. This Privacy Policy explains how we collect, use, disclose, and secure your information when you utilize the CutBook mobile application (Android/iOS), our web application, and our website (collectively, the "Service").</p>
+                <p>By accessing or using the Service, you agree to the collection and use of information in accordance with this Privacy Policy. If you do not agree with these terms, please do not access or use the Service.</p>
             </section>
 
             <section class="content-section">
-                <h2>2. Data Collection & Offline-First Design</h2>
-                <p>CutBook is built as an offline-first system to ensure your business remains active at all times. All transactions, commission ledgers, and payout logs are saved locally in a secure SQLite database stored on your device.</p>
-                <p>When an active network connection is detected, CutBook automatically synchronizes your local data with our secure servers. This includes:</p>
+                <h2>2. Information We Collect</h2>
+                <p>To provide a fully functioning POS and salon analytics experience, we collect several categories of information depending on how you interact with our Service:</p>
+                
+                <h3 style="color: var(--secondary); font-size: 18px; margin: 16px 0 8px; font-family: 'Outfit', sans-serif;">A. Personal Data</h3>
+                <p>When you create an account, register your salon, or communicate with us, we collect information that can identify you, including:</p>
                 <ul>
-                    <li>Stylist profiles (names, custom commissions, and roles).</li>
-                    <li>Operational logs (service item price tags, logs of hair cuts, styling, payments, and tips).</li>
-                    <li>Owner metrics and historical logs to facilitate multi-device updates and secure backups.</li>
+                    <li><strong>Authentication Details:</strong> Email address and phone number (collected and processed securely via Google Firebase Authentication).</li>
+                    <li><strong>Profile Information:</strong> Display name and profile picture (optional, for personalizing your account).</li>
+                    <li><strong>Business Details:</strong> Salon name, business address (optional), local currency, and timezone settings.</li>
+                </ul>
+
+                <h3 style="color: var(--secondary); font-size: 18px; margin: 16px 0 8px; font-family: 'Outfit', sans-serif;">B. Transactional & Salon Operational Data (Offline-First Sync)</h3>
+                <p>CutBook is built on an offline-first architecture. All transaction logs, commission structures, and stylist profiles are stored locally in a secure SQLite database on your device. When an active internet connection is detected, CutBook automatically synchronizes your local data with our secure cloud database (Google Cloud Firestore) to facilitate backups and support multi-device access. This synchronized data includes:</p>
+                <ul>
+                    <li><strong>Stylist & Employee Profiles:</strong> Names, roles, custom commission percentages, and payout histories.</li>
+                    <li><strong>Work Entries & Service Logs:</strong> Details of services rendered (e.g., haircuts, styling, coloring), service price tags, timestamps, client display names (optional), and payment methods.</li>
+                    <li><strong>Financial Metrics:</strong> Commission calculations, tips collected, sales performance indicators, and historical checkout logs.</li>
+                </ul>
+
+                <h3 style="color: var(--secondary); font-size: 18px; margin: 16px 0 8px; font-family: 'Outfit', sans-serif;">C. Device & Technical Data</h3>
+                <p>We automatically collect certain technical information from your device when you access our app or website:</p>
+                <ul>
+                    <li><strong>Device Identifiers:</strong> Device model, operating system name and version, and unique device IDs.</li>
+                    <li><strong>Push Notification Tokens:</strong> Unique tokens required to deliver synchronization updates, reminders, and system alerts.</li>
+                    <li><strong>Usage & Diagnostic Data:</strong> IP address, access dates/times, app performance metrics, and error logs (collected via Sentry and Google Firebase Crashlytics).</li>
                 </ul>
             </section>
 
             <section class="content-section">
                 <h2>3. How We Use Your Information</h2>
-                <p>The information processed by CutBook is used strictly to provide the core system functionality:</p>
+                <p>We process and use the collected data strictly for operational business purposes, including:</p>
                 <ul>
-                    <li>Real-time salon operational analytics and performance reporting.</li>
-                    <li>Accurate commission calculations and payout request records for salon staff.</li>
-                    <li>Synchronizing device ledgers across multiple authorized user logins.</li>
-                    <li>Sending transactional, synchronization, or upcoming service notifications.</li>
+                    <li><strong>Core App Functionality:</strong> Creating and managing accounts, running offline databases, and synchronizing data across multiple devices.</li>
+                    <li><strong>Business Operations:</strong> Calculating accurate stylist commissions, tracking client appointments, and providing real-time financial reporting.</li>
+                    <li><strong>Customer Support:</strong> Diagnosing synchronization errors, troubleshooting crash logs, and responding to support requests.</li>
+                    <li><strong>Communications:</strong> Sending push notifications regarding sync status, business updates, and security announcements.</li>
                 </ul>
+                <p><em>We do not sell, trade, rent, or distribute your salon data, client records, or operational logs to third-party advertising companies or data brokers.</em></p>
             </section>
 
             <section class="content-section">
                 <h2>4. Data Security</h2>
-                <p>We deploy standard industry practices to ensure your data is safe. Connection pipelines between local devices and our sync servers use secure Transport Layer Security (TLS) and WebSocket connections. Databases hosted on our production cloud servers utilize enterprise-grade encryption standard practices to protect your data from unauthorized access or breaches.</p>
+                <p>We implement industry-standard physical, technical, and administrative security measures to protect your data:</p>
+                <ul>
+                    <li><strong>Data in Transit:</strong> All communications between your local device and our synchronization backend are encrypted using secure Transport Layer Security (TLS/HTTPS) protocols.</li>
+                    <li><strong>Data at Rest:</strong> Customer data synchronized to Cloud Firestore is encrypted using enterprise-grade server-side encryption. Local databases rely on standard operating system sandboxing.</li>
+                    <li><strong>Access Control:</strong> Access to cloud databases is restricted strictly through Firebase Security Rules, ensuring users can only read and write data associated with their verified organization ID.</li>
+                </ul>
             </section>
 
             <section class="content-section">
-                <h2>5. Third-Party Integrations</h2>
-                <p>CutBook does not share or sell salon ledgers or customer transactional history to advertising companies. We may use verified services (such as Google Analytics for mobile crash reports, Firebase, or similar) strictly to track performance improvements, app latency, and offline sync bugs.</p>
+                <h2>5. Data Retention & Account Deletion</h2>
+                <p>In accordance with Google Play Store and Apple App Store Developer Policies, we provide users with full control over their data, including the right to delete their accounts and operational records.</p>
+                <p><strong>Retention Period:</strong> We retain your personal and operational data only for as long as your account is active, or as necessary to provide you with the Service, comply with legal obligations, or resolve disputes.</p>
+                <p><strong>Account and Data Deletion Flow:</strong> You can initiate a permanent deletion of your account and all associated operational data at any time:</p>
+                <ul>
+                    <li><strong>In-App Deletion:</strong> Navigate to <strong>Settings</strong> &gt; <strong>Account Settings</strong> &gt; <strong>Delete Account</strong> inside the CutBook application. Confirming this action will trigger an automatic cleanup script.</li>
+                    <li><strong>Manual Deletion Request:</strong> You can request account deletion by emailing our support team at <a href="mailto:support@cutbook.app" style="color: var(--secondary); text-decoration: underline;">support@cutbook.app</a>. Please provide your registered email address or organization ID.</li>
+                </ul>
+                <p><strong>Scope of Deletion:</strong> Upon processing your deletion request, your authenticated credentials will be deleted from Firebase Authentication, and all synchronized stylist profiles, transaction histories, service logs, and analytics associated with your salon will be permanently purged from Cloud Firestore within 30 days. Any local SQLite database files will remain on your device until you manually uninstall the app.</p>
             </section>
 
             <section class="content-section">
-                <h2>6. Your Control Over Data</h2>
-                <p>You have full authority over your data. As a salon owner, you can edit, clear, or request absolute deletion of your synchronized salon record profiles and accounts directly from the setting screen of the application or by writing to support.</p>
+                <h2>6. Third-Party Services & SDKs</h2>
+                <p>We use standard Software Development Kits (SDKs) and integration partners strictly to maintain, improve, and secure the Service. These third parties handle your data in accordance with their respective privacy policies:</p>
+                <ul>
+                    <li><strong>Google Firebase (Auth, Firestore, Analytics, Crashlytics):</strong> Used for cloud synchronization, user authentication, general app usage metrics, and crash reporting. <a href="https://firebase.google.com/support/privacy" target="_blank" style="color: var(--secondary); text-decoration: underline;">Firebase Privacy Policy</a></li>
+                    <li><strong>Sentry:</strong> Used to monitor application performance and catch crashes in real-time. <a href="https://sentry.io/privacy/" target="_blank" style="color: var(--secondary); text-decoration: underline;">Sentry Privacy Policy</a></li>
+                    <li><strong>Stripe / bKash:</strong> Used to process subscription payments and premium invoices. We do not collect or store credit card numbers on our servers. <a href="https://stripe.com/privacy" target="_blank" style="color: var(--secondary); text-decoration: underline;">Stripe Privacy Policy</a> | <a href="https://www.bkash.com/privacy-policy" target="_blank" style="color: var(--secondary); text-decoration: underline;">bKash Privacy Policy</a></li>
+                </ul>
             </section>
 
             <section class="content-section">
-                <h2>7. Contact Information</h2>
-                <p>If you have any inquiries, suggestions, or concerns regarding our Privacy Policy or need help with database management, please reach out to us at:</p>
-                <p><strong>Email:</strong> support@cutbook.app</p>
+                <h2>7. Children's Privacy</h2>
+                <p>Our Service is not intended for or directed to children under the age of 13. We do not knowingly collect personal identifiable information from children under 13. If we discover that a child under 13 has provided us with personal data, we immediately delete this from our servers.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>8. Changes to This Privacy Policy</h2>
+                <p>We may update our Privacy Policy from time to time to reflect changes in our practices or regulatory requirements. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date. We encourage you to review this page periodically.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>9. Contact Information</h2>
+                <p>If you have any questions, comments, or concerns about this Privacy Policy, or if you need assistance with account deletion or data portability, please contact us at:</p>
+                <p><strong>Email:</strong> <a href="mailto:support@cutbook.app" style="color: var(--secondary); text-decoration: underline;">support@cutbook.app</a></p>
+                <p><strong>Mailing Address:</strong> CutBook Project Team, [Insert Physical Address (Optional)]</p>
             </section>
         </div>
     </div>
