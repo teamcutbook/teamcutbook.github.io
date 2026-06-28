@@ -79,7 +79,7 @@ We retain your personal and operational data only for as long as your CutBook ac
 ### B. Account and Data Deletion Flow
 You can initiate a permanent deletion of your account and all associated operational data at any time:
 1.  **In-App Deletion:** Navigate to **Settings** > **Account Settings** > **Delete Account** inside the CutBook application. Confirming this action will trigger an automatic cleanup script.
-2.  **Manual Deletion Request:** You can request account deletion by emailing our support team at [support@cutbook.app](mailto:support@cutbook.app) with the subject line "Account Deletion Request." Please provide your registered email address or organization ID.
+2.  **Manual Deletion Request:** You can request account deletion by emailing our support team at [bdcutbook@gmail.com](mailto:bdcutbook@gmail.com) or [jaoharraihan@gmail.com](mailto:jaoharraihan@gmail.com) with the subject line "Account Deletion Request." Please provide your registered email address or organization ID.
 
 ### C. Scope of Deletion
 Upon receiving a deletion request (either in-app or via email), the following processes occur:
@@ -119,5 +119,6 @@ We may update our Privacy Policy from time to time to reflect changes in our pra
 
 If you have any questions, comments, or concerns about this Privacy Policy, or if you need assistance with account deletion or data portability, please contact us at:
 
-*   **Email:** [support@cutbook.app](mailto:support@cutbook.app)
-*   **Mailing Address:** CutBook Project Team, [Insert Physical Address (Optional)]
+*   **Email:** [bdcutbook@gmail.com](mailto:bdcutbook@gmail.com) / [jaoharraihan@gmail.com](mailto:jaoharraihan@gmail.com)
+*   **Phone:** +880 1874-517426
+*   **Mailing Address:** CutBook Project Team
