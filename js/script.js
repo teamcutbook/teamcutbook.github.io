@@ -37,6 +37,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 11. Interactive 360° 3D Ecosystem Galaxy Orbit
   init3DEcosystem();
+
+  // 12. CutBook Owner Work Entry POS Simulator & Code Viewer
+  initPosSimulatorInteractive();
 });
 
 /* --------------------------------------------------------------------------
@@ -1842,5 +1845,141 @@ function initInsightsLensSwitcher() {
       });
     });
   });
+}
+
+/* --------------------------------------------------------------------------
+   14. CutBook Owner Work Entry POS Simulator & React Native Code Viewer
+   -------------------------------------------------------------------------- */
+function initPosSimulatorInteractive() {
+  const btnUi = document.getElementById('btnPosViewUi');
+  const btnCode = document.getElementById('btnPosViewCode');
+  const panelUi = document.getElementById('posViewUi');
+  const panelCode = document.getElementById('posViewCode');
+  const btnCopy = document.getElementById('btnCopyAppCode');
+
+  if (btnUi && btnCode && panelUi && panelCode) {
+    btnUi.addEventListener('click', () => {
+      btnUi.classList.add('active');
+      btnCode.classList.remove('active');
+      panelUi.classList.add('active');
+      panelCode.classList.remove('active');
+    });
+
+    btnCode.addEventListener('click', () => {
+      btnCode.classList.add('active');
+      btnUi.classList.remove('active');
+      panelCode.classList.add('active');
+      panelUi.classList.remove('active');
+    });
+  }
+
+  if (btnCopy) {
+    btnCopy.addEventListener('click', () => {
+      const codeEl = document.querySelector('#posViewCode pre code');
+      if (codeEl) {
+        navigator.clipboard.writeText(codeEl.innerText).then(() => {
+          btnCopy.innerHTML = '<span>✓ Copied!</span>';
+          setTimeout(() => {
+            btnCopy.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy TSX</span>`;
+          }, 2000);
+        });
+      }
+    });
+  }
+
+  // Interactive Live POS Simulator Calculations
+  const billPriceEl = document.getElementById('rnBillPrice');
+  const totalDisplayEl = document.getElementById('rnTotalDisplay');
+  const tipPlaceholderEl = document.getElementById('rnTipPlaceholder');
+  const saveBtn = document.getElementById('rnSaveEntryBtn');
+  const serviceChips = document.querySelectorAll('.rn-quick-chip');
+  const staffChips = document.querySelectorAll('.rn-staff-chip');
+  const tipChips = document.querySelectorAll('.rn-tip-chip');
+  const payCards = document.querySelectorAll('.rn-pay-card');
+
+  if (!billPriceEl || !totalDisplayEl) return;
+
+  let currentPrice = 150;
+  let currentTip = 0;
+
+  function updateTotals() {
+    const total = currentPrice + currentTip;
+    billPriceEl.textContent = currentPrice.toString();
+    totalDisplayEl.textContent = `৳${total.toFixed(2)}`;
+  }
+
+  // Toggle Services
+  serviceChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      const chipPrice = parseInt(chip.getAttribute('data-price') || '0', 10);
+      if (chip.classList.contains('active')) {
+        const activeCount = document.querySelectorAll('.rn-quick-chip.active').length;
+        if (activeCount > 1) {
+          chip.classList.remove('active');
+          currentPrice = Math.max(0, currentPrice - chipPrice);
+        }
+      } else {
+        chip.classList.add('active');
+        currentPrice += chipPrice;
+      }
+      updateTotals();
+    });
+  });
+
+  // Switch Staff
+  staffChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      staffChips.forEach(c => {
+        c.classList.remove('active');
+        const check = c.querySelector('.rn-avatar-check');
+        if (check) check.remove();
+      });
+      chip.classList.add('active');
+      const avatar = chip.querySelector('.rn-staff-avatar');
+      if (avatar && !avatar.querySelector('.rn-avatar-check')) {
+        const check = document.createElement('span');
+        check.className = 'rn-avatar-check';
+        check.textContent = '✓';
+        avatar.appendChild(check);
+      }
+    });
+  });
+
+  // Switch Tip
+  tipChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      tipChips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      const val = parseInt(chip.getAttribute('data-tip') || '0', 10);
+      currentTip = val;
+      if (tipPlaceholderEl) {
+        tipPlaceholderEl.textContent = val > 0 ? `+৳${val}` : 'বকশিসের পরিমাণ লিখুন...';
+        tipPlaceholderEl.style.color = val > 0 ? '#059669' : '#94A3B8';
+        tipPlaceholderEl.style.fontWeight = val > 0 ? '700' : '400';
+      }
+      updateTotals();
+    });
+  });
+
+  // Switch Payment
+  payCards.forEach(card => {
+    card.addEventListener('click', () => {
+      payCards.forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+    });
+  });
+
+  // Complete Button Feedback
+  if (saveBtn) {
+    saveBtn.addEventListener('click', () => {
+      const originalText = saveBtn.innerHTML;
+      saveBtn.innerHTML = '<span>✓ এন্ট্রি সেভ হয়েছে! (১ কয়েন খরচ হয়েছে)</span>';
+      saveBtn.style.background = '#047857';
+      setTimeout(() => {
+        saveBtn.innerHTML = originalText;
+        saveBtn.style.background = '';
+      }, 2200);
+    });
+  }
 }
 
