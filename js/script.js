@@ -34,6 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 10. Interactive Commission Mode Switcher
   initCommissionModeSwitcher();
+
+  // 11. Interactive 360° 3D Ecosystem Galaxy Orbit
+  init3DEcosystem();
 });
 
 /* --------------------------------------------------------------------------
@@ -718,7 +721,21 @@ function initSharedFutureCarousel() {
 function init3DEcosystem() {
   const container = document.getElementById('ecosystem-three-canvas');
   const stage = document.getElementById('ecosystem3DStage');
-  if (!container || !stage || typeof THREE === 'undefined') return;
+  if (!container || !stage) return;
+
+  if (typeof THREE === 'undefined') {
+    let attempts = 0;
+    const pollTimer = setInterval(() => {
+      attempts++;
+      if (typeof THREE !== 'undefined') {
+        clearInterval(pollTimer);
+        init3DEcosystem();
+      } else if (attempts > 30) {
+        clearInterval(pollTimer);
+      }
+    }, 100);
+    return;
+  }
 
   // Scene & Sizing
   const scene = new THREE.Scene();
