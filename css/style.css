@@ -5122,6 +5122,342 @@ button {
   cursor: pointer;
 }
 
+/* Staff Add Quick Button */
+.rn-staff-add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 4px 7px;
+  border-radius: 8px;
+  background: #F8FAFC;
+  border: 1px dashed #CBD5E1;
+  color: #059669;
+  font-size: 0.62rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+}
+.rn-staff-add-btn:hover {
+  background: #ECFDF5;
+  border-color: #A7F3D0;
+}
+
+/* Inline Main Screen Custom Service Drawer (mainCustomCard) */
+.rn-main-custom-card {
+  background: #F0FDF4;
+  border: 1.5px solid #A7F3D0;
+  border-radius: 12px;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  animation: fadeIn 0.2s ease;
+}
+.rn-main-custom-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.rn-main-custom-title-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #059669;
+}
+.rn-main-custom-close-btn {
+  background: none;
+  border: none;
+  color: #64748B;
+  font-size: 0.72rem;
+  cursor: pointer;
+  padding: 0 4px;
+}
+.rn-main-custom-name-input {
+  width: 100%;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 7px;
+  padding: 5px 8px;
+  font-size: 0.68rem;
+  color: #0F172A;
+  margin-bottom: 6px;
+  outline: none;
+  font-family: inherit;
+}
+.rn-main-custom-name-input:focus {
+  border-color: #059669;
+}
+.rn-main-custom-price-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.rn-main-custom-price-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 7px;
+  padding: 4px 8px;
+}
+.rn-custom-price-prefix {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #64748B;
+  margin-right: 4px;
+}
+.rn-main-custom-price-input {
+  width: 100%;
+  border: none;
+  background: none;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #0F172A;
+  outline: none;
+  font-family: inherit;
+}
+.rn-main-custom-add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: #059669;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 7px;
+  padding: 5px 10px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.rn-main-custom-add-btn:hover {
+  background: #047857;
+}
+
+/* Tip clear button */
+.rn-tip-clear-btn {
+  background: none;
+  border: none;
+  color: #94A3B8;
+  font-size: 0.72rem;
+  cursor: pointer;
+  padding: 0 4px;
+  margin-left: auto;
+}
+.rn-tip-clear-btn:hover {
+  color: #EF4444;
+}
+
+/* Search clear button in catalog */
+.rn-catalog-search-clear {
+  background: none;
+  border: none;
+  color: #94A3B8;
+  font-size: 0.7rem;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+/* Catalog Custom Service Option */
+.rn-catalog-custom-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 8px;
+  border-radius: 8px;
+  background: #f4f7f4;
+  border: 1px solid #c4c8bc;
+  margin-bottom: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.rn-catalog-custom-card:hover {
+  background: #eaf2ec;
+  border-color: #4a7c59;
+}
+.rn-catalog-custom-left {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.rn-catalog-chevron {
+  font-size: 0.75rem;
+  color: #059669;
+  transition: transform 0.2s ease;
+}
+.rn-catalog-custom-drawer {
+  background: #f0ece4;
+  border: 1px solid #c4c8bc;
+  border-radius: 8px;
+  padding: 7px 8px;
+  margin-bottom: 6px;
+  animation: fadeIn 0.15s ease;
+}
+.rn-catalog-empty-wrap {
+  text-align: center;
+  padding: 20px 10px;
+}
+.rn-catalog-empty-icon {
+  font-size: 1.6rem;
+  margin-bottom: 4px;
+}
+.rn-catalog-empty-title {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #0F172A;
+  margin-bottom: 2px;
+}
+.rn-catalog-empty-sub {
+  font-size: 0.62rem;
+  color: #64748B;
+  margin-bottom: 8px;
+}
+.rn-catalog-empty-btn {
+  background: #059669;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 7px;
+  padding: 5px 12px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Work Entries History Modal (WorkEntryCard.tsx Parity) */
+.rn-history-modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #F8FAFC;
+  border-radius: 36px;
+  z-index: 45;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+.rn-history-modal.active {
+  display: flex;
+  animation: modalSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.rn-history-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+  scrollbar-width: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.rn-history-list::-webkit-scrollbar {
+  display: none;
+}
+
+/* Real WorkEntryCard Component */
+.rn-work-card {
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 11px 12px;
+  border: 1px solid #E0E0E0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  position: relative;
+  transition: transform 0.15s ease;
+}
+.rn-work-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+.rn-work-service-info {
+  flex: 1;
+  margin-right: 8px;
+}
+.rn-work-service-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #212121;
+  line-height: 1.2;
+}
+.rn-work-time {
+  font-size: 0.62rem;
+  color: #757575;
+  margin-top: 2px;
+}
+.rn-work-price-container {
+  text-align: right;
+}
+.rn-work-price {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #000000;
+  letter-spacing: -0.3px;
+}
+.rn-work-tip-badge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #FF9800;
+  margin-top: 1px;
+}
+.rn-work-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #F1F5F9;
+  padding-top: 7px;
+}
+.rn-work-emp-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+}
+.rn-work-emp-avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #000000;
+  color: #FFFFFF;
+  font-size: 0.58rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.rn-work-emp-name {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #212121;
+}
+.rn-work-payment-badge {
+  padding: 2px 7px;
+  border-radius: 10px;
+  color: #FFFFFF;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.rn-work-edited-badge {
+  position: absolute;
+  top: 10px;
+  right: 85px;
+  background: #FFF3E0;
+  color: #e8913a;
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 0.55rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
 /* ==========================================================================
    CutBook React Native Dashboard Screen (Owner Version) Simulator
    ========================================================================== */

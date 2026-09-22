@@ -1848,7 +1848,7 @@ function initInsightsLensSwitcher() {
 }
 
 /* --------------------------------------------------------------------------
-   22. CutBook Owner Work Entry Native UI Simulator
+   22. CutBook Owner Work Entry Native UI Simulator (100% AddWorkEntryScreen Parity)
    -------------------------------------------------------------------------- */
 function initPosSimulatorInteractive() {
   const billPriceEl = document.getElementById('rnBillPrice');
@@ -1858,6 +1858,7 @@ function initPosSimulatorInteractive() {
   const summaryStaffLabelEl = document.getElementById('rnSummaryStaffLabel');
   const summaryAvatarEl = document.getElementById('rnSummaryAvatar');
   const tipPlaceholderEl = document.getElementById('rnTipPlaceholder');
+  const tipClearBtn = document.getElementById('rnTipClearBtn');
   const saveBtn = document.getElementById('rnSaveEntryBtn');
   const serviceChips = document.querySelectorAll('.rn-quick-chip');
   const staffChips = document.querySelectorAll('.rn-staff-chip');
@@ -1866,6 +1867,17 @@ function initPosSimulatorInteractive() {
   const selectedCountBadge = document.getElementById('rnSelectedCountBadge');
   const selectedCardsWrap = document.getElementById('rnSelectedCardsWrap');
   const clearServicesBtn = document.getElementById('rnClearServicesBtn');
+  const staffAddBtn = document.getElementById('rnStaffAddBtn');
+
+  // Custom Service Main Screen Drawer
+  const mainCustomCard = document.getElementById('rnMainCustomCard');
+  const quickCustomLink = document.getElementById('rnQuickCustomLink');
+  const addCustomBtn = document.getElementById('rnAddCustomBtn');
+  const quickChipCustomBtn = document.getElementById('rnQuickChipCustomBtn');
+  const mainCustomCloseBtn = document.getElementById('rnMainCustomCloseBtn');
+  const mainCustomNameInput = document.getElementById('rnMainCustomNameInput');
+  const mainCustomPriceInput = document.getElementById('rnMainCustomPriceInput');
+  const mainCustomAddBtn = document.getElementById('rnMainCustomAddBtn');
 
   // Notes toggle
   const notesBtn = document.getElementById('rnNotesToggleBtn');
@@ -1891,17 +1903,39 @@ function initPosSimulatorInteractive() {
   const btnDoneCatalog = document.getElementById('rnCatalogDoneBtn');
   const btnConfirmCatalog = document.getElementById('rnCatalogConfirmBtn');
   const catalogSearchInput = document.getElementById('rnCatalogSearchInput');
+  const catalogSearchClear = document.getElementById('rnCatalogSearchClear');
   const catalogCatPills = document.querySelectorAll('.rn-catalog-cat-pill');
   const catalogItems = document.querySelectorAll('.rn-catalog-item');
   const catalogBottomCount = document.getElementById('rnCatalogBottomCount');
   const catalogBottomTotal = document.getElementById('rnCatalogBottomTotal');
+  const catalogCustomCard = document.getElementById('rnCatalogCustomCard');
+  const catalogCustomDrawer = document.getElementById('rnCatalogCustomDrawer');
+  const catalogCustomChevron = document.getElementById('rnCatalogCustomChevron');
+  const modalCustomNameInput = document.getElementById('rnModalCustomNameInput');
+  const modalCustomPriceInput = document.getElementById('rnModalCustomPriceInput');
+  const modalCustomAddBtn = document.getElementById('rnModalCustomAddBtn');
+  const catalogEmptyWrap = document.getElementById('rnCatalogEmptyWrap');
+  const catalogEmptyAddBtn = document.getElementById('rnCatalogEmptyAddBtn');
+
+  // History / Records Modal elements
+  const historyModal = document.getElementById('rnHistoryModal');
+  const headerHistoryBtn = document.getElementById('rnHeaderHistoryBtn');
+  const historyCloseBtn = document.getElementById('rnHistoryCloseBtn');
+  const historyList = document.getElementById('rnHistoryList');
+  const historySubtitle = document.getElementById('rnHistorySubtitle');
 
   if (!billPriceEl || !totalDisplayEl) return;
 
   let currentPrice = 150;
   let currentTip = 0;
+  let currentStaff = 'kabbo';
   let currentStaffName = 'kabbo';
   let currentStaffInitials = 'KA';
+  let currentStaffRate = 'owner'; // 'owner' | 35 | 40
+  let currentPaymentMethod = 'Cash';
+  let currentPaymentColor = '#008000';
+  let customServiceName = '';
+  let customServicePrice = 0;
 
   // Services catalog database
   const catalogData = {
@@ -1919,16 +1953,19 @@ function initPosSimulatorInteractive() {
     if (!selectedCardsWrap) return;
     selectedCardsWrap.innerHTML = '';
 
-    if (activeServiceIds.size === 0) {
+    const totalSelectedCount = activeServiceIds.size + (customServiceName ? 1 : 0);
+
+    if (totalSelectedCount === 0) {
       selectedCardsWrap.innerHTML = `<div style="font-size:0.62rem;color:#94A3B8;padding:4px 0">কোনো সেবা নির্বাচিত নেই। দ্রুত যোগ করতে নিচের বাটনে চাপ দিন।</div>`;
       if (selectedCountBadge) selectedCountBadge.textContent = '০টি নির্বাচিত';
       return;
     }
 
     if (selectedCountBadge) {
-      selectedCountBadge.textContent = `${activeServiceIds.size}টি নির্বাচিত`;
+      selectedCountBadge.textContent = `${totalSelectedCount}টি নির্বাচিত`;
     }
 
+    // Render regular services
     activeServiceIds.forEach((id) => {
       const item = catalogData[id] || { name: id, price: 150 };
       const card = document.createElement('div');
@@ -1955,6 +1992,37 @@ function initPosSimulatorInteractive() {
 
       selectedCardsWrap.appendChild(card);
     });
+
+    // Render custom service if present (selectedTagCardCustom)
+    if (customServiceName && customServicePrice > 0) {
+      const customCard = document.createElement('div');
+      customCard.className = 'rn-selected-tag-card';
+      customCard.style.background = '#ECFDF5';
+      customCard.style.borderColor = '#A7F3D0';
+      customCard.innerHTML = `
+        <div class="rn-selected-tag-left">
+          <span style="color:#059669;font-size:0.75rem;">✨</span>
+          <span class="rn-selected-tag-name" style="color:#065F46;font-weight:700;">${customServiceName}</span>
+        </div>
+        <div class="rn-selected-tag-right">
+          <span class="rn-selected-tag-price">৳${customServicePrice}</span>
+          <button type="button" class="rn-selected-tag-remove-btn" id="rnRemoveCustomTagBtn" title="মুছুন">✕</button>
+        </div>
+      `;
+
+      const removeCustomBtn = customCard.querySelector('#rnRemoveCustomTagBtn');
+      if (removeCustomBtn) {
+        removeCustomBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          customServiceName = '';
+          customServicePrice = 0;
+          calculatePriceFromSelected();
+          renderSelectedTags();
+        });
+      }
+
+      selectedCardsWrap.appendChild(customCard);
+    }
   }
 
   function calculatePriceFromSelected() {
@@ -1963,6 +2031,7 @@ function initPosSimulatorInteractive() {
       const item = catalogData[id];
       if (item) sum += item.price;
     });
+    sum += customServicePrice;
     currentPrice = sum;
     updateTotals();
   }
@@ -1973,9 +2042,20 @@ function initPosSimulatorInteractive() {
     totalDisplayEl.textContent = `৳${total.toFixed(2)}`;
 
     if (summaryBillEl) summaryBillEl.textContent = `৳${total.toFixed(2)}`;
-    if (summaryStaffEl) summaryStaffEl.textContent = `৳${total.toFixed(2)}`;
+
+    // Staff Commission Calculation matching AddWorkEntryScreen.tsx
+    let staffShare = 0;
+    if (currentStaffRate === 'owner') {
+      staffShare = total; // Working owner receives full amount
+    } else {
+      const rateNum = typeof currentStaffRate === 'number' ? currentStaffRate : 35;
+      staffShare = Math.round(currentPrice * (rateNum / 100)) + currentTip;
+    }
+
+    if (summaryStaffEl) summaryStaffEl.textContent = `৳${staffShare.toFixed(2)}`;
     if (catalogBottomTotal) catalogBottomTotal.textContent = `৳${currentPrice.toFixed(2)}`;
-    if (catalogBottomCount) catalogBottomCount.textContent = `${activeServiceIds.size}টি সেবা নির্বাচিত`;
+    const totalCount = activeServiceIds.size + (customServiceName ? 1 : 0);
+    if (catalogBottomCount) catalogBottomCount.textContent = `${totalCount}টি সেবা নির্বাচিত`;
   }
 
   function toggleServiceById(id) {
@@ -1987,9 +2067,9 @@ function initPosSimulatorInteractive() {
 
     // Sync quick chips
     serviceChips.forEach((chip) => {
-      const name = chip.getAttribute('data-name');
-      if (name === 'চুল কাটা') {
-        chip.classList.toggle('active', activeServiceIds.has('haircut'));
+      const cId = chip.getAttribute('data-id');
+      if (cId) {
+        chip.classList.toggle('active', activeServiceIds.has(cId));
       }
     });
 
@@ -2010,7 +2090,11 @@ function initPosSimulatorInteractive() {
   if (clearServicesBtn) {
     clearServicesBtn.addEventListener('click', () => {
       activeServiceIds.clear();
-      serviceChips.forEach((c) => c.classList.remove('active'));
+      customServiceName = '';
+      customServicePrice = 0;
+      serviceChips.forEach((c) => {
+        if (!c.classList.contains('rn-chip-custom')) c.classList.remove('active');
+      });
       catalogItems.forEach((ci) => {
         ci.classList.remove('selected');
         const checkEl = ci.querySelector('.rn-catalog-check');
@@ -2024,24 +2108,52 @@ function initPosSimulatorInteractive() {
   // Toggle Services via Quick Chips
   serviceChips.forEach((chip) => {
     chip.addEventListener('click', () => {
-      const chipPrice = parseInt(chip.getAttribute('data-price') || '0', 10);
-      const chipName = chip.getAttribute('data-name');
+      if (chip.classList.contains('rn-chip-custom')) return;
+      const cId = chip.getAttribute('data-id');
+      if (cId) toggleServiceById(cId);
+    });
+  });
 
-      if (chipName === 'চুল কাটা') {
-        toggleServiceById('haircut');
+  // Main Screen Custom Service Drawer Handlers
+  function toggleMainCustomDrawer(show) {
+    if (!mainCustomCard) return;
+    const isVisible = mainCustomCard.style.display !== 'none';
+    const nextState = show !== undefined ? show : !isVisible;
+    mainCustomCard.style.display = nextState ? 'block' : 'none';
+    if (nextState && mainCustomNameInput) {
+      mainCustomNameInput.focus();
+    }
+  }
+
+  if (quickCustomLink) quickCustomLink.addEventListener('click', () => toggleMainCustomDrawer(true));
+  if (addCustomBtn) addCustomBtn.addEventListener('click', () => toggleMainCustomDrawer(true));
+  if (quickChipCustomBtn) quickChipCustomBtn.addEventListener('click', () => toggleMainCustomDrawer(true));
+  if (mainCustomCloseBtn) mainCustomCloseBtn.addEventListener('click', () => toggleMainCustomDrawer(false));
+
+  if (mainCustomAddBtn) {
+    mainCustomAddBtn.addEventListener('click', () => {
+      const name = (mainCustomNameInput?.value || '').trim();
+      const priceVal = parseFloat(mainCustomPriceInput?.value || '0');
+
+      if (!name) {
+        alert('দয়া করে সেবার নাম লিখুন');
+        return;
+      }
+      if (isNaN(priceVal) || priceVal <= 0) {
+        alert('দয়া করে সঠিক সেবা মূল্য লিখুন');
         return;
       }
 
-      if (chip.classList.contains('active')) {
-        chip.classList.remove('active');
-        currentPrice = Math.max(0, currentPrice - chipPrice);
-      } else {
-        chip.classList.add('active');
-        currentPrice += chipPrice;
-      }
-      updateTotals();
+      customServiceName = name;
+      customServicePrice = priceVal;
+      toggleMainCustomDrawer(false);
+      calculatePriceFromSelected();
+      renderSelectedTags();
+
+      if (mainCustomNameInput) mainCustomNameInput.value = '';
+      if (mainCustomPriceInput) mainCustomPriceInput.value = '';
     });
-  });
+  }
 
   // Switch Staff
   staffChips.forEach((chip) => {
@@ -2054,15 +2166,20 @@ function initPosSimulatorInteractive() {
       chip.classList.add('active');
 
       const staffKey = chip.getAttribute('data-staff') || 'kabbo';
+      currentStaff = staffKey;
+
       if (staffKey === 'kabbo') {
         currentStaffName = 'kabbo';
         currentStaffInitials = 'KA';
+        currentStaffRate = 'owner';
       } else if (staffKey === 'masum') {
         currentStaffName = 'masum';
         currentStaffInitials = 'MA';
+        currentStaffRate = 35;
       } else {
         currentStaffName = 'xMan';
         currentStaffInitials = 'XM';
+        currentStaffRate = 40;
       }
 
       if (summaryStaffLabelEl) summaryStaffLabelEl.textContent = `${currentStaffName}:`;
@@ -2075,38 +2192,88 @@ function initPosSimulatorInteractive() {
         check.textContent = '✓';
         avatar.appendChild(check);
       }
+
+      updateTotals();
     });
   });
 
-  // Switch Tip
+  if (staffAddBtn) {
+    staffAddBtn.addEventListener('click', () => {
+      alert('নতুন স্টাফ যুক্ত করতে বা কমিশন কনফিগার করতে CutBook অ্যাপের টিম ট্যাব ব্যবহার করুন।');
+    });
+  }
+
+  // Switch Tip with Suggestions
   tipChips.forEach((chip) => {
     chip.addEventListener('click', () => {
       tipChips.forEach((c) => c.classList.remove('active'));
       chip.classList.add('active');
       const val = parseInt(chip.getAttribute('data-tip') || '0', 10);
       currentTip = val;
+
       if (tipPlaceholderEl) {
         tipPlaceholderEl.textContent = val > 0 ? `+৳${val}` : 'বকশিসের পরিমাণ লিখুন...';
         tipPlaceholderEl.style.color = val > 0 ? '#059669' : '#94A3B8';
         tipPlaceholderEl.style.fontWeight = val > 0 ? '700' : '400';
       }
+
+      if (tipClearBtn) {
+        tipClearBtn.style.display = val > 0 ? 'inline-block' : 'none';
+      }
+
       updateTotals();
     });
   });
 
+  if (tipClearBtn) {
+    tipClearBtn.addEventListener('click', () => {
+      currentTip = 0;
+      tipChips.forEach((c) => {
+        c.classList.toggle('active', c.getAttribute('data-tip') === '0');
+      });
+      if (tipPlaceholderEl) {
+        tipPlaceholderEl.textContent = 'বকশিসের পরিমাণ লিখুন...';
+        tipPlaceholderEl.style.color = '#94A3B8';
+        tipPlaceholderEl.style.fontWeight = '400';
+      }
+      tipClearBtn.style.display = 'none';
+      updateTotals();
+    });
+  }
+
   // Switch Payment
+  const paymentMap = {
+    cash: { name: 'Cash', color: '#008000' },
+    bkash: { name: 'bKash', color: '#E91E63' },
+    nagad: { name: 'Nagad', color: '#FF9800' },
+    bangla_qr: { name: 'Bangla QR', color: '#006A4E' },
+    rocket: { name: 'Rocket', color: '#8C2D8B' },
+    card: { name: 'Card', color: '#3aa7f4' }
+  };
+
   payCards.forEach((card) => {
     card.addEventListener('click', () => {
       payCards.forEach((c) => c.classList.remove('active'));
       card.classList.add('active');
+      const method = card.getAttribute('data-method') || 'cash';
+      const mInfo = paymentMap[method] || { name: 'Cash', color: '#008000' };
+      currentPaymentMethod = mInfo.name;
+      currentPaymentColor = mInfo.color;
     });
   });
 
-  // Complete Button Feedback
+  // Complete Button Feedback & Dynamic History Entry
+  let savedEntriesCount = 3;
   if (saveBtn) {
     saveBtn.addEventListener('click', () => {
+      if (currentPrice <= 0) {
+        alert('দয়া করে কমপক্ষে একটি সেবা নির্বাচন করুন।');
+        return;
+      }
+
+      const total = currentPrice + currentTip;
       const originalText = saveBtn.innerHTML;
-      saveBtn.innerHTML = '<span>✓ এন্ট্রি সেভ হয়েছে! (১ কয়েন খরচ হয়েছে)</span>';
+      saveBtn.innerHTML = `<span>✓ ${currentStaffName}-এর কাজের হিসাব সেভ হয়েছে!</span>`;
       saveBtn.style.background = '#047857';
 
       // Coin decrement visual feedback
@@ -2116,13 +2283,60 @@ function initPosSimulatorInteractive() {
         coinEl.style.color = '#059669';
         setTimeout(() => {
           coinEl.style.color = '';
-        }, 2200);
+        }, 2500);
+      }
+
+      // Prepend newly saved entry into History Modal (WorkEntryCard.tsx Parity)
+      if (historyList) {
+        savedEntriesCount++;
+        const now = new Date();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        const displayHours = hours % 12 || 12;
+        const displayMinutes = minutes < 10 ? `0${minutes}` : minutes;
+        const timeStr = `${displayHours}:${displayMinutes} ${ampm}`;
+
+        const namesList = [];
+        activeServiceIds.forEach((id) => {
+          if (catalogData[id]) namesList.push(catalogData[id].name);
+        });
+        if (customServiceName) namesList.push(customServiceName);
+        const serviceNameStr = namesList.join(' & ') || 'সেলুন সেবা';
+
+        const newCard = document.createElement('div');
+        newCard.className = 'rn-work-card';
+        newCard.style.animation = 'fadeIn 0.3s ease';
+        newCard.innerHTML = `
+          <div class="rn-work-card-header">
+            <div class="rn-work-service-info">
+              <div class="rn-work-service-name">${serviceNameStr}</div>
+              <div class="rn-work-time">${timeStr} • এইমাত্র</div>
+            </div>
+            <div class="rn-work-price-container">
+              <div class="rn-work-price">৳${total.toFixed(2)}</div>
+              ${currentTip > 0 ? `<div class="rn-work-tip-badge">+৳${currentTip} tip</div>` : ''}
+            </div>
+          </div>
+          <div class="rn-work-card-footer">
+            <div class="rn-work-emp-container">
+              <div class="rn-work-emp-avatar" style="background:#059669">${currentStaffInitials}</div>
+              <div class="rn-work-emp-name">${currentStaffName}</div>
+            </div>
+            <div class="rn-work-payment-badge" style="background:${currentPaymentColor};">${currentPaymentMethod}</div>
+          </div>
+        `;
+        historyList.insertBefore(newCard, historyList.firstChild);
+
+        if (historySubtitle) {
+          historySubtitle.textContent = `${savedEntriesCount}টি এন্ট্রি সংরক্ষিত • মায়ের দোয়া সেলুন`;
+        }
       }
 
       setTimeout(() => {
         saveBtn.innerHTML = originalText;
         saveBtn.style.background = '';
-      }, 2200);
+      }, 2500);
     });
   }
 
@@ -2141,6 +2355,41 @@ function initPosSimulatorInteractive() {
   if (btnDoneCatalog) btnDoneCatalog.addEventListener('click', closeCatalog);
   if (btnConfirmCatalog) btnConfirmCatalog.addEventListener('click', closeCatalog);
 
+  // Modal Custom Drawer Toggle
+  if (catalogCustomCard && catalogCustomDrawer) {
+    catalogCustomCard.addEventListener('click', () => {
+      const isVisible = catalogCustomDrawer.style.display !== 'none';
+      catalogCustomDrawer.style.display = isVisible ? 'none' : 'block';
+      if (catalogCustomChevron) {
+        catalogCustomChevron.textContent = isVisible ? '▾' : '▴';
+      }
+    });
+  }
+
+  if (modalCustomAddBtn) {
+    modalCustomAddBtn.addEventListener('click', () => {
+      const name = (modalCustomNameInput?.value || '').trim();
+      const priceVal = parseFloat(modalCustomPriceInput?.value || '0');
+
+      if (!name) {
+        alert('দয়া করে সেবার নাম লিখুন');
+        return;
+      }
+      if (isNaN(priceVal) || priceVal <= 0) {
+        alert('সঠিক সেবা মূল্য লিখুন');
+        return;
+      }
+
+      customServiceName = name;
+      customServicePrice = priceVal;
+      if (catalogCustomDrawer) catalogCustomDrawer.style.display = 'none';
+      if (modalCustomNameInput) modalCustomNameInput.value = '';
+      if (modalCustomPriceInput) modalCustomPriceInput.value = '';
+      calculatePriceFromSelected();
+      renderSelectedTags();
+    });
+  }
+
   // Catalog Item Selection
   catalogItems.forEach((item) => {
     item.addEventListener('click', () => {
@@ -2156,10 +2405,17 @@ function initPosSimulatorInteractive() {
       pill.classList.add('active');
       const cat = pill.getAttribute('data-cat') || 'all';
 
+      let visibleCount = 0;
       catalogItems.forEach((ci) => {
         const itemCat = ci.getAttribute('data-cat');
-        ci.style.display = (cat === 'all' || itemCat === cat) ? 'flex' : 'none';
+        const show = (cat === 'all' || itemCat === cat);
+        ci.style.display = show ? 'flex' : 'none';
+        if (show) visibleCount++;
       });
+
+      if (catalogEmptyWrap) {
+        catalogEmptyWrap.style.display = visibleCount === 0 ? 'block' : 'none';
+      }
     });
   });
 
@@ -2167,11 +2423,57 @@ function initPosSimulatorInteractive() {
   if (catalogSearchInput) {
     catalogSearchInput.addEventListener('input', (e) => {
       const query = (e.target.value || '').trim().toLowerCase();
+      if (catalogSearchClear) {
+        catalogSearchClear.style.display = query ? 'inline-block' : 'none';
+      }
+
+      let visibleCount = 0;
       catalogItems.forEach((ci) => {
         const name = (ci.getAttribute('data-name') || '').toLowerCase();
         const cat = (ci.getAttribute('data-cat') || '').toLowerCase();
-        ci.style.display = (name.includes(query) || cat.includes(query)) ? 'flex' : 'none';
+        const match = name.includes(query) || cat.includes(query);
+        ci.style.display = match ? 'flex' : 'none';
+        if (match) visibleCount++;
       });
+
+      if (catalogEmptyWrap) {
+        catalogEmptyWrap.style.display = visibleCount === 0 ? 'block' : 'none';
+      }
+    });
+  }
+
+  if (catalogSearchClear) {
+    catalogSearchClear.addEventListener('click', () => {
+      if (catalogSearchInput) {
+        catalogSearchInput.value = '';
+        catalogSearchInput.dispatchEvent(new Event('input'));
+      }
+    });
+  }
+
+  if (catalogEmptyAddBtn) {
+    catalogEmptyAddBtn.addEventListener('click', () => {
+      const query = (catalogSearchInput?.value || '').trim();
+      if (query) {
+        customServiceName = query;
+        customServicePrice = 200;
+        calculatePriceFromSelected();
+        renderSelectedTags();
+        closeCatalog();
+      }
+    });
+  }
+
+  // --- HISTORY MODAL CONTROLS ---
+  if (headerHistoryBtn && historyModal) {
+    headerHistoryBtn.addEventListener('click', () => {
+      historyModal.classList.add('active');
+    });
+  }
+
+  if (historyCloseBtn && historyModal) {
+    historyCloseBtn.addEventListener('click', () => {
+      historyModal.classList.remove('active');
     });
   }
 

@@ -759,9 +759,9 @@
               </div>
               
               <div class="phone-screen-viewport rn-simulator-screen">
-                <!-- Header -->
+                <!-- Header (Single Executive Header) -->
                 <div class="rn-header">
-                  <div class="rn-header-back-btn">
+                  <div class="rn-header-back-btn" title="Back">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
                   </div>
                   <div class="rn-header-salon-badge">SALON</div>
@@ -769,10 +769,10 @@
                     <div class="rn-header-title">নতুন সেবা এন্ট্রি</div>
                     <div class="rn-header-subtitle">মায়ের দোয়া সেলুন</div>
                   </div>
-                  <div class="rn-header-history-btn">
+                  <button type="button" class="rn-header-history-btn" id="rnHeaderHistoryBtn" title="View Work Entry History">
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
                     <span>রেকর্ড</span>
-                  </div>
+                  </button>
                 </div>
 
                 <!-- Scrollable Form Body -->
@@ -790,41 +790,48 @@
                         <div class="rn-coin-subtext">⚡ ১টি সেবা এন্ট্রি = ১টি কয়েন কাটা হবে</div>
                       </div>
                     </div>
-                    <div class="rn-coin-recharge-btn">+ রিচার্জ</div>
+                    <div class="rn-coin-recharge-btn">
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="margin-right:2px"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                      <span>রিচার্জ</span>
+                    </div>
                   </div>
 
-                  <!-- 2. Staff Row -->
+                  <!-- 2. Streamlined Staff / Barber Carousel -->
                   <div class="rn-staff-row">
                     <div class="rn-staff-label">
                       <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
                       <span>স্টাফ:</span>
                     </div>
                     <div class="rn-staff-chips-scroll">
-                      <div class="rn-staff-chip active" data-staff="kabbo">
+                      <div class="rn-staff-chip active" data-staff="kabbo" data-rate="owner" title="kabbo (মালিক)">
                         <div class="rn-staff-avatar">KA<span class="rn-avatar-check">✓</span></div>
                         <div class="rn-staff-meta">
                           <strong>kabbo</strong>
                           <small>মালিক</small>
                         </div>
                       </div>
-                      <div class="rn-staff-chip" data-staff="masum">
+                      <div class="rn-staff-chip" data-staff="masum" data-rate="35" title="masum (৩৫% কমিশন)">
                         <div class="rn-staff-avatar">MA</div>
                         <div class="rn-staff-meta">
                           <strong>masum</strong>
-                          <small>মালিক</small>
+                          <small>৩৫%</small>
                         </div>
                       </div>
-                      <div class="rn-staff-chip" data-staff="xman">
+                      <div class="rn-staff-chip" data-staff="xman" data-rate="40" title="xMan (৪০% কমিশন)">
                         <div class="rn-staff-avatar">XM</div>
                         <div class="rn-staff-meta">
                           <strong>xMan</strong>
-                          <small>মালিক</small>
+                          <small>৪০%</small>
                         </div>
+                      </div>
+                      <div class="rn-staff-add-btn" id="rnStaffAddBtn" title="নতুন স্টাফ যুক্ত করুন">
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+                        <span>+ স্টাফ</span>
                       </div>
                     </div>
                   </div>
 
-                  <!-- 3. Clean Service Selector -->
+                  <!-- 3. Clean & Non-Messy Service Selector -->
                   <div class="rn-service-box">
                     <div class="rn-service-header">
                       <div class="rn-service-title-wrap">
@@ -836,6 +843,28 @@
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4zM4 10h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4zM4 16h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4z"/></svg>
                         <span>সকল সেবা (২১) ▾</span>
                       </button>
+                    </div>
+
+                    <!-- Inline Main Screen Custom Service Drawer (showMainCustomInput) -->
+                    <div class="rn-main-custom-card" id="rnMainCustomCard" style="display:none;">
+                      <div class="rn-main-custom-header">
+                        <div class="rn-main-custom-title-row">
+                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                          <span>কাস্টম সেবা যোগ করুন</span>
+                        </div>
+                        <button type="button" class="rn-main-custom-close-btn" id="rnMainCustomCloseBtn">✕</button>
+                      </div>
+                      <input type="text" class="rn-main-custom-name-input" id="rnMainCustomNameInput" placeholder="সেবার নাম লিখুন (যেমন: স্পেশাল ফেসিয়াল)..." />
+                      <div class="rn-main-custom-price-row">
+                        <div class="rn-main-custom-price-wrap">
+                          <span class="rn-custom-price-prefix">৳</span>
+                          <input type="number" class="rn-main-custom-price-input" id="rnMainCustomPriceInput" placeholder="মূল্য" />
+                        </div>
+                        <button type="button" class="rn-main-custom-add-btn" id="rnMainCustomAddBtn">
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                          <span>যুক্ত করুন</span>
+                        </button>
+                      </div>
                     </div>
 
                     <!-- Selected Services Tag Cards (Active State) -->
@@ -867,37 +896,41 @@
                           <span>আরও সেবা যোগ করুন...</span>
                         </button>
                         <button type="button" class="rn-add-custom-btn" id="rnAddCustomBtn">
-                          <span>✨ + কাস্টম</span>
+                          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                          <span>+ কাস্টম সেবা</span>
                         </button>
                       </div>
                     </div>
 
-                    <div class="rn-quick-label">১-ট্যাপে সেবা যোগ করুন:</div>
-                    <div class="rn-quick-services-grid">
-                      <button type="button" class="rn-quick-chip active" data-price="150" data-name="চুল কাটা">
-                        <span class="rn-chip-icon">✂️</span>
-                        <span class="rn-chip-name">চুল কাটা</span>
-                        <span class="rn-chip-cost">৳১৫০</span>
-                      </button>
-                      <button type="button" class="rn-quick-chip" data-price="50000" data-name="Spa">
-                        <span class="rn-chip-icon">✂️</span>
-                        <span class="rn-chip-name">Spa</span>
-                        <span class="rn-chip-cost">৳৫০০০০</span>
-                      </button>
-                      <button type="button" class="rn-quick-chip" data-price="6000" data-name="Facial">
-                        <span class="rn-chip-icon">✂️</span>
-                        <span class="rn-chip-name">Facial</span>
-                        <span class="rn-chip-cost">৳৬০০০</span>
-                      </button>
-                      <button type="button" class="rn-quick-chip rn-chip-custom" data-price="500" data-name="কাস্টম সেবা">
-                        <span class="rn-chip-icon">✨</span>
-                        <span class="rn-chip-name">কাস্টম সেবা</span>
-                        <span class="rn-chip-cost">+ নতুন</span>
-                      </button>
+                    <!-- 1-Tap Quick Services Tray -->
+                    <div class="rn-quick-services-tray" id="rnQuickServicesTray">
+                      <div class="rn-quick-label">১-ট্যাপে সেবা যোগ করুন:</div>
+                      <div class="rn-quick-services-grid">
+                        <button type="button" class="rn-quick-chip active" data-id="haircut" data-price="150" data-name="চুল কাটা">
+                          <span class="rn-chip-icon">✂️</span>
+                          <span class="rn-chip-name">চুল কাটা</span>
+                          <span class="rn-chip-cost">৳১৫০</span>
+                        </button>
+                        <button type="button" class="rn-quick-chip" data-id="spa" data-price="500" data-name="হেড স্পা ও ম্যাসাজ">
+                          <span class="rn-chip-icon">💆</span>
+                          <span class="rn-chip-name">Spa</span>
+                          <span class="rn-chip-cost">৳৫০০</span>
+                        </button>
+                        <button type="button" class="rn-quick-chip" data-id="facial" data-price="800" data-name="গোল্ডেন ফেসিয়াল">
+                          <span class="rn-chip-icon">🧖‍♂️</span>
+                          <span class="rn-chip-name">Facial</span>
+                          <span class="rn-chip-cost">৳৮০০</span>
+                        </button>
+                        <button type="button" class="rn-quick-chip rn-chip-custom" id="rnQuickChipCustomBtn" title="Add custom service">
+                          <span class="rn-chip-icon">✨</span>
+                          <span class="rn-chip-name">কাস্টম সেবা</span>
+                          <span class="rn-chip-cost">+ নতুন</span>
+                        </button>
+                      </div>
                     </div>
                   </div>
 
-                  <!-- 4. Price & Tip Block -->
+                  <!-- 4. Price & Tip Card with Suggestions (Auto-Sum Calculation) -->
                   <div class="rn-price-card">
                     <div class="rn-price-header">
                       <span class="rn-price-label">সেবা মূল্য (মূল বিল)</span>
@@ -908,7 +941,7 @@
                       <span class="rn-price-val" id="rnBillPrice">150</span>
                     </div>
 
-                    <!-- Tip Section -->
+                    <!-- Tip Section with Suggestions -->
                     <div class="rn-tip-section">
                       <div class="rn-tip-header">
                         <span class="rn-tip-label">কাস্টমারের বকশিস (ঐচ্ছিক)</span>
@@ -917,6 +950,7 @@
                       <div class="rn-tip-input-wrap">
                         <span class="rn-tip-sign">৳</span>
                         <span class="rn-tip-placeholder" id="rnTipPlaceholder">বকশিসের পরিমাণ লিখুন...</span>
+                        <button type="button" class="rn-tip-clear-btn" id="rnTipClearBtn" style="display:none;" title="মুছুন">✕</button>
                       </div>
                       <div class="rn-tip-chips-row">
                         <button type="button" class="rn-tip-chip active" data-tip="0">বকশিস নেই</button>
@@ -928,10 +962,10 @@
                     </div>
                   </div>
 
-                  <!-- 5. 3x2 Payment Methods -->
+                  <!-- 5. Compact 3x2 Branded Payment Grid -->
                   <div class="rn-payment-section">
                     <div class="rn-payment-header">
-                      <span class="rn-payment-icon">👛</span>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2.2"><rect x="2" y="4" width="20" height="16" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line><circle cx="17" cy="15" r="1"></circle></svg>
                       <span class="rn-payment-title">কীভাবে টাকা পেয়েছেন</span>
                     </div>
                     <div class="rn-payment-grid">
@@ -987,12 +1021,12 @@
                       </button>
                     </div>
                     <div class="rn-notes-expand-wrap" id="rnNotesExpandWrap" style="display:none;">
-                      <input type="text" class="rn-notes-expand-input" placeholder="কাস্টমারের নাম বা বিশেষ নোট..." />
+                      <input type="text" class="rn-notes-expand-input" id="rnNotesExpandInput" placeholder="কাস্টমারের নাম বা বিশেষ নোট..." />
                     </div>
                   </div>
                 </div>
 
-                <!-- Sticky Bottom Action Bar -->
+                <!-- Sticky Pinned Bottom Action Bar -->
                 <div class="rn-bottom-action-bar">
                   <div class="rn-action-total">
                     <span class="rn-action-label">মোট বিল</span>
@@ -1039,6 +1073,7 @@
                     <div class="rn-catalog-search-wrap">
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                       <input type="text" class="rn-catalog-search-input" id="rnCatalogSearchInput" placeholder="সেবার নাম লিখে খুঁজুন..." />
+                      <button type="button" class="rn-catalog-search-clear" id="rnCatalogSearchClear" style="display:none;">✕</button>
                     </div>
                     <div class="rn-catalog-cats-row">
                       <button type="button" class="rn-catalog-cat-pill active" data-cat="all">✨ সব সেবা</button>
@@ -1052,9 +1087,40 @@
                   </div>
 
                   <div class="rn-catalog-list-scroll" id="rnCatalogListScroll">
+                    <!-- Custom Service Option in Modal -->
+                    <div class="rn-catalog-custom-card" id="rnCatalogCustomCard">
+                      <div class="rn-catalog-custom-left">
+                        <div class="rn-catalog-icon-wrap" style="background:#eaf2ec;color:#059669">✨</div>
+                        <div class="rn-catalog-name-col">
+                          <span class="rn-catalog-name">কাস্টম সেবা</span>
+                          <span class="rn-catalog-cat-tag">যেকোনো নাম ও মূল্য</span>
+                        </div>
+                      </div>
+                      <div class="rn-catalog-item-right">
+                        <span class="rn-catalog-price" id="rnCatalogCustomPriceDisplay" style="color:#059669">+ Custom</span>
+                        <span class="rn-catalog-chevron" id="rnCatalogCustomChevron">▾</span>
+                      </div>
+                    </div>
+
+                    <!-- Custom Service Drawer inside Modal -->
+                    <div class="rn-catalog-custom-drawer" id="rnCatalogCustomDrawer" style="display:none;">
+                      <input type="text" class="rn-main-custom-name-input" id="rnModalCustomNameInput" placeholder="সেবার নাম লিখুন..." />
+                      <div class="rn-main-custom-price-row">
+                        <div class="rn-main-custom-price-wrap">
+                          <span class="rn-custom-price-prefix">৳</span>
+                          <input type="number" class="rn-main-custom-price-input" id="rnModalCustomPriceInput" placeholder="মূল্য" />
+                        </div>
+                        <button type="button" class="rn-main-custom-add-btn" id="rnModalCustomAddBtn">
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                          <span>যোগ করুন</span>
+                        </button>
+                      </div>
+                    </div>
+
+                    <!-- Service List -->
                     <div class="rn-catalog-item selected" data-id="haircut" data-name="চুল কাটা" data-price="150" data-cat="hair">
                       <div class="rn-catalog-item-left">
-                        <div class="rn-catalog-icon-wrap">✂️</div>
+                        <div class="rn-catalog-icon-wrap" style="background:#EFF6FF;color:#059669">✂️</div>
                         <div class="rn-catalog-name-col">
                           <span class="rn-catalog-name">চুল কাটা</span>
                           <span class="rn-catalog-cat-tag">চুল</span>
@@ -1068,7 +1134,7 @@
 
                     <div class="rn-catalog-item" data-id="beard" data-name="দাড়ি ট্রিম" data-price="100" data-cat="beard">
                       <div class="rn-catalog-item-left">
-                        <div class="rn-catalog-icon-wrap">🧔</div>
+                        <div class="rn-catalog-icon-wrap" style="background:#ECFDF5;color:#059669">🧔</div>
                         <div class="rn-catalog-name-col">
                           <span class="rn-catalog-name">দাড়ি ট্রিম</span>
                           <span class="rn-catalog-cat-tag">দাড়ি</span>
@@ -1082,7 +1148,7 @@
 
                     <div class="rn-catalog-item" data-id="shave" data-name="ক্লিন শেভ" data-price="80" data-cat="shave">
                       <div class="rn-catalog-item-left">
-                        <div class="rn-catalog-icon-wrap">🪒</div>
+                        <div class="rn-catalog-icon-wrap" style="background:#ECFDF5;color:#059669">🪒</div>
                         <div class="rn-catalog-name-col">
                           <span class="rn-catalog-name">ক্লিন শেভ</span>
                           <span class="rn-catalog-cat-tag">শেভ</span>
@@ -1096,7 +1162,7 @@
 
                     <div class="rn-catalog-item" data-id="facial" data-name="গোল্ডেন ফেসিয়াল" data-price="800" data-cat="facial">
                       <div class="rn-catalog-item-left">
-                        <div class="rn-catalog-icon-wrap">🧖‍♂️</div>
+                        <div class="rn-catalog-icon-wrap" style="background:#ECFDF5;color:#059669">🧖‍♂️</div>
                         <div class="rn-catalog-name-col">
                           <span class="rn-catalog-name">গোল্ডেন ফেসিয়াল</span>
                           <span class="rn-catalog-cat-tag">ফেসিয়াল</span>
@@ -1110,7 +1176,7 @@
 
                     <div class="rn-catalog-item" data-id="spa" data-name="হেড স্পা ও ম্যাসাজ" data-price="500" data-cat="spa">
                       <div class="rn-catalog-item-left">
-                        <div class="rn-catalog-icon-wrap">💆</div>
+                        <div class="rn-catalog-icon-wrap" style="background:#FFFBEB;color:#D97706">💆</div>
                         <div class="rn-catalog-name-col">
                           <span class="rn-catalog-name">হেড স্পা ও ম্যাসাজ</span>
                           <span class="rn-catalog-cat-tag">স্পা</span>
@@ -1124,7 +1190,7 @@
 
                     <div class="rn-catalog-item" data-id="color" data-name="হেয়ার কালার / ডাই" data-price="450" data-cat="color">
                       <div class="rn-catalog-item-left">
-                        <div class="rn-catalog-icon-wrap">🎨</div>
+                        <div class="rn-catalog-icon-wrap" style="background:#FFF1F2;color:#E11D48">🎨</div>
                         <div class="rn-catalog-name-col">
                           <span class="rn-catalog-name">হেয়ার কালার / ডাই</span>
                           <span class="rn-catalog-cat-tag">কালার</span>
@@ -1134,6 +1200,14 @@
                         <span class="rn-catalog-price">৳৪৫০</span>
                         <span class="rn-catalog-check">+</span>
                       </div>
+                    </div>
+
+                    <!-- Empty state if search doesn't match -->
+                    <div class="rn-catalog-empty-wrap" id="rnCatalogEmptyWrap" style="display:none;">
+                      <div class="rn-catalog-empty-icon">🔍</div>
+                      <div class="rn-catalog-empty-title">কোনো সেবা খুঁজে পাওয়া যায়নি</div>
+                      <div class="rn-catalog-empty-sub">তালিকায় নেই? কাস্টম সেবা হিসেবে যোগ করুন</div>
+                      <button type="button" class="rn-catalog-empty-btn" id="rnCatalogEmptyAddBtn">+ কাস্টম সেবা হিসেবে যোগ করুন</button>
                     </div>
                   </div>
 
@@ -1145,6 +1219,87 @@
                     <button type="button" class="rn-catalog-confirm-btn" id="rnCatalogConfirmBtn">সেবা বাছাই সম্পন্ন</button>
                   </div>
                 </div>
+
+                <!-- 9. Work Entries History Records Modal (Real WorkEntryCard.tsx Implementation) -->
+                <div class="rn-history-modal" id="rnHistoryModal">
+                  <div class="rn-catalog-header">
+                    <button type="button" class="rn-catalog-back-btn" id="rnHistoryCloseBtn">←</button>
+                    <div class="rn-catalog-title-col">
+                      <div class="rn-catalog-title">কাজের হিসাব রেকর্ড</div>
+                      <div class="rn-catalog-sub" id="rnHistorySubtitle">৩টি এন্ট্রি সংরক্ষিত • মায়ের দোয়া সেলুন</div>
+                    </div>
+                    <span style="font-size:0.62rem;font-weight:700;color:#059669;background:#ECFDF5;border:1px solid #A7F3D0;padding:3px 7px;border-radius:6px">লাইভ</span>
+                  </div>
+
+                  <div class="rn-history-list" id="rnHistoryList">
+                    <!-- Real WorkEntryCard 1 -->
+                    <div class="rn-work-card">
+                      <div class="rn-work-card-header">
+                        <div class="rn-work-service-info">
+                          <div class="rn-work-service-name">চুল কাটা &amp; স্টাইলিং</div>
+                          <div class="rn-work-time">10:45 AM</div>
+                        </div>
+                        <div class="rn-work-price-container">
+                          <div class="rn-work-price">৳200.00</div>
+                          <div class="rn-work-tip-badge">+৳50 tip</div>
+                        </div>
+                      </div>
+                      <div class="rn-work-card-footer">
+                        <div class="rn-work-emp-container">
+                          <div class="rn-work-emp-avatar">K</div>
+                          <div class="rn-work-emp-name">kabbo (মালিক)</div>
+                        </div>
+                        <div class="rn-work-payment-badge" style="background:#008000;">Cash</div>
+                      </div>
+                    </div>
+
+                    <!-- Real WorkEntryCard 2 -->
+                    <div class="rn-work-card">
+                      <div class="rn-work-card-header">
+                        <div class="rn-work-service-info">
+                          <div class="rn-work-service-name">হেড স্পা ও ম্যাসাজ</div>
+                          <div class="rn-work-time">11:15 AM</div>
+                        </div>
+                        <div class="rn-work-price-container">
+                          <div class="rn-work-price">৳500.00</div>
+                        </div>
+                      </div>
+                      <div class="rn-work-card-footer">
+                        <div class="rn-work-emp-container">
+                          <div class="rn-work-emp-avatar" style="background:#059669">M</div>
+                          <div class="rn-work-emp-name">masum (স্টাফ)</div>
+                        </div>
+                        <div class="rn-work-payment-badge" style="background:#E2136E;">bKash</div>
+                      </div>
+                      <div class="rn-work-edited-badge">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <span>এডিটেড</span>
+                      </div>
+                    </div>
+
+                    <!-- Real WorkEntryCard 3 -->
+                    <div class="rn-work-card">
+                      <div class="rn-work-card-header">
+                        <div class="rn-work-service-info">
+                          <div class="rn-work-service-name">গোল্ডেন ফেসিয়াল &amp; শেভ</div>
+                          <div class="rn-work-time">12:30 PM</div>
+                        </div>
+                        <div class="rn-work-price-container">
+                          <div class="rn-work-price">৳880.00</div>
+                          <div class="rn-work-tip-badge">+৳100 tip</div>
+                        </div>
+                      </div>
+                      <div class="rn-work-card-footer">
+                        <div class="rn-work-emp-container">
+                          <div class="rn-work-emp-avatar" style="background:#2563EB">X</div>
+                          <div class="rn-work-emp-name">xMan (স্টাফ)</div>
+                        </div>
+                        <div class="rn-work-payment-badge" style="background:#F37021;">Nagad</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
