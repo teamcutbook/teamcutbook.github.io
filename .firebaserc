@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "cutbook-47881"
+  },
+  "targets": {
+    "cutbook-47881": {
+      "hosting": {
+        "teamcutbook": [
+          "teamcutbook"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

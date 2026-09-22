@@ -1,0 +1,15 @@
+{
+  "hosting": {
+    "target": "teamcutbook",
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      ".firebaserc",
+      "**/.*",
+      "**/node_modules/**",
+      "skills-lock.json",
+      "firebase-debug.log"
+    ],
+    "cleanUrls": true
+  }
+}
