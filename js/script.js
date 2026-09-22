@@ -40,6 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 12. CutBook Owner Work Entry POS Simulator & Code Viewer
   initPosSimulatorInteractive();
+
+  // 13. CutBook Owner Dashboard Screen Simulator & Code Viewer
+  initDashSimulatorInteractive();
 });
 
 /* --------------------------------------------------------------------------
@@ -1982,4 +1985,235 @@ function initPosSimulatorInteractive() {
     });
   }
 }
+
+/* --------------------------------------------------------------------------
+   15. CutBook Owner Dashboard Screen Simulator & Code Viewer
+   -------------------------------------------------------------------------- */
+function initDashSimulatorInteractive() {
+  const btnUi = document.getElementById('btnDashViewUi');
+  const btnCode = document.getElementById('btnDashViewCode');
+  const panelUi = document.getElementById('dashViewUi');
+  const panelCode = document.getElementById('dashViewCode');
+  const btnCopy = document.getElementById('btnCopyDashCode');
+
+  if (btnUi && btnCode && panelUi && panelCode) {
+    btnUi.addEventListener('click', () => {
+      btnUi.classList.add('active');
+      btnCode.classList.remove('active');
+      panelUi.classList.add('active');
+      panelCode.classList.remove('active');
+    });
+
+    btnCode.addEventListener('click', () => {
+      btnCode.classList.add('active');
+      btnUi.classList.remove('active');
+      panelCode.classList.add('active');
+      panelUi.classList.remove('active');
+    });
+  }
+
+  if (btnCopy) {
+    btnCopy.addEventListener('click', () => {
+      const codeEl = document.querySelector('#dashViewCode pre code');
+      if (codeEl) {
+        navigator.clipboard.writeText(codeEl.innerText).then(() => {
+          btnCopy.innerHTML = '<span>✓ Copied!</span>';
+          setTimeout(() => {
+            btnCopy.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy TSX</span>`;
+          }, 2000);
+        });
+      }
+    });
+  }
+
+  // Timeframe Data
+  const dashData = {
+    today: {
+      balance: '৳৪১,৭৫০',
+      gross: '৳৫২,৩০০',
+      customers: '৩৮',
+      periodLabel: 'Daily',
+      ownerProfit: '৳৩১,৪০০',
+      expenses: '৳৪,৮০০',
+      expCount: '৩টি খরচ',
+      payouts: '৳১২,৫০০',
+      tips: '৳১,৪৫০',
+      unpaid: '৳৩,৬০০',
+      withoutTips: '৳৫০,৮৫০',
+      cash: '৳২৪,২০০',
+      mobile: '৳২০,৭০০',
+      card: '৳৭,৪০০',
+      top1Services: '১৮',
+      top1Amount: '৳২২,৪০০',
+      top2Services: '১২',
+      top2Amount: '৳১৬,৫০০',
+      top3Services: '৮',
+      top3Amount: '৳১১,৯৫০',
+      date: '২৩ সেপ্টেম্বর ২০২৬'
+    },
+    weekly: {
+      balance: '৳২,৬৪,৩০০',
+      gross: '৳৩,১৮,৫০০',
+      customers: '২১৮',
+      periodLabel: 'Weekly',
+      ownerProfit: '৳১,৯৪,২০০',
+      expenses: '৳২৯,৫০০',
+      expCount: '১৫টি খরচ',
+      payouts: '৳৭৪,২০০',
+      tips: '৳৯,৮০০',
+      unpaid: '৳১৪,৩০০',
+      withoutTips: '৳৩,০৮,৭০০',
+      cash: '৳১,৫২,১০০',
+      mobile: '৳১,২১,৬০০',
+      card: '৳৪৪,৮০০',
+      top1Services: '৯২',
+      top1Amount: '৳১,৩৬,৫০০',
+      top2Services: '৬৪',
+      top2Amount: '৳১,০৪,২০০',
+      top3Services: '৪২',
+      top3Amount: '৳৭৭,৮০০',
+      date: '১৭ - ২৩ সেপ্টেম্বর ২০২৬'
+    },
+    monthly: {
+      balance: '৳৯,৮৫,০০০',
+      gross: '৳১২,৪৫,০০০',
+      customers: '৮৮০',
+      periodLabel: 'Monthly',
+      ownerProfit: '৳৭,৮০,০০০',
+      expenses: '৳১,১০,০০০',
+      expCount: '৫২টি খরচ',
+      payouts: '৳২,৮৫,০০০',
+      tips: '৳৩৮,২০০',
+      unpaid: '৳৪৫,০০০',
+      withoutTips: '৳১২,০৬,৮০০',
+      cash: '৳৫,৮০,০০০',
+      mobile: '৳৪,৯৫,০০০',
+      card: '৳১,৭০,০০০',
+      top1Services: '৩৪০',
+      top1Amount: '৳৫,২৫,০০০',
+      top2Services: '২৪৫',
+      top2Amount: '৳৪,১০,০০০',
+      top3Services: '১৬০',
+      top3Amount: '৳৩,১০,০০০',
+      date: 'সেপ্টেম্বর ২০২৬'
+    },
+    yearly: {
+      balance: '৳১,১৮,৫০,০০০',
+      gross: '৳১,৫০,২০,০০০',
+      customers: '১০,৬০০',
+      periodLabel: 'Yearly',
+      ownerProfit: '৳৯২,৪০,০০০',
+      expenses: '৳১৩,২০,০০০',
+      expCount: '৬২০টি খরচ',
+      payouts: '৳৩৪,২০,০০০',
+      tips: '৳৪,৬০,০০০',
+      unpaid: '৳১,২০,০০০',
+      withoutTips: '৳১,৪৫,৬০,০০০',
+      cash: '৳৭০,৫০,০০০',
+      mobile: '৳৫৯,৮০,০০০',
+      card: '৳১৯,৯০,০০০',
+      top1Services: '৪,১০০',
+      top1Amount: '৳৬২,৪০,০০০',
+      top2Services: '২,৯৫০',
+      top2Amount: '৳৪৮,৮০,০০০',
+      top3Services: '১,৯২০',
+      top3Amount: '৳৩৮,৯০,০০০',
+      date: 'বছর ২০২৬'
+    }
+  };
+
+  // Elements to update
+  const elBalance = document.getElementById('dashLiveBalance');
+  const elGross = document.getElementById('dashGrossRevenue');
+  const elCustomers = document.getElementById('dashCustomerCount');
+  const elPeriodLabel = document.getElementById('dashPeriodLabel');
+  const elProfit = document.getElementById('dashOwnerProfit');
+  const elExpenses = document.getElementById('dashExpenses');
+  const elExpCount = document.getElementById('dashExpCount');
+  const elPayouts = document.getElementById('dashPayouts');
+  const elTips = document.getElementById('dashTips');
+  const elUnpaid = document.getElementById('dashUnpaid');
+  const elWithoutTips = document.getElementById('dashWithoutTips');
+  const elCash = document.getElementById('dashCash');
+  const elMobile = document.getElementById('dashMobileBanking');
+  const elCard = document.getElementById('dashCard');
+  const elTop1Services = document.getElementById('dashTop1Services');
+  const elTop1Amount = document.getElementById('dashTop1Amount');
+  const elTop2Services = document.getElementById('dashTop2Services');
+  const elTop2Amount = document.getElementById('dashTop2Amount');
+  const elTop3Services = document.getElementById('dashTop3Services');
+  const elTop3Amount = document.getElementById('dashTop3Amount');
+  const elSelectedDate = document.getElementById('dashSelectedDate');
+
+  const tabs = document.querySelectorAll('.rn-dash-tab');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      const period = tab.getAttribute('data-dash-period') || 'today';
+      const d = dashData[period];
+      if (!d) return;
+
+      if (elBalance) {
+        elBalance.style.opacity = '0.3';
+        elBalance.style.transform = 'scale(0.96)';
+        setTimeout(() => {
+          elBalance.textContent = d.balance;
+          if (elGross) elGross.textContent = d.gross;
+          if (elCustomers) elCustomers.textContent = d.customers;
+          if (elPeriodLabel) elPeriodLabel.textContent = d.periodLabel;
+          if (elProfit) elProfit.textContent = d.ownerProfit;
+          if (elExpenses) elExpenses.textContent = d.expenses;
+          if (elExpCount) elExpCount.textContent = d.expCount;
+          if (elPayouts) elPayouts.textContent = d.payouts;
+          if (elTips) elTips.textContent = d.tips;
+          if (elUnpaid) elUnpaid.textContent = d.unpaid;
+          if (elWithoutTips) elWithoutTips.textContent = d.withoutTips;
+          if (elCash) elCash.textContent = d.cash;
+          if (elMobile) elMobile.textContent = d.mobile;
+          if (elCard) elCard.textContent = d.card;
+          if (elTop1Services) elTop1Services.textContent = d.top1Services;
+          if (elTop1Amount) elTop1Amount.textContent = d.top1Amount;
+          if (elTop2Services) elTop2Services.textContent = d.top2Services;
+          if (elTop2Amount) elTop2Amount.textContent = d.top2Amount;
+          if (elTop3Services) elTop3Services.textContent = d.top3Services;
+          if (elTop3Amount) elTop3Amount.textContent = d.top3Amount;
+          if (elSelectedDate) elSelectedDate.textContent = d.date;
+
+          elBalance.style.opacity = '1';
+          elBalance.style.transform = 'scale(1)';
+        }, 140);
+      }
+    });
+  });
+
+  // Payout Filter Toggle
+  const btnPayoutFilter = document.getElementById('btnDashPayoutFilter');
+  if (btnPayoutFilter) {
+    btnPayoutFilter.addEventListener('click', () => {
+      const isFiltered = btnPayoutFilter.classList.toggle('active');
+      const nonPayouts = document.querySelectorAll('#dashTxnsList .txn-type-entry, #dashTxnsList .txn-type-expense');
+      nonPayouts.forEach(el => {
+        el.style.display = isFiltered ? 'none' : 'flex';
+      });
+    });
+  }
+
+  // Floating Action Button
+  const fabBtn = document.querySelector('.rn-dash-fab');
+  if (fabBtn) {
+    fabBtn.addEventListener('click', () => {
+      const quickLoggerTab = document.querySelector('.tab-chip[data-tab="quick-entry"]');
+      if (quickLoggerTab) {
+        quickLoggerTab.click();
+        const loggerSection = document.getElementById('features');
+        if (loggerSection) {
+          loggerSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    });
+  }
+}
+
 
