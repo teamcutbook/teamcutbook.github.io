@@ -17,56 +17,23 @@ document.addEventListener('DOMContentLoaded', () => {
   // 4. Counter Up Animation for Stats
   initCounterAnimation();
 
-  // 5. Interactive Product Overview Tabs (Grassfeld-style)
+  // 5. Interactive Product Overview Tabs
   initProductTabs();
 
-  // 6. Testimonial Carousel
-  initTestimonialCarousel();
-
-  // 7. Interactive Pricing Calculator Simulator
+  // 6. Interactive Pricing Calculator Simulator
   initPricingCalculator();
 
-  // 8. FAQ Accordion
+  // 7. FAQ Accordion
   initFaqAccordion();
 
-  // 9. 3D Tilt Effect on Hero Mockup & Gallery
+  // 8. 3D Tilt Effect on Hero Mockup
   initTiltEffect();
 
-  // 10. CutBook Owner Summary Screen Telemetry (Section 08)
+  // 9. CutBook Owner Summary Screen Telemetry
   initSummaryTelemetryInteractive();
 
-  // 11. Organize Salon Future Together Carousel (Grassfeld Style)
-  initSharedFutureCarousel();
-
-  // 12. 360° Interactive Three.js 3D Ecosystem Universe
-  init3DEcosystem();
-
-  // 13. 5-in-1 Salon Headaches vs Unified Terminal Interaction
-  initProblemStreamHover();
-
-  // 14. Interactive Commission Mode Switcher (Section 05)
+  // 10. Interactive Commission Mode Switcher
   initCommissionModeSwitcher();
-
-  // 15. Team & Stylist Hub Interactions (Section 06)
-  initTeamHubInteractions();
-
-  // 16. Service Lifecycle Pipeline Flow (Section 07)
-  initPipelineFlowInteractions();
-
-  // 17. Dedicated Stylist Portal Simulation (Section 10)
-  initStylistPortalInteractive();
-
-  // 18. Section 12: Flagship 3-Phone Showcase & Interactive Ergonomics
-  initPocketShowcase();
-
-  // 19. Section 13: 24-Hour Salon Rhythm Workflow Timeline
-  initWorkflowTimeline();
-
-  // 20. Section 14: The Old Way vs. CutBook Matrix
-  initComparisonMatrix();
-
-  // 21. Section 15: Revenue Intelligence Bento Lens Switcher
-  initInsightsLensSwitcher();
 });
 
 /* --------------------------------------------------------------------------
