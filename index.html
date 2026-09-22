@@ -751,33 +751,217 @@
             <a href="#features" class="btn btn-primary btn-sm btn-pill">Explore 1-Tap Logger</a>
           </div>
 
-          <div class="tab-ui-preview tab-ui-preview-mockup">
-            <div class="app-screenshot-phone-frame">
+          <div class="tab-ui-preview tab-ui-preview-interactive">
+            <div class="app-screenshot-phone-frame app-interactive-phone">
               <div class="phone-dynamic-island">
                 <span class="phone-camera-lens"></span>
                 <span class="phone-speaker-grill"></span>
               </div>
-              <div class="phone-screen-viewport">
-                <picture>
-                  <source srcset="assets/images/cutbook_service_entry_screen.webp" type="image/webp">
-                  <img src="assets/images/cutbook_service_entry_screen.jpg" alt="CutBook 1-Tap Service Logger Mobile App" class="app-mockup-img" width="514" height="1024" loading="lazy">
-                </picture>
-              </div>
-
-              <!-- Floating Feature Highlights -->
-              <div class="phone-float-badge badge-left">
-                <span class="float-badge-icon gold">🪙</span>
-                <div class="float-badge-text">
-                  <strong>৫৫৭৫ কয়েন</strong>
-                  <small>১ এন্ট্রি = ১ কয়েন</small>
+              
+              <div class="phone-screen-viewport rn-simulator-screen">
+                <!-- Header -->
+                <div class="rn-header">
+                  <div class="rn-header-back-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                  </div>
+                  <div class="rn-header-salon-badge">SALON</div>
+                  <div class="rn-header-title-col">
+                    <div class="rn-header-title">নতুন সেবা এন্ট্রি</div>
+                    <div class="rn-header-subtitle">মায়ের দোয়া সেলুন</div>
+                  </div>
+                  <div class="rn-header-history-btn">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                    <span>রেকর্ড</span>
+                  </div>
                 </div>
-              </div>
 
-              <div class="phone-float-badge badge-right">
-                <span class="float-badge-icon emerald">⚡</span>
-                <div class="float-badge-text">
-                  <strong>৪ সেকেন্ডে এন্ট্রি</strong>
-                  <small>১-ট্যাপ চেকআউট</small>
+                <!-- Scrollable Form Body -->
+                <div class="rn-scroll-body">
+                  <!-- 1. VIP Gold Coin Card -->
+                  <div class="rn-coin-card">
+                    <div class="rn-coin-left">
+                      <div class="rn-coin-medallion">🪙</div>
+                      <div class="rn-coin-info">
+                        <div class="rn-coin-title-row">
+                          <span class="rn-coin-balance">৫৫৭৫</span>
+                          <span class="rn-coin-unit">কয়েন ব্যালেন্স</span>
+                          <span class="rn-coin-status">সক্রিয়</span>
+                        </div>
+                        <div class="rn-coin-subtext">⚡ ১টি সেবা এন্ট্রি = ১টি কয়েন কাটা হবে</div>
+                      </div>
+                    </div>
+                    <div class="rn-coin-recharge-btn">+ রিচার্জ</div>
+                  </div>
+
+                  <!-- 2. Staff Row -->
+                  <div class="rn-staff-row">
+                    <div class="rn-staff-label">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                      <span>স্টাফ:</span>
+                    </div>
+                    <div class="rn-staff-chips-scroll">
+                      <div class="rn-staff-chip active" data-staff="kabbo">
+                        <div class="rn-staff-avatar">KA<span class="rn-avatar-check">✓</span></div>
+                        <div class="rn-staff-meta">
+                          <strong>kabbo</strong>
+                          <small>মালিক</small>
+                        </div>
+                      </div>
+                      <div class="rn-staff-chip" data-staff="masum">
+                        <div class="rn-staff-avatar">MA</div>
+                        <div class="rn-staff-meta">
+                          <strong>masum</strong>
+                          <small>মালিক</small>
+                        </div>
+                      </div>
+                      <div class="rn-staff-chip" data-staff="xman">
+                        <div class="rn-staff-avatar">XM</div>
+                        <div class="rn-staff-meta">
+                          <strong>xMan</strong>
+                          <small>মালিক</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 3. Service Selector -->
+                  <div class="rn-service-box">
+                    <div class="rn-service-header">
+                      <div class="rn-service-title-wrap">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.2"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><line x1="20" y1="4" x2="8.12" y2="15.88"></line><line x1="14.47" y1="14.48" x2="20" y2="20"></line><line x1="8.12" y1="8.12" x2="12" y2="12"></line></svg>
+                        <span class="rn-service-title">সেবা বাছাই করুন</span>
+                      </div>
+                      <div class="rn-browse-all-btn">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4zM4 10h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4zM4 16h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4z"/></svg>
+                        <span>সকল সেবা (২১) ▾</span>
+                      </div>
+                    </div>
+
+                    <div class="rn-quick-label">১-ট্যাপে সেবা যোগ করুন:</div>
+                    <div class="rn-quick-services-grid">
+                      <button type="button" class="rn-quick-chip active" data-price="150" data-name="চুল কাটা">
+                        <span class="rn-chip-icon">✂️</span>
+                        <span class="rn-chip-name">চুল কাটা</span>
+                        <span class="rn-chip-cost">৳১৫০</span>
+                      </button>
+                      <button type="button" class="rn-quick-chip" data-price="50000" data-name="Spa">
+                        <span class="rn-chip-icon">✂️</span>
+                        <span class="rn-chip-name">Spa</span>
+                        <span class="rn-chip-cost">৳৫০০০০</span>
+                      </button>
+                      <button type="button" class="rn-quick-chip" data-price="6000" data-name="Facial">
+                        <span class="rn-chip-icon">✂️</span>
+                        <span class="rn-chip-name">Facial</span>
+                        <span class="rn-chip-cost">৳৬০০০</span>
+                      </button>
+                      <button type="button" class="rn-quick-chip rn-chip-custom" data-price="500" data-name="কাস্টম সেবা">
+                        <span class="rn-chip-icon">✨</span>
+                        <span class="rn-chip-name">কাস্টম সেবা</span>
+                        <span class="rn-chip-cost">+ নতুন</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- 4. Price & Tip Block -->
+                  <div class="rn-price-card">
+                    <div class="rn-price-header">
+                      <span class="rn-price-label">সেবা মূল্য (মূল বিল)</span>
+                      <span class="rn-auto-badge">✨ অটো-হিসাব</span>
+                    </div>
+                    <div class="rn-price-input-wrap">
+                      <span class="rn-currency-sign">৳</span>
+                      <span class="rn-price-val" id="rnBillPrice">150</span>
+                    </div>
+
+                    <!-- Tip Section -->
+                    <div class="rn-tip-section">
+                      <div class="rn-tip-header">
+                        <span class="rn-tip-label">কাস্টমারের বকশিস (ঐচ্ছিক)</span>
+                        <span class="rn-tip-notice">১০০% স্টাফ পাবে</span>
+                      </div>
+                      <div class="rn-tip-input-wrap">
+                        <span class="rn-tip-sign">৳</span>
+                        <span class="rn-tip-placeholder" id="rnTipPlaceholder">বকশিসের পরিমাণ লিখুন...</span>
+                      </div>
+                      <div class="rn-tip-chips-row">
+                        <button type="button" class="rn-tip-chip active" data-tip="0">বকশিস নেই</button>
+                        <button type="button" class="rn-tip-chip" data-tip="20">+৳২০</button>
+                        <button type="button" class="rn-tip-chip" data-tip="50">+৳৫০</button>
+                        <button type="button" class="rn-tip-chip" data-tip="100">+৳১০০</button>
+                        <button type="button" class="rn-tip-chip" data-tip="200">+৳২০০</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 5. 3x2 Payment Methods -->
+                  <div class="rn-payment-section">
+                    <div class="rn-payment-header">
+                      <span class="rn-payment-icon">👛</span>
+                      <span class="rn-payment-title">কীভাবে টাকা পেয়েছেন</span>
+                    </div>
+                    <div class="rn-payment-grid">
+                      <button type="button" class="rn-pay-card pay-cash active" data-method="cash">
+                        <span class="pay-icon">💵</span>
+                        <span class="pay-label">ক্যাশ</span>
+                        <span class="pay-check-dot">✓</span>
+                      </button>
+                      <button type="button" class="rn-pay-card pay-bkash" data-method="bkash">
+                        <span class="pay-brand bkash-brand">bKash</span>
+                        <span class="pay-check-dot">✓</span>
+                      </button>
+                      <button type="button" class="rn-pay-card pay-nagad" data-method="nagad">
+                        <span class="pay-brand nagad-brand">Nagad</span>
+                        <span class="pay-check-dot">✓</span>
+                      </button>
+                      <button type="button" class="rn-pay-card pay-qr" data-method="bangla_qr">
+                        <span class="pay-icon">⚏</span>
+                        <span class="pay-label">Bangla QR</span>
+                        <span class="pay-check-dot">✓</span>
+                      </button>
+                      <button type="button" class="rn-pay-card pay-rocket" data-method="rocket">
+                        <span class="pay-icon">🚀</span>
+                        <span class="pay-label">Rocket</span>
+                        <span class="pay-check-dot">✓</span>
+                      </button>
+                      <button type="button" class="rn-pay-card pay-card" data-method="card">
+                        <span class="pay-icon">💳</span>
+                        <span class="pay-label">কার্ড</span>
+                        <span class="pay-check-dot">✓</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Sticky Bottom Action Bar -->
+                <div class="rn-bottom-action-bar">
+                  <div class="rn-action-total">
+                    <span class="rn-action-label">মোট বিল</span>
+                    <strong class="rn-action-val" id="rnTotalDisplay">৳১৫০.০০</strong>
+                  </div>
+                  <button type="button" class="rn-save-entry-btn" id="rnSaveEntryBtn">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <span>কাস্টমার সেবা সেভ করুন</span>
+                  </button>
+                </div>
+
+                <!-- App Bottom Navigation Tab Bar -->
+                <div class="rn-bottom-nav-bar">
+                  <div class="rn-nav-item active">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                    <span>হোম</span>
+                  </div>
+                  <div class="rn-nav-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                    <span>খরচ</span>
+                  </div>
+                  <div class="rn-nav-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    <span>টিম</span>
+                  </div>
+                  <div class="rn-nav-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    <span>আমার অ্যাকাউন্ট</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -807,33 +991,193 @@
             <a href="#features" class="btn btn-primary btn-sm btn-pill">Explore Live Dashboard</a>
           </div>
 
-          <div class="tab-ui-preview tab-ui-preview-mockup">
-            <div class="app-screenshot-phone-frame">
+          <div class="tab-ui-preview tab-ui-preview-interactive">
+            <div class="app-screenshot-phone-frame app-interactive-phone">
               <div class="phone-dynamic-island">
                 <span class="phone-camera-lens"></span>
                 <span class="phone-speaker-grill"></span>
               </div>
-              <div class="phone-screen-viewport">
-                <picture>
-                  <source srcset="assets/images/cutbook_dashboard_screen.webp" type="image/webp">
-                  <img src="assets/images/cutbook_dashboard_screen.jpg" alt="CutBook Live Owner Dashboard Mobile App" class="app-mockup-img" width="512" height="1024" loading="lazy">
-                </picture>
-              </div>
-
-              <!-- Floating Feature Highlights matching user screenshot -->
-              <div class="phone-float-badge badge-left">
-                <span class="float-badge-icon emerald">💰</span>
-                <div class="float-badge-text">
-                  <strong>৳ ৮৪,৭৪,২০৯.০০</strong>
-                  <small>দোকানে মোট জমা</small>
+              
+              <div class="phone-screen-viewport rn-simulator-screen">
+                <!-- Header matching User Screenshot -->
+                <div class="rn-dash-header">
+                  <div class="rn-dash-header-left">
+                    <div class="rn-dash-avatar-wrap">
+                      <div class="rn-dash-avatar-circle" style="font-size:0.55rem;font-weight:800;letter-spacing:-0.5px">SALON</div>
+                      <div class="rn-dash-online-dot"></div>
+                    </div>
+                    <div class="rn-dash-header-text">
+                      <div class="rn-dash-salon-title">
+                        <span>মায়ের দোয়া সেলুন</span>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                      </div>
+                      <div class="rn-dash-salon-sub">সেলুন মালিক • ২ জন স্টাফ</div>
+                    </div>
+                  </div>
+                  <div class="rn-dash-bell-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                  </div>
                 </div>
-              </div>
 
-              <div class="phone-float-badge badge-right">
-                <span class="float-badge-icon blue">↗</span>
-                <div class="float-badge-text">
-                  <strong>৳ ১,১৬,৫২৪.৫০</strong>
-                  <small>মালিকের নেট লাভ</small>
+                <!-- Scrollable Body -->
+                <div class="rn-scroll-body">
+                  <!-- Timeframe Controls -->
+                  <div class="rn-dash-controls">
+                    <div class="rn-dash-segmented">
+                      <button type="button" class="rn-dash-tab active" data-dash-period="today">আজ</button>
+                      <button type="button" class="rn-dash-tab" data-dash-period="weekly">সাপ্তাহিক</button>
+                      <button type="button" class="rn-dash-tab" data-dash-period="monthly">মাসিক</button>
+                      <button type="button" class="rn-dash-tab" data-dash-period="yearly">বার্ষিক</button>
+                    </div>
+                    <div class="rn-dash-date-row">
+                      <div class="rn-dash-date-pill">
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <span id="dashSelectedDate">20 Sep 2026</span>
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 3. Total Salon Balance Hero Card -->
+                  <div class="rn-dash-hero-card">
+                    <div class="rn-dash-hero-orb"></div>
+                    <div class="rn-dash-hero-top">
+                      <div>
+                        <div class="rn-dash-hero-badge">
+                          <span class="rn-dash-hero-dot"></span>
+                          <span>দোকানে মোট জমা</span>
+                        </div>
+                        <div class="rn-dash-hero-balance" id="dashLiveBalance">৳8,474,209.00</div>
+                      </div>
+                      <div class="rn-dash-hero-icon">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+                      </div>
+                    </div>
+                    <div class="rn-dash-hero-sub">সব খরচ ও স্টাফদের টাকা দেওয়ার পর হাতে আছে</div>
+                  </div>
+
+                  <!-- 4. Primary Financial Metrics (2 Columns) -->
+                  <div class="rn-dash-2col">
+                    <div class="rn-dash-card">
+                      <div>
+                        <div class="rn-dash-metric-header">
+                          <span class="rn-dash-metric-label">মোট বিক্রি</span>
+                          <span class="rn-dash-metric-icon icon-blue">
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                          </span>
+                        </div>
+                        <div class="rn-dash-metric-val" id="dashGrossRevenue">৳214,040.00</div>
+                      </div>
+                      <div class="rn-dash-metric-footer">
+                        <span class="rn-dash-pill-blue"><span id="dashCustomerCount">11</span> জন কাস্টমার</span>
+                        <span class="rn-dash-subtext" id="dashPeriodLabel">Daily</span>
+                      </div>
+                    </div>
+
+                    <div class="rn-dash-card">
+                      <div>
+                        <div class="rn-dash-metric-header">
+                          <span class="rn-dash-metric-label">মালিকের লাভ / লস</span>
+                          <span class="rn-dash-metric-icon icon-emerald">
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                          </span>
+                        </div>
+                        <div class="rn-dash-metric-val rn-dash-val-profit" id="dashOwnerProfit">৳116,524.50</div>
+                      </div>
+                      <div class="rn-dash-metric-footer">
+                        <span class="rn-dash-subtext">সব খরচ বাদে লাভ</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 5. Operational Metrics Row 1 -->
+                  <div class="rn-dash-2col">
+                    <div class="rn-dash-op-card">
+                      <div class="rn-dash-metric-header">
+                        <span class="rn-dash-metric-label">খরচ</span>
+                        <span class="rn-dash-dot dot-rose"></span>
+                      </div>
+                      <div class="rn-dash-op-val" id="dashExpenses">৳0.00</div>
+                      <span class="rn-dash-subtext" id="dashExpCount">কোনো খরচ হয়নি</span>
+                    </div>
+                    <div class="rn-dash-op-card">
+                      <div class="rn-dash-metric-header">
+                        <span class="rn-dash-metric-label">স্টাফদের দেওয়া টাকা</span>
+                        <span class="rn-dash-dot dot-indigo"></span>
+                      </div>
+                      <div class="rn-dash-op-val" id="dashPayouts">৳20.00</div>
+                      <span class="rn-dash-subtext">স্টাফদের দেওয়া টাকা</span>
+                    </div>
+                  </div>
+
+                  <!-- Operational Metrics Row 2 -->
+                  <div class="rn-dash-2col">
+                    <div class="rn-dash-op-card">
+                      <div class="rn-dash-metric-header">
+                        <span class="rn-dash-metric-label">কাস্টমারের বকশিস</span>
+                        <span class="rn-dash-dot dot-amber"></span>
+                      </div>
+                      <div class="rn-dash-op-val" id="dashTips">৳440.00</div>
+                      <span class="rn-dash-subtext">কাস্টমারদের দেওয়া টিপস</span>
+                    </div>
+                    <div class="rn-dash-op-card rn-dash-op-amber">
+                      <div class="rn-dash-metric-header">
+                        <span class="rn-dash-metric-label" style="color:#B45309">স্টাফদের পাওনা</span>
+                        <span class="rn-dash-dot dot-amber-due"></span>
+                      </div>
+                      <div class="rn-dash-op-val rn-dash-op-val-amber" id="dashUnpaid">৳97,495.50</div>
+                      <span class="rn-dash-subtext" style="color:#B45309">স্টাফদের দেওয়া বাকি</span>
+                    </div>
+                  </div>
+
+                  <!-- 6. Detailed Breakdowns Row 3 -->
+                  <div class="rn-dash-2col">
+                    <div class="rn-dash-without-tips">
+                      <span class="rn-dash-without-tips-label">কাজ থেকে আয় (বকশিস ছাড়া)</span>
+                      <div class="rn-dash-without-tips-val" id="dashWithoutTips">৳213,600.00</div>
+                      <div class="rn-dash-without-tips-pill">কাজের মোট আয়</div>
+                    </div>
+
+                    <div class="rn-dash-pay-methods-card">
+                      <div class="rn-dash-metric-header" style="border-bottom:1px solid #F1F5F9;padding-bottom:3px;margin-bottom:3px;">
+                        <span class="rn-dash-metric-label">কীভাবে টাকা পেয়েছেন</span>
+                        <span style="font-size:0.55rem;color:#059669;font-weight:700">আরও →</span>
+                      </div>
+                      <div class="rn-dash-channel-row">
+                        <span class="rn-dash-channel-left">💵 ক্যাশ</span>
+                        <strong class="rn-dash-channel-val" id="dashCash">৳107,400</strong>
+                      </div>
+                      <div class="rn-dash-channel-row">
+                        <span class="rn-dash-channel-left">📱 মোবাইল</span>
+                        <strong class="rn-dash-channel-val" id="dashMobileBanking">৳106,400</strong>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Floating Green Action Button (+) -->
+                <button type="button" class="rn-dash-fab" title="নতুন এন্ট্রি">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                </button>
+
+                <!-- App Bottom Navigation Tab Bar -->
+                <div class="rn-bottom-nav-bar">
+                  <div class="rn-nav-item active">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                    <span>হোম</span>
+                  </div>
+                  <div class="rn-nav-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                    <span>খরচ</span>
+                  </div>
+                  <div class="rn-nav-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    <span>টিম</span>
+                  </div>
+                  <div class="rn-nav-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    <span>আমার অ্যাকাউন্ট</span>
+                  </div>
                 </div>
               </div>
             </div>

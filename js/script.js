@@ -35,10 +35,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // 10. Interactive Commission Mode Switcher
   initCommissionModeSwitcher();
 
-  // 11. Interactive 360° 3D Ecosystem Galaxy Orbit
-  init3DEcosystem();
+  // 12. CutBook Owner Work Entry UI Simulator
+  initPosSimulatorInteractive();
 
-
+  // 13. CutBook Owner Dashboard Screen UI Simulator
+  initDashSimulatorInteractive();
 });
 
 /* --------------------------------------------------------------------------
@@ -1845,6 +1846,244 @@ function initInsightsLensSwitcher() {
     });
   });
 }
+
+/* --------------------------------------------------------------------------
+   22. CutBook Owner Work Entry Native UI Simulator
+   -------------------------------------------------------------------------- */
+function initPosSimulatorInteractive() {
+  const billPriceEl = document.getElementById('rnBillPrice');
+  const totalDisplayEl = document.getElementById('rnTotalDisplay');
+  const tipPlaceholderEl = document.getElementById('rnTipPlaceholder');
+  const saveBtn = document.getElementById('rnSaveEntryBtn');
+  const serviceChips = document.querySelectorAll('.rn-quick-chip');
+  const staffChips = document.querySelectorAll('.rn-staff-chip');
+  const tipChips = document.querySelectorAll('.rn-tip-chip');
+  const payCards = document.querySelectorAll('.rn-pay-card');
+
+  if (!billPriceEl || !totalDisplayEl) return;
+
+  let currentPrice = 150;
+  let currentTip = 0;
+
+  function updateTotals() {
+    const total = currentPrice + currentTip;
+    billPriceEl.textContent = currentPrice.toString();
+    totalDisplayEl.textContent = `৳${total.toFixed(2)}`;
+  }
+
+  // Toggle Services
+  serviceChips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      const chipPrice = parseInt(chip.getAttribute('data-price') || '0', 10);
+      if (chip.classList.contains('active')) {
+        const activeCount = document.querySelectorAll('.rn-quick-chip.active').length;
+        if (activeCount > 1) {
+          chip.classList.remove('active');
+          currentPrice = Math.max(0, currentPrice - chipPrice);
+        }
+      } else {
+        chip.classList.add('active');
+        currentPrice += chipPrice;
+      }
+      updateTotals();
+    });
+  });
+
+  // Switch Staff
+  staffChips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      staffChips.forEach((c) => {
+        c.classList.remove('active');
+        const check = c.querySelector('.rn-avatar-check');
+        if (check) check.remove();
+      });
+      chip.classList.add('active');
+      const avatar = chip.querySelector('.rn-staff-avatar');
+      if (avatar && !avatar.querySelector('.rn-avatar-check')) {
+        const check = document.createElement('span');
+        check.className = 'rn-avatar-check';
+        check.textContent = '✓';
+        avatar.appendChild(check);
+      }
+    });
+  });
+
+  // Switch Tip
+  tipChips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      tipChips.forEach((c) => c.classList.remove('active'));
+      chip.classList.add('active');
+      const val = parseInt(chip.getAttribute('data-tip') || '0', 10);
+      currentTip = val;
+      if (tipPlaceholderEl) {
+        tipPlaceholderEl.textContent = val > 0 ? `+৳${val}` : 'বকশিসের পরিমাণ লিখুন...';
+        tipPlaceholderEl.style.color = val > 0 ? '#059669' : '#94A3B8';
+        tipPlaceholderEl.style.fontWeight = val > 0 ? '700' : '400';
+      }
+      updateTotals();
+    });
+  });
+
+  // Switch Payment
+  payCards.forEach((card) => {
+    card.addEventListener('click', () => {
+      payCards.forEach((c) => c.classList.remove('active'));
+      card.classList.add('active');
+    });
+  });
+
+  // Complete Button Feedback
+  if (saveBtn) {
+    saveBtn.addEventListener('click', () => {
+      const originalText = saveBtn.innerHTML;
+      saveBtn.innerHTML = '<span>✓ এন্ট্রি সেভ হয়েছে! (১ কয়েন খরচ হয়েছে)</span>';
+      saveBtn.style.background = '#047857';
+      setTimeout(() => {
+        saveBtn.innerHTML = originalText;
+        saveBtn.style.background = '';
+      }, 2200);
+    });
+  }
+}
+
+/* --------------------------------------------------------------------------
+   23. CutBook Owner Dashboard Screen Native UI Simulator
+   -------------------------------------------------------------------------- */
+function initDashSimulatorInteractive() {
+  const dashData = {
+    today: {
+      balance: '৳8,474,209.00',
+      gross: '৳214,040.00',
+      customers: '11',
+      periodLabel: 'Daily',
+      ownerProfit: '৳116,524.50',
+      expenses: '৳0.00',
+      expCount: 'কোনো খরচ হয়নি',
+      payouts: '৳20.00',
+      tips: '৳440.00',
+      unpaid: '৳97,495.50',
+      withoutTips: '৳213,600.00',
+      cash: '৳107,400',
+      mobile: '৳106,400',
+      date: '20 Sep 2026'
+    },
+    weekly: {
+      balance: '৳8,620,500.00',
+      gross: '৳1,480,200.00',
+      customers: '84',
+      periodLabel: 'Weekly',
+      ownerProfit: '৳792,400.00',
+      expenses: '৳18,500.00',
+      expCount: '৫টি খরচ',
+      payouts: '৳140.00',
+      tips: '৳3,200.00',
+      unpaid: '৳680,200.00',
+      withoutTips: '৳1,477,000.00',
+      cash: '৳745,000',
+      mobile: '৳735,200',
+      date: '14 - 20 Sep 2026'
+    },
+    monthly: {
+      balance: '৳9,150,000.00',
+      gross: '৳6,250,000.00',
+      customers: '340',
+      periodLabel: 'Monthly',
+      ownerProfit: '৳3,450,000.00',
+      expenses: '৳85,000.00',
+      expCount: '১৮টি খরচ',
+      payouts: '৳600.00',
+      tips: '৳14,500.00',
+      unpaid: '৳2,850,000.00',
+      withoutTips: '৳6,235,500.00',
+      cash: '৳3,150,000',
+      mobile: '৳3,100,000',
+      date: 'September 2026'
+    },
+    yearly: {
+      balance: '৳12,850,000.00',
+      gross: '৳48,500,000.00',
+      customers: '4,100',
+      periodLabel: 'Yearly',
+      ownerProfit: '৳26,800,000.00',
+      expenses: '৳640,000.00',
+      expCount: '১৪২টি খরচ',
+      payouts: '৳7,500.00',
+      tips: '৳115,000.00',
+      unpaid: '৳21,700,000.00',
+      withoutTips: '৳48,385,000.00',
+      cash: '৳24,500,000',
+      mobile: '৳24,000,000',
+      date: 'Year 2026'
+    }
+  };
+
+  const elBalance = document.getElementById('dashLiveBalance');
+  const elGross = document.getElementById('dashGrossRevenue');
+  const elCustomers = document.getElementById('dashCustomerCount');
+  const elPeriodLabel = document.getElementById('dashPeriodLabel');
+  const elProfit = document.getElementById('dashOwnerProfit');
+  const elExpenses = document.getElementById('dashExpenses');
+  const elExpCount = document.getElementById('dashExpCount');
+  const elPayouts = document.getElementById('dashPayouts');
+  const elTips = document.getElementById('dashTips');
+  const elUnpaid = document.getElementById('dashUnpaid');
+  const elWithoutTips = document.getElementById('dashWithoutTips');
+  const elCash = document.getElementById('dashCash');
+  const elMobile = document.getElementById('dashMobileBanking');
+  const elSelectedDate = document.getElementById('dashSelectedDate');
+
+  const tabs = document.querySelectorAll('.rn-dash-tab');
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      tabs.forEach((t) => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      const period = tab.getAttribute('data-dash-period') || 'today';
+      const d = dashData[period];
+      if (!d) return;
+
+      if (elBalance) {
+        elBalance.style.opacity = '0.3';
+        elBalance.style.transform = 'scale(0.96)';
+        setTimeout(() => {
+          elBalance.textContent = d.balance;
+          if (elGross) elGross.textContent = d.gross;
+          if (elCustomers) elCustomers.textContent = d.customers;
+          if (elPeriodLabel) elPeriodLabel.textContent = d.periodLabel;
+          if (elProfit) elProfit.textContent = d.ownerProfit;
+          if (elExpenses) elExpenses.textContent = d.expenses;
+          if (elExpCount) elExpCount.textContent = d.expCount;
+          if (elPayouts) elPayouts.textContent = d.payouts;
+          if (elTips) elTips.textContent = d.tips;
+          if (elUnpaid) elUnpaid.textContent = d.unpaid;
+          if (elWithoutTips) elWithoutTips.textContent = d.withoutTips;
+          if (elCash) elCash.textContent = d.cash;
+          if (elMobile) elMobile.textContent = d.mobile;
+          if (elSelectedDate) elSelectedDate.textContent = d.date;
+
+          elBalance.style.opacity = '1';
+          elBalance.style.transform = 'scale(1)';
+        }, 140);
+      }
+    });
+  });
+
+  // Floating Action Button
+  const fabBtn = document.querySelector('.rn-dash-fab');
+  if (fabBtn) {
+    fabBtn.addEventListener('click', () => {
+      const quickLoggerTab = document.querySelector('.tab-chip[data-tab="quick-entry"]');
+      if (quickLoggerTab) {
+        quickLoggerTab.click();
+        const loggerSection = document.getElementById('features');
+        if (loggerSection) {
+          loggerSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    });
+  }
+}
+
 
 
 
