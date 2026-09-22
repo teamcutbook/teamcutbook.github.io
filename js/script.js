@@ -595,30 +595,35 @@ function initSharedFutureCarousel() {
   }
 
   let cachedStep = 0;
+  let cachedPad = -1;
   function getCardStep() {
     if (cachedStep > 0) return cachedStep;
     if (cards.length > 1) {
       cachedStep = cards[1].offsetLeft - cards[0].offsetLeft;
-      return cachedStep;
+      if (cachedStep > 0) return cachedStep;
     }
     const style = window.getComputedStyle(track);
     const gap = parseFloat(style.gap) || 28;
-    cachedStep = cards[0].offsetWidth + gap;
+    cachedStep = (cards[0].offsetWidth || 320) + gap;
     return cachedStep;
   }
-  window.addEventListener('resize', () => { cachedStep = 0; }, { passive: true });
+
+  function getViewportPad() {
+    if (cachedPad >= 0) return cachedPad;
+    cachedPad = parseFloat(window.getComputedStyle(viewport).paddingLeft) || 0;
+    return cachedPad;
+  }
+  window.addEventListener('resize', () => { cachedStep = 0; cachedPad = -1; }, { passive: true });
 
   function scrollToIndex(index) {
     const card = cards[index];
     if (!card) return;
-    const pad = parseFloat(window.getComputedStyle(viewport).paddingLeft) || 0;
-    const target = card.offsetLeft - pad;
+    const target = card.offsetLeft - getViewportPad();
     viewport.scrollTo({ left: target, behavior: 'smooth' });
   }
 
   function updateActiveState() {
-    const step = getCardStep();
-    const pad = parseFloat(window.getComputedStyle(viewport).paddingLeft) || 0;
+    const step = getCardStep() || 320;
     const currentScroll = viewport.scrollLeft;
     let activeIdx = Math.round(currentScroll / step);
     activeIdx = Math.max(0, Math.min(cards.length - 1, activeIdx));
@@ -734,8 +739,10 @@ function initSharedFutureCarousel() {
   section.addEventListener('touchstart', stopAutoPlay, { passive: true });
   section.addEventListener('touchend', () => setTimeout(startAutoPlay, 6000), { passive: true });
 
-  startAutoPlay();
-  updateActiveState();
+  requestAnimationFrame(() => {
+    startAutoPlay();
+    updateActiveState();
+  });
 }
 
 /* --------------------------------------------------------------------------

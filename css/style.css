@@ -12,8 +12,8 @@
   /* Colors */
   --color-primary: #1E2229;
   --color-primary-dark: #0F1218;
-  --color-brand-green: #059669;
-  --color-brand-green-hover: #059669;
+  --color-brand-green: #047857;
+  --color-brand-green-hover: #065F46;
   --color-brand-green-light: #ECFDF5;
   --color-brand-green-border: #A7F3D0;
   --color-accent-blue: #3B82F6;
@@ -1397,57 +1397,41 @@ button {
     /* Stage 1b: Visible on back-left */
     transform: translate3d(-150px, -30px, -100px) rotateY(18deg) rotateX(6deg) rotate(-6deg) scale(0.78);
     opacity: 0.9;
-    z-index: 1;
-    filter: blur(0px);
   }
   24% {
-    /* Stage 2: Curving into Front-Left Foreground (Elevates to z-index: 999) */
+    /* Stage 2: Curving into Front-Left Foreground */
     transform: translate3d(-60px, 40px, 80px) rotateY(10deg) rotateX(3deg) rotate(-3deg) scale(0.94);
     opacity: 1;
-    z-index: 999;
-    filter: blur(0px);
   }
   44% {
     /* Stage 3: Front-Center Focus Overlapping Directly in Front of Phone Frame */
     transform: translate3d(50px, 110px, 180px) rotateY(0deg) rotateX(0deg) rotate(0deg) scale(1.04);
     opacity: 1;
-    z-index: 999;
-    filter: blur(0px);
   }
   60% {
-    /* Stage 4: Curving Rightward in Foreground (Still in Front, z-index: 999) */
+    /* Stage 4: Curving Rightward in Foreground */
     transform: translate3d(150px, 40px, 80px) rotateY(-10deg) rotateX(-3deg) rotate(3deg) scale(0.94);
     opacity: 1;
-    z-index: 999;
-    filter: blur(0px);
   }
   74% {
-    /* Stage 4b: Dipping behind the right edge of the phone (Dips to z-index: 1) */
+    /* Stage 4b: Dipping behind the right edge of the phone */
     transform: translate3d(220px, -35px, -80px) rotateY(-20deg) rotateX(-6deg) rotate(6deg) scale(0.76);
     opacity: 0.8;
-    z-index: 1;
-    filter: blur(0px);
   }
   82% {
     /* Stage 5: In background behind right edge */
     transform: translate3d(240px, -70px, -150px) rotateY(-24deg) rotateX(-8deg) rotate(8deg) scale(0.66);
     opacity: 0.45;
-    z-index: 1;
-    filter: blur(1px);
   }
   92% {
     /* Stage 6: Passing behind center of phone */
     transform: translate3d(40px, -110px, -200px) rotateY(0deg) rotateX(0deg) rotate(0deg) scale(0.56);
     opacity: 0.1;
-    z-index: 1;
-    filter: blur(3px);
   }
   100% {
     /* Stage 7: Back to behind-left start */
     transform: translate3d(-180px, -60px, -180px) rotateY(22deg) rotateX(8deg) rotate(-8deg) scale(0.72);
     opacity: 0;
-    z-index: 1;
-    filter: blur(2px);
   }
 }
 
@@ -1464,35 +1448,26 @@ button {
   24% {
     transform: translate3d(-60px, 280px, 180px) rotate(90deg) scale(1.18);
     opacity: 1;
-    z-index: 999;
   }
   48% {
     transform: translate3d(285px, 80px, 100px) rotate(180deg) scale(1.02);
     opacity: 0.95;
-    z-index: 999;
   }
   66% {
     transform: translate3d(220px, -170px, -110px) rotate(245deg) scale(0.72);
     opacity: 0.55;
-    z-index: 2;
-    filter: blur(0.8px);
   }
   80% {
     transform: translate3d(0px, -270px, -170px) rotate(290deg) scale(0.6);
     opacity: 0.35;
-    z-index: 2;
-    filter: blur(1.5px);
   }
   92% {
     transform: translate3d(-220px, -150px, -90px) rotate(330deg) scale(0.78);
     opacity: 0.75;
-    z-index: 2;
-    filter: blur(0.4px);
   }
   100% {
     transform: translate3d(-275px, 30px, 130px) rotate(360deg) scale(1);
     opacity: 1;
-    z-index: 999;
   }
 }
 
@@ -1505,35 +1480,26 @@ button {
   26% {
     transform: translate3d(300px, 70px, 90px) rotate(-90deg) scale(1.15);
     opacity: 1;
-    z-index: 999;
   }
   48% {
     transform: translate3d(120px, 270px, 160px) rotate(-170deg) scale(1.22);
     opacity: 1;
-    z-index: 999;
   }
   65% {
     transform: translate3d(-170px, 170px, -100px) rotate(-235deg) scale(0.75);
     opacity: 0.58;
-    z-index: 2;
-    filter: blur(0.8px);
   }
   78% {
     transform: translate3d(-250px, -40px, -150px) rotate(-285deg) scale(0.65);
     opacity: 0.4;
-    z-index: 2;
-    filter: blur(1.5px);
   }
   90% {
     transform: translate3d(-110px, -240px, -100px) rotate(-325deg) scale(0.82);
     opacity: 0.72;
-    z-index: 2;
-    filter: blur(0.4px);
   }
   100% {
     transform: translate3d(275px, -140px, 140px) rotate(-360deg) scale(1.05);
     opacity: 1;
-    z-index: 999;
   }
 }
 
@@ -1546,29 +1512,22 @@ button {
   28% {
     transform: translate3d(-250px, -70px, 150px) rotate(100deg) scale(1.25);
     opacity: 1;
-    z-index: 999;
   }
   50% {
     transform: translate3d(0px, -310px, -130px) rotate(180deg) scale(0.65);
     opacity: 0.45;
-    z-index: 2;
-    filter: blur(1.2px);
   }
   72% {
     transform: translate3d(250px, -100px, 130px) rotate(260deg) scale(1.2);
     opacity: 1;
-    z-index: 999;
   }
   88% {
     transform: translate3d(150px, -260px, -70px) rotate(320deg) scale(0.82);
     opacity: 0.72;
-    z-index: 2;
-    filter: blur(0.5px);
   }
   100% {
     transform: translate3d(-220px, -230px, 110px) rotate(360deg) scale(0.95);
     opacity: 0.92;
-    z-index: 999;
   }
 }
 
@@ -3012,42 +2971,49 @@ button {
 .shared-carousel-indicators {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
   background: rgba(15, 23, 42, 0.4);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 8px 14px;
+  padding: 4px 10px;
   border-radius: var(--radius-pill);
 }
 
 .shared-indicator-dot {
   position: relative;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.shared-indicator-dot::before {
+  content: '';
+  display: block;
   width: 10px;
   height: 10px;
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.35);
-  border: none;
-  padding: 0;
-  cursor: pointer;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.shared-indicator-dot::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  min-width: 48px;
-  min-height: 48px;
-}
 
-.shared-indicator-dot:hover {
+.shared-indicator-dot:hover::before {
   background: rgba(255, 255, 255, 0.75);
   transform: scale(1.2);
 }
 
 .shared-indicator-dot.active {
+  width: 36px;
+}
+
+.shared-indicator-dot.active::before {
   width: 28px;
   background: #3B82F6;
   box-shadow: 0 0 12px rgba(59, 130, 246, 0.6);
