@@ -594,14 +594,19 @@ function initSharedFutureCarousel() {
     });
   }
 
+  let cachedStep = 0;
   function getCardStep() {
+    if (cachedStep > 0) return cachedStep;
     if (cards.length > 1) {
-      return cards[1].offsetLeft - cards[0].offsetLeft;
+      cachedStep = cards[1].offsetLeft - cards[0].offsetLeft;
+      return cachedStep;
     }
     const style = window.getComputedStyle(track);
     const gap = parseFloat(style.gap) || 28;
-    return cards[0].offsetWidth + gap;
+    cachedStep = cards[0].offsetWidth + gap;
+    return cachedStep;
   }
+  window.addEventListener('resize', () => { cachedStep = 0; }, { passive: true });
 
   function scrollToIndex(index) {
     const card = cards[index];
@@ -1039,12 +1044,16 @@ function init3DEcosystem() {
   stage.addEventListener('pointercancel', stopDrag);
 
   // Responsive Resize Handling
+  let stageW = stage.clientWidth || 1040;
+  let stageH = stage.clientHeight || 640;
   function onResize() {
     width = stage.clientWidth || 1040;
     height = stage.clientHeight || 640;
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
     renderer.setSize(width, height);
+    stageW = width;
+    stageH = height;
   }
   window.addEventListener('resize', onResize, { passive: true });
 
@@ -1089,9 +1098,6 @@ function init3DEcosystem() {
     });
 
     renderer.render(scene, camera);
-
-    const stageW = stage.clientWidth;
-    const stageH = stage.clientHeight;
 
     nodeMeshes.forEach((mesh, idx) => {
       const el = htmlNodes[idx];

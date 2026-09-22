@@ -15,8 +15,13 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/images/cutbookicon/appstore.png">
   
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="css/style.css?v=eco360grand">
+  <!-- Preconnect to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Cabinet+Grotesk:wght@700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap">
+
+  <!-- Stylesheets (Minified Production Bundle) -->
+  <link rel="stylesheet" href="css/style.min.css?v=eco360grand">
 </head>
 <body>
 
@@ -27,7 +32,7 @@
     <div class="container nav-container">
       <!-- Brand Logo -->
       <a href="#" class="brand-logo">
-        <img src="assets/images/CutBook_logo.png" alt="CutBook Logo" class="brand-logo-img">
+        <img src="assets/images/CutBook_logo.webp" alt="CutBook Logo" class="brand-logo-img" width="40" height="40">
         <span>CutBook<span class="logo-dot">.</span></span>
       </a>
 
@@ -66,7 +71,7 @@
   <aside class="mobile-nav-drawer">
     <div class="mobile-drawer-header">
       <div class="brand-logo">
-        <img src="assets/images/CutBook_logo.png" alt="CutBook Logo" class="brand-logo-img">
+        <img src="assets/images/CutBook_logo.webp" alt="CutBook Logo" class="brand-logo-img" width="40" height="40">
         <span>CutBook<span class="logo-dot">.</span></span>
       </div>
       <button class="mobile-close-btn" aria-label="Close menu">&times;</button>
@@ -106,6 +111,7 @@
   <!-- ==========================================================================
        SECTION 01 — HERO (100% GRASSFELD COMPOSITION & 3D ANIMATED CARDS)
        ========================================================================== -->
+  <main id="main-content">
   <section class="hero-section" id="hero">
     <div class="hero-bg-glow"></div>
 
@@ -210,7 +216,7 @@
               <div class="add-entry-icon-box">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#334155" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
               </div>
-              <h4>Add Work Entry</h4>
+              <h4 role="heading" aria-level="2">Add Work Entry</h4>
             </div>
             <div class="add-entry-fields">
               <div class="add-entry-field selected">
@@ -514,7 +520,7 @@
        SECTION — "ORGANIZE YOUR SALON'S FUTURE TOGETHER" (100% GRASSFELD PARITY)
        ========================================================================== -->
   <section class="shared-future-section" id="shared-growth">
-    <div class="shared-future-bg" style="background-image: url('assets/images/salon_future_bg.jpg');"></div>
+    <div class="shared-future-bg"></div>
     <div class="shared-future-container">
       
       <!-- Top Avatars Capsule Pill -->
@@ -921,7 +927,7 @@
               <div class="headache-icon-badge">📕</div>
               <div class="headache-meta">
                 <span class="headache-tag">Headache 1 • Paper Ledger</span>
-                <h4>Missed Haircuts &amp; Lost Scribbles</h4>
+                <h4 role="heading" aria-level="3">Missed Haircuts &amp; Lost Scribbles</h4>
               </div>
             </div>
             <p class="headache-desc">Staff write shorthand in torn notebooks while hands are wet. Haircuts and beard trims get forgotten, leading to untracked services.</p>
@@ -1647,7 +1653,7 @@
           <div class="terminal-header-title">
             <div class="terminal-pulse-dot"></div>
             <div>
-              <h4>Today's Staff Settlement</h4>
+              <h4 role="heading" aria-level="3">Today's Staff Settlement</h4>
               <span class="terminal-subtext">Friday Closing • 3 Stylists Active</span>
             </div>
           </div>
@@ -2116,7 +2122,7 @@
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
               </div>
             </div>
-            <h4>Service Delivered in Chair</h4>
+            <h4 role="heading" aria-level="3">Service Delivered in Chair</h4>
             <p>Client gets an Executive Haircut or Keratin treatment in the salon chair. No reception computers or slow check-in queues needed.</p>
             <div class="pipeline-micro-chip">
               <span class="chip-title">✂️ Executive Haircut</span>
@@ -2493,7 +2499,7 @@
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
               </div>
               <div class="pillar-content">
-                <h5>Live Net Owner Profit (মালিকের প্রকৃত লাভ)</h5>
+                <h5 role="heading" aria-level="4">Live Net Owner Profit (মালিকের প্রকৃত লাভ)</h5>
                 <p>Calculated dynamically: Gross Billing minus Stylist Commissions minus Verified Daily Shop Expenses. You know your exact take-home every hour of the day.</p>
               </div>
             </div>
@@ -3063,7 +3069,7 @@
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
             </div>
             <div class="bento-content">
-              <h4>Live Shift Summary & 40% Split</h4>
+              <h4 role="heading" aria-level="3">Live Shift Summary & 40% Split</h4>
               <p>Every haircut automatically calculates the stylist's commission and 100% retained tips in real time. Zero midnight math, zero notebook disputes.</p>
             </div>
           </div>
@@ -3372,7 +3378,7 @@
                 <div class="screen-app-header">
                   <div class="app-header-left">
                     <span class="screen-crumb">Front Desk POS</span>
-                    <h4 class="screen-app-title">New Service Entry</h4>
+                    <h4 class="screen-app-title" role="heading" aria-level="3">New Service Entry</h4>
                   </div>
                   <span class="screen-badge badge-emerald">● 4s Speed</span>
                 </div>
@@ -3788,7 +3794,7 @@
           </div>
           
           <div class="step-card-body">
-            <h4>Float Check &amp; Chair Roster</h4>
+            <h4 role="heading" aria-level="3">Float Check &amp; Chair Roster</h4>
             <p>Open the day with 1 tap. Register cash float is counted, 8 stylist chairs check in, and daily salon targets are locked.</p>
           </div>
 
@@ -3985,7 +3991,7 @@
             <div class="row-dimension">
               <div class="dim-icon">📝</div>
               <div class="dim-info">
-                <h4>Daily Service Logging</h4>
+                <h4 role="heading" aria-level="3">Daily Service Logging</h4>
                 <small>Floor desk &amp; chair entry</small>
               </div>
             </div>
@@ -4814,6 +4820,8 @@
     </div>
   </section>
 
+</main>
+
   <!-- Site Footer -->
   <footer class="site-footer">
     <div class="container">
@@ -4821,7 +4829,7 @@
         <!-- Col 1: Brand -->
         <div class="footer-brand">
           <div class="brand-logo" style="color: #FFF;">
-            <img src="assets/images/CutBook_logo.png" alt="CutBook Logo" class="brand-logo-img" style="border: 1px solid rgba(255, 255, 255, 0.2);">
+            <img src="assets/images/CutBook_logo.webp" alt="CutBook Logo" class="brand-logo-img" width="40" height="40" loading="lazy" decoding="async" style="border: 1px solid rgba(255, 255, 255, 0.2);">
             <span>CutBook<span class="logo-dot">.</span></span>
           </div>
           <p>The modern operating system for barbershops, hair salons, and beauty studios. Automate staff commissions, payroll, POS billing, and financial growth.</p>
@@ -4861,7 +4869,7 @@
 
         <!-- Col 2: Product -->
         <div>
-          <h4 class="footer-col-title">Product</h4>
+          <h4 class="footer-col-title" role="heading" aria-level="2">Product</h4>
           <div class="footer-links-list">
             <a href="#overview">Smart Dashboard</a>
             <a href="#payroll">Payroll &amp; Commissions</a>
@@ -4873,7 +4881,7 @@
 
         <!-- Col 3: For Salons -->
         <div>
-          <h4 class="footer-col-title">Solutions</h4>
+          <h4 class="footer-col-title" role="heading" aria-level="2">Solutions</h4>
           <div class="footer-links-list">
             <a href="#trust">For Barbershops</a>
             <a href="#trust">For Hair Salons</a>
@@ -4885,7 +4893,7 @@
 
         <!-- Col 4: Company -->
         <div>
-          <h4 class="footer-col-title">Company</h4>
+          <h4 class="footer-col-title" role="heading" aria-level="2">Company</h4>
           <div class="footer-links-list">
             <a href="#story">About CutBook</a>
             <a href="#pricing">Pricing Plans</a>
@@ -4902,7 +4910,7 @@
 
         <!-- Col 5: Newsletter -->
         <div>
-          <h4 class="footer-col-title">Stay Updated</h4>
+          <h4 class="footer-col-title" role="heading" aria-level="2">Stay Updated</h4>
           <p style="font-size: 1rem; color: #94A3B8; line-height: 1.5;">Get the latest salon growth tips and product updates delivered to your inbox.</p>
           <form class="footer-newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing to CutBook updates!');">
             <input type="email" placeholder="Enter salon email" class="footer-input" required>
@@ -4922,10 +4930,10 @@
     </div>
   </footer>
 
-  <!-- Three.js 3D Engine -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- Three.js 3D Engine (Deferred for zero render-blocking) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 
-  <!-- Master JavaScript -->
-  <script src="js/script.js?v=eco360grand"></script>
+  <!-- Master JavaScript (Minified & Deferred) -->
+  <script src="js/script.min.js?v=eco360grand" defer></script>
 </body>
 </html>
