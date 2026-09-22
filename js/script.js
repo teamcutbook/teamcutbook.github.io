@@ -2243,12 +2243,12 @@ function initPosSimulatorInteractive() {
 
   // Switch Payment
   const paymentMap = {
-    cash: { name: 'Cash', color: '#008000' },
-    bkash: { name: 'bKash', color: '#E91E63' },
-    nagad: { name: 'Nagad', color: '#FF9800' },
+    cash: { name: 'Cash', color: '#4a7c59' },
+    bkash: { name: 'bKash', color: '#E2136E' },
+    nagad: { name: 'Nagad', color: '#F37021' },
     bangla_qr: { name: 'Bangla QR', color: '#006A4E' },
     rocket: { name: 'Rocket', color: '#8C2D8B' },
-    card: { name: 'Card', color: '#3aa7f4' }
+    card: { name: 'Card', color: '#2563EB' }
   };
 
   payCards.forEach((card) => {
@@ -2256,7 +2256,7 @@ function initPosSimulatorInteractive() {
       payCards.forEach((c) => c.classList.remove('active'));
       card.classList.add('active');
       const method = card.getAttribute('data-method') || 'cash';
-      const mInfo = paymentMap[method] || { name: 'Cash', color: '#008000' };
+      const mInfo = paymentMap[method] || { name: 'Cash', color: '#4a7c59' };
       currentPaymentMethod = mInfo.name;
       currentPaymentColor = mInfo.color;
     });
