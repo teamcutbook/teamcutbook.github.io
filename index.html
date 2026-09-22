@@ -824,16 +824,51 @@
                     </div>
                   </div>
 
-                  <!-- 3. Service Selector -->
+                  <!-- 3. Clean Service Selector -->
                   <div class="rn-service-box">
                     <div class="rn-service-header">
                       <div class="rn-service-title-wrap">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.2"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><line x1="20" y1="4" x2="8.12" y2="15.88"></line><line x1="14.47" y1="14.48" x2="20" y2="20"></line><line x1="8.12" y1="8.12" x2="12" y2="12"></line></svg>
                         <span class="rn-service-title">সেবা বাছাই করুন</span>
+                        <span class="rn-selected-count-badge" id="rnSelectedCountBadge">১টি নির্বাচিত</span>
                       </div>
-                      <div class="rn-browse-all-btn">
+                      <button type="button" class="rn-browse-all-btn" id="rnBrowseAllBtn">
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4zM4 10h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4zM4 16h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4z"/></svg>
                         <span>সকল সেবা (২১) ▾</span>
+                      </button>
+                    </div>
+
+                    <!-- Selected Services Tag Cards (Active State) -->
+                    <div class="rn-selected-services-container" id="rnSelectedServicesContainer">
+                      <div class="rn-selected-services-header">
+                        <span class="rn-selected-services-header-title">নির্বাচিত সেবাসমূহ:</span>
+                        <div class="rn-selected-services-header-actions">
+                          <span class="rn-selected-services-custom-link" id="rnQuickCustomLink">+ কাস্টম</span>
+                          <span class="rn-selected-services-clear-link" id="rnClearServicesBtn">সব মুছুন</span>
+                        </div>
+                      </div>
+
+                      <div class="rn-selected-cards-wrap" id="rnSelectedCardsWrap">
+                        <div class="rn-selected-tag-card" data-service-id="haircut">
+                          <div class="rn-selected-tag-left">
+                            <span class="rn-selected-tag-check">✓</span>
+                            <span class="rn-selected-tag-name">চুল কাটা</span>
+                          </div>
+                          <div class="rn-selected-tag-right">
+                            <span class="rn-selected-tag-price">৳১৫০</span>
+                            <button type="button" class="rn-selected-tag-remove-btn" title="মুছুন">✕</button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="rn-selected-actions-row">
+                        <button type="button" class="rn-add-more-services-btn" id="rnAddMoreServicesBtn">
+                          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                          <span>আরও সেবা যোগ করুন...</span>
+                        </button>
+                        <button type="button" class="rn-add-custom-btn" id="rnAddCustomBtn">
+                          <span>✨ + কাস্টম</span>
+                        </button>
                       </div>
                     </div>
 
@@ -930,6 +965,31 @@
                       </button>
                     </div>
                   </div>
+
+                  <!-- 6. Live Executive Summary & Collapsible Notes -->
+                  <div class="rn-summary-bar-card">
+                    <div class="rn-summary-split">
+                      <div class="rn-summary-col-left">
+                        <span class="rn-summary-col-sub">কাস্টমারের মোট বিল</span>
+                        <strong class="rn-summary-col-bill" id="rnSummaryBill">৳১৫০.০০</strong>
+                      </div>
+                      <div class="rn-summary-divider-vert"></div>
+                      <div class="rn-summary-col-right">
+                        <div class="rn-summary-staff-header-row">
+                          <span class="rn-summary-staff-avatar-mini" id="rnSummaryAvatar">KA</span>
+                          <span class="rn-summary-col-sub" id="rnSummaryStaffLabel">kabbo:</span>
+                        </div>
+                        <strong class="rn-summary-col-staff" id="rnSummaryStaff">৳১৫০.০০</strong>
+                      </div>
+                      <button type="button" class="rn-notes-toggle-btn" id="rnNotesToggleBtn">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <span id="rnNotesBtnLabel">+ নোট</span>
+                      </button>
+                    </div>
+                    <div class="rn-notes-expand-wrap" id="rnNotesExpandWrap" style="display:none;">
+                      <input type="text" class="rn-notes-expand-input" placeholder="কাস্টমারের নাম বা বিশেষ নোট..." />
+                    </div>
+                  </div>
                 </div>
 
                 <!-- Sticky Bottom Action Bar -->
@@ -961,6 +1021,128 @@
                   <div class="rn-nav-item">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                     <span>আমার অ্যাকাউন্ট</span>
+                  </div>
+                </div>
+
+                <!-- 8. World-Class Service Catalog Modal inside Phone Viewport -->
+                <div class="rn-service-catalog-modal" id="rnServiceCatalogModal">
+                  <div class="rn-catalog-header">
+                    <button type="button" class="rn-catalog-back-btn" id="rnCatalogCloseBtn">←</button>
+                    <div class="rn-catalog-title-col">
+                      <div class="rn-catalog-title">সকল সেবার তালিকা</div>
+                      <div class="rn-catalog-sub">২১টি সেবা উপলব্ধ</div>
+                    </div>
+                    <button type="button" class="rn-catalog-done-link" id="rnCatalogDoneBtn">সম্পন্ন</button>
+                  </div>
+
+                  <div class="rn-catalog-filter-box">
+                    <div class="rn-catalog-search-wrap">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                      <input type="text" class="rn-catalog-search-input" id="rnCatalogSearchInput" placeholder="সেবার নাম লিখে খুঁজুন..." />
+                    </div>
+                    <div class="rn-catalog-cats-row">
+                      <button type="button" class="rn-catalog-cat-pill active" data-cat="all">✨ সব সেবা</button>
+                      <button type="button" class="rn-catalog-cat-pill" data-cat="hair">✂️ চুল</button>
+                      <button type="button" class="rn-catalog-cat-pill" data-cat="beard">🧔 দাড়ি</button>
+                      <button type="button" class="rn-catalog-cat-pill" data-cat="shave">🪒 শেভ</button>
+                      <button type="button" class="rn-catalog-cat-pill" data-cat="facial">🧖‍♂️ ফেসিয়াল</button>
+                      <button type="button" class="rn-catalog-cat-pill" data-cat="spa">💆 স্পা</button>
+                      <button type="button" class="rn-catalog-cat-pill" data-cat="color">🎨 কালার</button>
+                    </div>
+                  </div>
+
+                  <div class="rn-catalog-list-scroll" id="rnCatalogListScroll">
+                    <div class="rn-catalog-item selected" data-id="haircut" data-name="চুল কাটা" data-price="150" data-cat="hair">
+                      <div class="rn-catalog-item-left">
+                        <div class="rn-catalog-icon-wrap">✂️</div>
+                        <div class="rn-catalog-name-col">
+                          <span class="rn-catalog-name">চুল কাটা</span>
+                          <span class="rn-catalog-cat-tag">চুল</span>
+                        </div>
+                      </div>
+                      <div class="rn-catalog-item-right">
+                        <span class="rn-catalog-price">৳১৫০</span>
+                        <span class="rn-catalog-check">✓</span>
+                      </div>
+                    </div>
+
+                    <div class="rn-catalog-item" data-id="beard" data-name="দাড়ি ট্রিম" data-price="100" data-cat="beard">
+                      <div class="rn-catalog-item-left">
+                        <div class="rn-catalog-icon-wrap">🧔</div>
+                        <div class="rn-catalog-name-col">
+                          <span class="rn-catalog-name">দাড়ি ট্রিম</span>
+                          <span class="rn-catalog-cat-tag">দাড়ি</span>
+                        </div>
+                      </div>
+                      <div class="rn-catalog-item-right">
+                        <span class="rn-catalog-price">৳১০০</span>
+                        <span class="rn-catalog-check">+</span>
+                      </div>
+                    </div>
+
+                    <div class="rn-catalog-item" data-id="shave" data-name="ক্লিন শেভ" data-price="80" data-cat="shave">
+                      <div class="rn-catalog-item-left">
+                        <div class="rn-catalog-icon-wrap">🪒</div>
+                        <div class="rn-catalog-name-col">
+                          <span class="rn-catalog-name">ক্লিন শেভ</span>
+                          <span class="rn-catalog-cat-tag">শেভ</span>
+                        </div>
+                      </div>
+                      <div class="rn-catalog-item-right">
+                        <span class="rn-catalog-price">৳৮০</span>
+                        <span class="rn-catalog-check">+</span>
+                      </div>
+                    </div>
+
+                    <div class="rn-catalog-item" data-id="facial" data-name="গোল্ডেন ফেসিয়াল" data-price="800" data-cat="facial">
+                      <div class="rn-catalog-item-left">
+                        <div class="rn-catalog-icon-wrap">🧖‍♂️</div>
+                        <div class="rn-catalog-name-col">
+                          <span class="rn-catalog-name">গোল্ডেন ফেসিয়াল</span>
+                          <span class="rn-catalog-cat-tag">ফেসিয়াল</span>
+                        </div>
+                      </div>
+                      <div class="rn-catalog-item-right">
+                        <span class="rn-catalog-price">৳৮০০</span>
+                        <span class="rn-catalog-check">+</span>
+                      </div>
+                    </div>
+
+                    <div class="rn-catalog-item" data-id="spa" data-name="হেড স্পা ও ম্যাসাজ" data-price="500" data-cat="spa">
+                      <div class="rn-catalog-item-left">
+                        <div class="rn-catalog-icon-wrap">💆</div>
+                        <div class="rn-catalog-name-col">
+                          <span class="rn-catalog-name">হেড স্পা ও ম্যাসাজ</span>
+                          <span class="rn-catalog-cat-tag">স্পা</span>
+                        </div>
+                      </div>
+                      <div class="rn-catalog-item-right">
+                        <span class="rn-catalog-price">৳৫০০</span>
+                        <span class="rn-catalog-check">+</span>
+                      </div>
+                    </div>
+
+                    <div class="rn-catalog-item" data-id="color" data-name="হেয়ার কালার / ডাই" data-price="450" data-cat="color">
+                      <div class="rn-catalog-item-left">
+                        <div class="rn-catalog-icon-wrap">🎨</div>
+                        <div class="rn-catalog-name-col">
+                          <span class="rn-catalog-name">হেয়ার কালার / ডাই</span>
+                          <span class="rn-catalog-cat-tag">কালার</span>
+                        </div>
+                      </div>
+                      <div class="rn-catalog-item-right">
+                        <span class="rn-catalog-price">৳৪৫০</span>
+                        <span class="rn-catalog-check">+</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="rn-catalog-bottom-bar">
+                    <div class="rn-catalog-bottom-info">
+                      <span class="rn-catalog-bottom-count" id="rnCatalogBottomCount">১টি সেবা নির্বাচিত</span>
+                      <strong class="rn-catalog-bottom-total" id="rnCatalogBottomTotal">৳১৫০.০০</strong>
+                    </div>
+                    <button type="button" class="rn-catalog-confirm-btn" id="rnCatalogConfirmBtn">সেবা বাছাই সম্পন্ন</button>
                   </div>
                 </div>
               </div>

@@ -1853,34 +1853,188 @@ function initInsightsLensSwitcher() {
 function initPosSimulatorInteractive() {
   const billPriceEl = document.getElementById('rnBillPrice');
   const totalDisplayEl = document.getElementById('rnTotalDisplay');
+  const summaryBillEl = document.getElementById('rnSummaryBill');
+  const summaryStaffEl = document.getElementById('rnSummaryStaff');
+  const summaryStaffLabelEl = document.getElementById('rnSummaryStaffLabel');
+  const summaryAvatarEl = document.getElementById('rnSummaryAvatar');
   const tipPlaceholderEl = document.getElementById('rnTipPlaceholder');
   const saveBtn = document.getElementById('rnSaveEntryBtn');
   const serviceChips = document.querySelectorAll('.rn-quick-chip');
   const staffChips = document.querySelectorAll('.rn-staff-chip');
   const tipChips = document.querySelectorAll('.rn-tip-chip');
   const payCards = document.querySelectorAll('.rn-pay-card');
+  const selectedCountBadge = document.getElementById('rnSelectedCountBadge');
+  const selectedCardsWrap = document.getElementById('rnSelectedCardsWrap');
+  const clearServicesBtn = document.getElementById('rnClearServicesBtn');
+
+  // Notes toggle
+  const notesBtn = document.getElementById('rnNotesToggleBtn');
+  const notesWrap = document.getElementById('rnNotesExpandWrap');
+  const notesLabel = document.getElementById('rnNotesBtnLabel');
+
+  if (notesBtn && notesWrap) {
+    notesBtn.addEventListener('click', () => {
+      const isVisible = notesWrap.style.display !== 'none';
+      notesWrap.style.display = isVisible ? 'none' : 'block';
+      notesBtn.classList.toggle('active', !isVisible);
+      if (notesLabel) {
+        notesLabel.textContent = !isVisible ? 'নোট ✓' : '+ নোট';
+      }
+    });
+  }
+
+  // Catalog Modal elements
+  const catalogModal = document.getElementById('rnServiceCatalogModal');
+  const btnBrowseAll = document.getElementById('rnBrowseAllBtn');
+  const btnAddMore = document.getElementById('rnAddMoreServicesBtn');
+  const btnCloseCatalog = document.getElementById('rnCatalogCloseBtn');
+  const btnDoneCatalog = document.getElementById('rnCatalogDoneBtn');
+  const btnConfirmCatalog = document.getElementById('rnCatalogConfirmBtn');
+  const catalogSearchInput = document.getElementById('rnCatalogSearchInput');
+  const catalogCatPills = document.querySelectorAll('.rn-catalog-cat-pill');
+  const catalogItems = document.querySelectorAll('.rn-catalog-item');
+  const catalogBottomCount = document.getElementById('rnCatalogBottomCount');
+  const catalogBottomTotal = document.getElementById('rnCatalogBottomTotal');
 
   if (!billPriceEl || !totalDisplayEl) return;
 
   let currentPrice = 150;
   let currentTip = 0;
+  let currentStaffName = 'kabbo';
+  let currentStaffInitials = 'KA';
+
+  // Services catalog database
+  const catalogData = {
+    haircut: { name: 'চুল কাটা', price: 150, cat: 'hair', icon: '✂️' },
+    beard: { name: 'দাড়ি ট্রিম', price: 100, cat: 'beard', icon: '🧔' },
+    shave: { name: 'ক্লিন শেভ', price: 80, cat: 'shave', icon: '🪒' },
+    facial: { name: 'গোল্ডেন ফেসিয়াল', price: 800, cat: 'facial', icon: '🧖‍♂️' },
+    spa: { name: 'হেড স্পা ও ম্যাসাজ', price: 500, cat: 'spa', icon: '💆' },
+    color: { name: 'হেয়ার কালার / ডাই', price: 450, cat: 'color', icon: '🎨' }
+  };
+
+  let activeServiceIds = new Set(['haircut']);
+
+  function renderSelectedTags() {
+    if (!selectedCardsWrap) return;
+    selectedCardsWrap.innerHTML = '';
+
+    if (activeServiceIds.size === 0) {
+      selectedCardsWrap.innerHTML = `<div style="font-size:0.62rem;color:#94A3B8;padding:4px 0">কোনো সেবা নির্বাচিত নেই। দ্রুত যোগ করতে নিচের বাটনে চাপ দিন।</div>`;
+      if (selectedCountBadge) selectedCountBadge.textContent = '০টি নির্বাচিত';
+      return;
+    }
+
+    if (selectedCountBadge) {
+      selectedCountBadge.textContent = `${activeServiceIds.size}টি নির্বাচিত`;
+    }
+
+    activeServiceIds.forEach((id) => {
+      const item = catalogData[id] || { name: id, price: 150 };
+      const card = document.createElement('div');
+      card.className = 'rn-selected-tag-card';
+      card.setAttribute('data-service-id', id);
+      card.innerHTML = `
+        <div class="rn-selected-tag-left">
+          <span class="rn-selected-tag-check">✓</span>
+          <span class="rn-selected-tag-name">${item.name}</span>
+        </div>
+        <div class="rn-selected-tag-right">
+          <span class="rn-selected-tag-price">৳${item.price}</span>
+          <button type="button" class="rn-selected-tag-remove-btn" data-remove="${id}" title="মুছুন">✕</button>
+        </div>
+      `;
+
+      const removeBtn = card.querySelector('.rn-selected-tag-remove-btn');
+      if (removeBtn) {
+        removeBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          toggleServiceById(id);
+        });
+      }
+
+      selectedCardsWrap.appendChild(card);
+    });
+  }
+
+  function calculatePriceFromSelected() {
+    let sum = 0;
+    activeServiceIds.forEach((id) => {
+      const item = catalogData[id];
+      if (item) sum += item.price;
+    });
+    currentPrice = sum;
+    updateTotals();
+  }
 
   function updateTotals() {
     const total = currentPrice + currentTip;
     billPriceEl.textContent = currentPrice.toString();
     totalDisplayEl.textContent = `৳${total.toFixed(2)}`;
+
+    if (summaryBillEl) summaryBillEl.textContent = `৳${total.toFixed(2)}`;
+    if (summaryStaffEl) summaryStaffEl.textContent = `৳${total.toFixed(2)}`;
+    if (catalogBottomTotal) catalogBottomTotal.textContent = `৳${currentPrice.toFixed(2)}`;
+    if (catalogBottomCount) catalogBottomCount.textContent = `${activeServiceIds.size}টি সেবা নির্বাচিত`;
   }
 
-  // Toggle Services
+  function toggleServiceById(id) {
+    if (activeServiceIds.has(id)) {
+      activeServiceIds.delete(id);
+    } else {
+      activeServiceIds.add(id);
+    }
+
+    // Sync quick chips
+    serviceChips.forEach((chip) => {
+      const name = chip.getAttribute('data-name');
+      if (name === 'চুল কাটা') {
+        chip.classList.toggle('active', activeServiceIds.has('haircut'));
+      }
+    });
+
+    // Sync catalog modal items
+    catalogItems.forEach((ci) => {
+      const cId = ci.getAttribute('data-id');
+      const isSelected = activeServiceIds.has(cId);
+      ci.classList.toggle('selected', isSelected);
+      const checkEl = ci.querySelector('.rn-catalog-check');
+      if (checkEl) checkEl.textContent = isSelected ? '✓' : '+';
+    });
+
+    calculatePriceFromSelected();
+    renderSelectedTags();
+  }
+
+  // Clear all services
+  if (clearServicesBtn) {
+    clearServicesBtn.addEventListener('click', () => {
+      activeServiceIds.clear();
+      serviceChips.forEach((c) => c.classList.remove('active'));
+      catalogItems.forEach((ci) => {
+        ci.classList.remove('selected');
+        const checkEl = ci.querySelector('.rn-catalog-check');
+        if (checkEl) checkEl.textContent = '+';
+      });
+      calculatePriceFromSelected();
+      renderSelectedTags();
+    });
+  }
+
+  // Toggle Services via Quick Chips
   serviceChips.forEach((chip) => {
     chip.addEventListener('click', () => {
       const chipPrice = parseInt(chip.getAttribute('data-price') || '0', 10);
+      const chipName = chip.getAttribute('data-name');
+
+      if (chipName === 'চুল কাটা') {
+        toggleServiceById('haircut');
+        return;
+      }
+
       if (chip.classList.contains('active')) {
-        const activeCount = document.querySelectorAll('.rn-quick-chip.active').length;
-        if (activeCount > 1) {
-          chip.classList.remove('active');
-          currentPrice = Math.max(0, currentPrice - chipPrice);
-        }
+        chip.classList.remove('active');
+        currentPrice = Math.max(0, currentPrice - chipPrice);
       } else {
         chip.classList.add('active');
         currentPrice += chipPrice;
@@ -1898,6 +2052,22 @@ function initPosSimulatorInteractive() {
         if (check) check.remove();
       });
       chip.classList.add('active');
+
+      const staffKey = chip.getAttribute('data-staff') || 'kabbo';
+      if (staffKey === 'kabbo') {
+        currentStaffName = 'kabbo';
+        currentStaffInitials = 'KA';
+      } else if (staffKey === 'masum') {
+        currentStaffName = 'masum';
+        currentStaffInitials = 'MA';
+      } else {
+        currentStaffName = 'xMan';
+        currentStaffInitials = 'XM';
+      }
+
+      if (summaryStaffLabelEl) summaryStaffLabelEl.textContent = `${currentStaffName}:`;
+      if (summaryAvatarEl) summaryAvatarEl.textContent = currentStaffInitials;
+
       const avatar = chip.querySelector('.rn-staff-avatar');
       if (avatar && !avatar.querySelector('.rn-avatar-check')) {
         const check = document.createElement('span');
@@ -1938,12 +2108,75 @@ function initPosSimulatorInteractive() {
       const originalText = saveBtn.innerHTML;
       saveBtn.innerHTML = '<span>✓ এন্ট্রি সেভ হয়েছে! (১ কয়েন খরচ হয়েছে)</span>';
       saveBtn.style.background = '#047857';
+
+      // Coin decrement visual feedback
+      const coinEl = document.querySelector('.rn-coin-balance');
+      if (coinEl && coinEl.textContent === '৫৫৭৫') {
+        coinEl.textContent = '৫৫৭৪';
+        coinEl.style.color = '#059669';
+        setTimeout(() => {
+          coinEl.style.color = '';
+        }, 2200);
+      }
+
       setTimeout(() => {
         saveBtn.innerHTML = originalText;
         saveBtn.style.background = '';
       }, 2200);
     });
   }
+
+  // --- CATALOG MODAL CONTROLS ---
+  function openCatalog() {
+    if (catalogModal) catalogModal.classList.add('active');
+  }
+
+  function closeCatalog() {
+    if (catalogModal) catalogModal.classList.remove('active');
+  }
+
+  if (btnBrowseAll) btnBrowseAll.addEventListener('click', openCatalog);
+  if (btnAddMore) btnAddMore.addEventListener('click', openCatalog);
+  if (btnCloseCatalog) btnCloseCatalog.addEventListener('click', closeCatalog);
+  if (btnDoneCatalog) btnDoneCatalog.addEventListener('click', closeCatalog);
+  if (btnConfirmCatalog) btnConfirmCatalog.addEventListener('click', closeCatalog);
+
+  // Catalog Item Selection
+  catalogItems.forEach((item) => {
+    item.addEventListener('click', () => {
+      const id = item.getAttribute('data-id');
+      if (id) toggleServiceById(id);
+    });
+  });
+
+  // Catalog Category Filters
+  catalogCatPills.forEach((pill) => {
+    pill.addEventListener('click', () => {
+      catalogCatPills.forEach((p) => p.classList.remove('active'));
+      pill.classList.add('active');
+      const cat = pill.getAttribute('data-cat') || 'all';
+
+      catalogItems.forEach((ci) => {
+        const itemCat = ci.getAttribute('data-cat');
+        ci.style.display = (cat === 'all' || itemCat === cat) ? 'flex' : 'none';
+      });
+    });
+  });
+
+  // Catalog Search Filter
+  if (catalogSearchInput) {
+    catalogSearchInput.addEventListener('input', (e) => {
+      const query = (e.target.value || '').trim().toLowerCase();
+      catalogItems.forEach((ci) => {
+        const name = (ci.getAttribute('data-name') || '').toLowerCase();
+        const cat = (ci.getAttribute('data-cat') || '').toLowerCase();
+        ci.style.display = (name.includes(query) || cat.includes(query)) ? 'flex' : 'none';
+      });
+    });
+  }
+
+  // Initial tag render
+  renderSelectedTags();
 }
 
 /* --------------------------------------------------------------------------
