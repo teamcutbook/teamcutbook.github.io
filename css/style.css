@@ -3478,44 +3478,186 @@ button {
   line-height: 1.15;
 }
 
-.tabs-navigation-wrapper { display: flex; justify-content: center; margin-bottom: 48px; overflow-x: auto; padding-bottom: 12px; scrollbar-width: none; }
-.tabs-navigation-wrapper::-webkit-scrollbar { display: none; }
+/* ==========================================================================
+   Interactive Product Showcase Tabs (Premium Glass Segmented Filter Dock)
+   ========================================================================== */
+.tabs-navigation-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 44px;
+  overflow-x: auto;
+  padding: 8px 16px 18px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.tabs-navigation-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
 .tabs-bar {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   padding: 6px;
-  background: #F1F5F9;
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--border-light);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 9999px;
+  border: 1px solid rgba(226, 232, 240, 0.9);
   max-width: 100%;
-  box-shadow: inset 0 2px 4px rgba(15, 23, 42, 0.04);
+  box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.07), 0 2px 8px -2px rgba(15, 23, 42, 0.04);
+  position: relative;
 }
+
 .tab-btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 22px;
-  border-radius: var(--radius-pill);
-  font-size: clamp(0.85rem, 1vw, 1.05rem);
+  gap: 10px;
+  padding: 8px 18px 8px 10px;
+  border-radius: 9999px;
+  font-family: inherit;
+  font-size: clamp(0.85rem, 0.95vw, 0.96rem);
   font-weight: 700;
-  color: var(--text-muted);
+  color: #475569;
   border: 1px solid transparent;
   background: transparent;
   cursor: pointer;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   white-space: nowrap;
+  user-select: none;
+  position: relative;
 }
+
 .tab-btn:hover {
-  color: var(--color-primary);
-  background: rgba(255, 255, 255, 0.75);
+  color: #0F172A;
+  background: #F8FAFC;
   transform: translateY(-1px);
 }
+
+.tab-icon-wrap {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+
+.tab-icon-wrap svg {
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+.tab-btn:hover .tab-icon-wrap svg {
+  transform: scale(1.1);
+}
+
+/* Individual Icon Tint Colors */
+.icon-pulse-amber {
+  color: #D97706;
+  background: rgba(245, 158, 11, 0.12);
+}
+.icon-pulse-blue {
+  color: #0284C7;
+  background: rgba(14, 165, 233, 0.12);
+}
+.icon-pulse-purple {
+  color: #9333EA;
+  background: rgba(168, 85, 247, 0.12);
+}
+.icon-pulse-rose {
+  color: #E11D48;
+  background: rgba(244, 63, 94, 0.12);
+}
+.icon-pulse-cyan {
+  color: #0891B2;
+  background: rgba(6, 182, 212, 0.12);
+}
+.icon-pulse-emerald {
+  color: #059669;
+  background: rgba(16, 185, 129, 0.12);
+}
+
+.tab-content-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tab-title {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: inherit;
+}
+
+.tab-badge {
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  background: #EDF2F7;
+  color: #64748B;
+  transition: all 0.25s ease;
+}
+
+/* Active State - High End Charcoal Midnight with Emerald Laser Accent */
 .tab-btn.active {
-  background-color: var(--color-primary);
+  background: #0B132B;
   color: #FFFFFF;
-  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.22), 0 0 0 1px rgba(255, 255, 255, 0.12) inset;
-  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 24px -2px rgba(11, 19, 43, 0.35), 0 0 0 1px rgba(16, 185, 129, 0.45);
+  transform: translateY(-2px);
+}
+
+.tab-btn.active .tab-title {
+  color: #FFFFFF;
+}
+
+.tab-btn.active .tab-icon-wrap {
+  background: rgba(255, 255, 255, 0.14);
+  color: #10B981;
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.4);
+}
+
+.tab-btn.active .tab-badge {
+  background: rgba(16, 185, 129, 0.22);
+  color: #34D399;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+/* Responsive Mobile Refinements */
+@media (max-width: 991px) {
+  .tabs-navigation-wrapper {
+    justify-content: flex-start;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .tabs-bar {
+    padding: 5px;
+    gap: 5px;
+  }
+  .tab-btn {
+    padding: 7px 14px 7px 8px;
+    gap: 8px;
+  }
+  .tab-icon-wrap {
+    width: 28px;
+    height: 28px;
+  }
+  .tab-icon-wrap svg {
+    width: 15px;
+    height: 15px;
+  }
+  .tab-title {
+    font-size: 0.88rem;
+  }
+  .tab-badge {
+    display: none; /* Keep tabs sleek and compact on mobile */
+  }
 }
 .preview-service-item {
   display: flex;

@@ -660,15 +660,68 @@
         <p class="section-desc">Built specifically for the fast pace of salons and beauty parlors. Explore every core module designed to replace paper chaos and save you hours every day.</p>
       </div>
 
-      <!-- Grassfeld-style Tab Navigation Bar -->
+      <!-- Premium Glass Segmented Filter Dock -->
       <div class="tabs-navigation-wrapper reveal-on-scroll">
-        <div class="tabs-bar">
-          <button class="tab-btn active" data-tab="quick-entry">⚡ 1-Tap Service Logger</button>
-          <button class="tab-btn" data-tab="dashboard">📊 Live Dashboard</button>
-          <button class="tab-btn" data-tab="commissions">👥 Automated Commissions</button>
-          <button class="tab-btn" data-tab="expenses">☕ Shop Expenses</button>
-          <button class="tab-btn" data-tab="stylist-portal">📱 Stylist Mobile View</button>
-          <button class="tab-btn" data-tab="reports">📈 Owner P&amp;L Reports</button>
+        <div class="tabs-bar" role="tablist" aria-label="Salon Management Core Modules">
+          <button class="tab-btn active" data-tab="quick-entry" role="tab" aria-selected="true">
+            <span class="tab-icon-wrap icon-pulse-amber">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            </span>
+            <span class="tab-content-text">
+              <span class="tab-title">1-Tap Logger</span>
+              <span class="tab-badge">4s Speed</span>
+            </span>
+          </button>
+
+          <button class="tab-btn" data-tab="dashboard" role="tab" aria-selected="false">
+            <span class="tab-icon-wrap icon-pulse-blue">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"></rect><rect x="14" y="3" width="7" height="5" rx="1.5"></rect><rect x="14" y="12" width="7" height="9" rx="1.5"></rect><rect x="3" y="16" width="7" height="5" rx="1.5"></rect></svg>
+            </span>
+            <span class="tab-content-text">
+              <span class="tab-title">Live Dashboard</span>
+              <span class="tab-badge">Real-Time</span>
+            </span>
+          </button>
+
+          <button class="tab-btn" data-tab="commissions" role="tab" aria-selected="false">
+            <span class="tab-icon-wrap icon-pulse-purple">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            </span>
+            <span class="tab-content-text">
+              <span class="tab-title">Commissions</span>
+              <span class="tab-badge">0 Disputes</span>
+            </span>
+          </button>
+
+          <button class="tab-btn" data-tab="expenses" role="tab" aria-selected="false">
+            <span class="tab-icon-wrap icon-pulse-rose">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line><circle cx="17" cy="15" r="1"></circle></svg>
+            </span>
+            <span class="tab-content-text">
+              <span class="tab-title">Shop Expenses</span>
+              <span class="tab-badge">Petty Cash</span>
+            </span>
+          </button>
+
+          <button class="tab-btn" data-tab="stylist-portal" role="tab" aria-selected="false">
+            <span class="tab-icon-wrap icon-pulse-cyan">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2.5" ry="2.5"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+            </span>
+            <span class="tab-content-text">
+              <span class="tab-title">Stylist View</span>
+              <span class="tab-badge">Chair App</span>
+            </span>
+          </button>
+
+          <button class="tab-btn" data-tab="reports" role="tab" aria-selected="false">
+            <span class="tab-icon-wrap icon-pulse-emerald">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+            </span>
+            <span class="tab-content-text">
+              <span class="tab-title">P&amp;L Reports</span>
+              <span class="tab-badge">Net Profit</span>
+            </span>
+          </button>
         </div>
       </div>
 
@@ -2268,6 +2321,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 
   <!-- Master JavaScript (Minified & Deferred) -->
-  <script src="js/script.min.js?v=eco360orbit" defer></script>
+  <script src="js/script.min.js?v=eco360tabs" defer></script>
 </body>
 </html>

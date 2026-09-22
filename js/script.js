@@ -170,9 +170,16 @@ function initProductTabs() {
     button.addEventListener('click', () => {
       const targetTab = button.getAttribute('data-tab');
 
-      // Update active button
-      tabButtons.forEach(btn => btn.classList.remove('active'));
+      // Update active button & ARIA state
+      tabButtons.forEach(btn => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-selected', 'false');
+      });
       button.classList.add('active');
+      button.setAttribute('aria-selected', 'true');
+
+      // Smoothly center active button in scrollable container on smaller screens
+      button.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
 
       // Update active pane
       tabPanes.forEach(pane => {
