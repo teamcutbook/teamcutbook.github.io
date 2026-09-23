@@ -4033,15 +4033,53 @@ button {
 .app-interactive-phone {
   position: relative;
   width: clamp(280px, 24vw, 325px);
-  border: 8px solid #0F172A;
-  border-radius: 40px;
+  border: 10px solid #0F172A;
+  border-radius: 46px;
   background: #000000;
   box-shadow: 0 25px 60px -12px rgba(15, 23, 42, 0.32), 0 0 0 1px rgba(255, 255, 255, 0.15) inset;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .app-interactive-phone .phone-dynamic-island {
-  display: none !important;
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 82px;
+  height: 18px;
+  background: #000000;
+  border-radius: 20px;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.app-interactive-phone .phone-status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 18px 4px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #0F172A;
+  background: #FFFFFF;
+  z-index: 20;
+  position: relative;
+  height: 38px;
+  flex-shrink: 0;
+}
+
+.app-interactive-phone .phone-home-indicator {
+  width: 100px;
+  height: 4px;
+  background: #64748B;
+  border-radius: 3px;
+  margin: 6px auto 7px;
+  flex-shrink: 0;
 }
 
 .rn-simulator-screen,
@@ -4052,10 +4090,11 @@ button {
   line-height: normal;
   display: flex;
   flex-direction: column;
-  height: 640px;
+  flex: 1;
+  height: 600px;
   overflow: hidden;
   position: relative;
-  border-radius: 32px;
+  border-radius: 0 0 34px 34px;
 }
 
 /* Screen Top Header (1:1 with CutBook App) */
@@ -8456,10 +8495,8 @@ button {
 
 @media (max-width: 768px) {
   .app-interactive-phone {
-    width: 300px;
-  }
-  .rn-simulator-screen {
-    height: 520px;
+    width: min(320px, calc(100vw - 32px));
+    margin: 0 auto;
   }
 }
 
@@ -16991,39 +17028,84 @@ button {
     perspective: 1000px;
   }
 
-  /* Responsive Phone Frame on Tablets/Large Phones */
+  /* Responsive Phone Frame on Mobile */
   .phone-mockup-frame {
-    width: 310px;
-    height: 575px;
+    width: min(320px, calc(100vw - 32px));
+    height: 595px;
     border: 8px solid #0F172A;
     border-radius: 44px;
     margin: 0 auto;
-    box-shadow: 0 30px 70px -15px rgba(15, 23, 42, 0.35);
+    box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.35);
+    position: relative;
+    z-index: 10;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
 
   .phone-dynamic-island {
-    width: 95px;
-    height: 22px;
-    top: 8px;
-    padding: 0 10px;
+    width: 78px;
+    height: 18px;
+    top: 10px;
+    border-radius: 20px;
+    padding: 0 8px;
+    z-index: 30;
   }
-  .phone-island-cam { width: 9px; height: 9px; }
-  .phone-island-sens { width: 6px; height: 6px; }
+  .phone-island-cam { width: 7px; height: 7px; }
+  .phone-island-sens { width: 5px; height: 5px; }
 
   .phone-status-bar {
-    padding: 8px 18px 4px;
-    font-size: 0.75rem;
+    height: 38px;
+    padding: 10px 18px 4px;
+    font-size: 0.74rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #FFFFFF;
+    position: relative;
+    z-index: 20;
+    flex-shrink: 0;
+  }
+  .phone-status-time {
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: #0F172A;
+    line-height: 1;
+  }
+  .phone-status-icons {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #0F172A;
+  }
+  .phone-status-icons svg {
+    height: 10px;
+    width: auto;
   }
 
   .phone-home-indicator {
     width: 95px;
     height: 4px;
+    background: #64748B;
+    border-radius: 3px;
     margin: 5px auto 6px;
+    flex-shrink: 0;
   }
 
-  /* Inner Authentic App UI on Mobile */
+  /* Inner Authentic App UI on Mobile (Hero Section) */
+  .hero-rn-screen {
+    flex: 1;
+    border-radius: 0 0 34px 34px;
+    overflow: hidden;
+    position: relative;
+  }
   .hero-rn-screen .rn-dash-header {
-    padding: 6px 10px;
+    padding: 8px 10px 6px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #E2E8F0;
+    position: relative;
+    z-index: 10;
   }
   .hero-rn-screen .rn-dash-avatar-circle {
     width: 28px;
@@ -17037,7 +17119,7 @@ button {
     font-size: 0.62rem;
   }
   .hero-rn-screen .rn-scroll-body {
-    padding: 6px 6px 52px;
+    padding: 6px 6px 54px;
   }
   .hero-rn-screen .rn-dash-controls {
     margin-bottom: 6px;
@@ -17071,14 +17153,154 @@ button {
   .hero-rn-screen .rn-dash-fab {
     width: 38px;
     height: 38px;
-    bottom: 46px;
+    bottom: 48px;
     right: 10px;
   }
   .hero-rn-screen .rn-bottom-nav-bar {
-    padding: 4px 4px 6px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 5px 6px 6px;
+    background: rgba(255, 255, 255, 0.98);
+    border-top: 1px solid #E2E8F0;
+    z-index: 25;
+    border-bottom-left-radius: 34px;
+    border-bottom-right-radius: 34px;
   }
   .hero-rn-screen .rn-nav-item span {
     font-size: 0.58rem;
+  }
+
+  /* Section 3 Simulator Phone on Mobile (100% Native Parity, No Clipping) */
+  .app-interactive-phone {
+    width: min(320px, calc(100vw - 32px)) !important;
+    border: 8px solid #0F172A !important;
+    border-radius: 44px !important;
+    margin: 0 auto !important;
+    box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.35) !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .app-interactive-phone .rn-simulator-screen {
+    height: 575px !important;
+    border-radius: 0 0 34px 34px !important;
+  }
+  .rn-simulator-screen .rn-header {
+    padding: 8px 10px !important;
+    background: #FFFFFF !important;
+    border-bottom: 1px solid #F1F5F9 !important;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 15 !important;
+  }
+  .rn-simulator-screen .rn-header-title {
+    font-size: 0.84rem !important;
+  }
+  .rn-simulator-screen .rn-header-subtitle {
+    font-size: 0.6rem !important;
+  }
+  .rn-simulator-screen .rn-scroll-body {
+    padding: 6px 8px 105px !important;
+    -webkit-overflow-scrolling: touch !important;
+    scroll-behavior: smooth !important;
+  }
+  .rn-simulator-screen .rn-coin-card {
+    padding: 6px 8px !important;
+    margin-bottom: 6px !important;
+  }
+  .rn-simulator-screen .rn-coin-medallion {
+    width: 26px !important;
+    height: 26px !important;
+    font-size: 0.8rem !important;
+  }
+  .rn-simulator-screen .rn-coin-balance {
+    font-size: 0.85rem !important;
+  }
+  .rn-simulator-screen .rn-coin-recharge-btn {
+    padding: 4px 8px !important;
+    font-size: 0.6rem !important;
+  }
+  .rn-simulator-screen .rn-staff-row {
+    padding: 5px 8px !important;
+    margin-bottom: 6px !important;
+  }
+  .rn-simulator-screen .rn-staff-chip {
+    padding: 3px 6px !important;
+  }
+  .rn-simulator-screen .rn-service-card {
+    padding: 8px 8px !important;
+    margin-bottom: 6px !important;
+  }
+  .rn-simulator-screen .rn-quick-chip {
+    padding: 4px 7px !important;
+    font-size: 0.65rem !important;
+  }
+  .rn-simulator-screen .rn-service-card-header {
+    margin-bottom: 6px !important;
+  }
+  .rn-simulator-screen .rn-quick-label {
+    font-size: 0.6rem !important;
+    margin-bottom: 4px !important;
+  }
+  .rn-simulator-screen .rn-bill-amount-box {
+    padding: 8px 10px !important;
+    margin-bottom: 6px !important;
+  }
+  .rn-simulator-screen .rn-bill-price {
+    font-size: 1.15rem !important;
+  }
+  .rn-simulator-screen .rn-tip-box {
+    padding: 8px 10px !important;
+    margin-bottom: 6px !important;
+  }
+  .rn-simulator-screen .rn-tip-chip {
+    padding: 4px 8px !important;
+    font-size: 0.65rem !important;
+  }
+  .rn-simulator-screen .rn-payment-methods-box {
+    padding: 8px 10px !important;
+    margin-bottom: 6px !important;
+  }
+  .rn-simulator-screen .rn-pay-card {
+    padding: 5px 8px !important;
+    font-size: 0.68rem !important;
+  }
+  .rn-simulator-screen .rn-bottom-action-bar {
+    bottom: 42px !important;
+    padding: 6px 10px !important;
+    background: #FFFFFF !important;
+    border-top: 1px solid #E2E8F0 !important;
+    z-index: 24 !important;
+  }
+  .rn-simulator-screen .rn-bar-total-val {
+    font-size: 0.95rem !important;
+  }
+  .rn-simulator-screen .rn-save-entry-btn {
+    padding: 6px 10px !important;
+    font-size: 0.65rem !important;
+  }
+  .rn-simulator-screen .rn-bottom-nav-bar {
+    height: 42px !important;
+    padding: 3px 4px 5px !important;
+    border-bottom-left-radius: 34px !important;
+    border-bottom-right-radius: 34px !important;
+    z-index: 25 !important;
+  }
+  .rn-simulator-screen .rn-bottom-nav-item span {
+    font-size: 0.58rem !important;
+  }
+
+  /* Orbit Cards z-index management — keep phone in foreground */
+  .hero-3d-orbit-container {
+    pointer-events: none !important;
+    z-index: 4 !important;
+  }
+  .orbit-card {
+    z-index: 4 !important;
+    opacity: 0.72 !important;
   }
 
   /* Mobile Orbit Cards — scaled down and orbiting in tight envelope */
