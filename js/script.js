@@ -1896,7 +1896,7 @@ function initPosSimulatorInteractive() {
   }
 
   // Catalog Modal elements
-  const catalogModal = document.getElementById('rnServiceCatalogModal');
+  const catalogModal = document.getElementById('rnCatalogModal') || document.getElementById('rnServiceCatalogModal');
   const btnBrowseAll = document.getElementById('rnBrowseAllBtn');
   const btnAddMore = document.getElementById('rnAddMoreServicesBtn');
   const btnCloseCatalog = document.getElementById('rnCatalogCloseBtn');
@@ -1904,7 +1904,7 @@ function initPosSimulatorInteractive() {
   const btnConfirmCatalog = document.getElementById('rnCatalogConfirmBtn');
   const catalogSearchInput = document.getElementById('rnCatalogSearchInput');
   const catalogSearchClear = document.getElementById('rnCatalogSearchClear');
-  const catalogCatPills = document.querySelectorAll('.rn-catalog-cat-pill');
+  const catalogCatPills = document.querySelectorAll('.rn-catalog-cat-pill, .rn-cat-chip');
   const catalogItems = document.querySelectorAll('.rn-catalog-item');
   const catalogBottomCount = document.getElementById('rnCatalogBottomCount');
   const catalogBottomTotal = document.getElementById('rnCatalogBottomTotal');
@@ -1916,6 +1916,7 @@ function initPosSimulatorInteractive() {
   const modalCustomAddBtn = document.getElementById('rnModalCustomAddBtn');
   const catalogEmptyWrap = document.getElementById('rnCatalogEmptyWrap');
   const catalogEmptyAddBtn = document.getElementById('rnCatalogEmptyAddBtn');
+  const customTipInput = document.getElementById('rnCustomTipInput');
 
   // History / Records Modal elements
   const historyModal = document.getElementById('rnHistoryModal');
@@ -1927,13 +1928,13 @@ function initPosSimulatorInteractive() {
   if (!billPriceEl || !totalDisplayEl) return;
 
   let currentPrice = 150;
-  let currentTip = 0;
+  let currentTip = 50;
   let currentStaff = 'kabbo';
   let currentStaffName = 'kabbo';
   let currentStaffInitials = 'KA';
   let currentStaffRate = 'owner'; // 'owner' | 35 | 40
   let currentPaymentMethod = 'Cash';
-  let currentPaymentColor = '#008000';
+  let currentPaymentColor = '#4a7c59';
   let customServiceName = '';
   let customServicePrice = 0;
 
@@ -2210,6 +2211,7 @@ function initPosSimulatorInteractive() {
       chip.classList.add('active');
       const val = parseInt(chip.getAttribute('data-tip') || '0', 10);
       currentTip = val;
+      if (customTipInput) customTipInput.value = '';
 
       if (tipPlaceholderEl) {
         tipPlaceholderEl.textContent = val > 0 ? `+৳${val}` : 'বকশিসের পরিমাণ লিখুন...';
@@ -2225,18 +2227,29 @@ function initPosSimulatorInteractive() {
     });
   });
 
+  if (customTipInput) {
+    customTipInput.addEventListener('input', () => {
+      const val = parseFloat(customTipInput.value || '0');
+      if (!isNaN(val) && val >= 0) {
+        tipChips.forEach((c) => c.classList.remove('active'));
+        currentTip = val;
+        updateTotals();
+      }
+    });
+  }
+
   if (tipClearBtn) {
     tipClearBtn.addEventListener('click', () => {
       currentTip = 0;
       tipChips.forEach((c) => {
-        c.classList.toggle('active', c.getAttribute('data-tip') === '0');
+        c.classList.remove('active');
       });
+      if (customTipInput) customTipInput.value = '';
       if (tipPlaceholderEl) {
         tipPlaceholderEl.textContent = 'বকশিসের পরিমাণ লিখুন...';
         tipPlaceholderEl.style.color = '#94A3B8';
         tipPlaceholderEl.style.fontWeight = '400';
       }
-      tipClearBtn.style.display = 'none';
       updateTotals();
     });
   }
@@ -2246,9 +2259,11 @@ function initPosSimulatorInteractive() {
     cash: { name: 'Cash', color: '#4a7c59' },
     bkash: { name: 'bKash', color: '#E2136E' },
     nagad: { name: 'Nagad', color: '#F37021' },
+    card: { name: 'Card', color: '#2563EB' },
+    split: { name: 'Split', color: '#7C3AED' },
+    due: { name: 'Due', color: '#DC2626' },
     bangla_qr: { name: 'Bangla QR', color: '#006A4E' },
-    rocket: { name: 'Rocket', color: '#8C2D8B' },
-    card: { name: 'Card', color: '#2563EB' }
+    rocket: { name: 'Rocket', color: '#8C2D8B' }
   };
 
   payCards.forEach((card) => {

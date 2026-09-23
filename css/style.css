@@ -4222,22 +4222,32 @@ button {
   line-height: 1.1;
 }
 
+.rn-staff-name,
 .rn-staff-meta strong {
   font-size: 0.72rem;
   font-weight: 700;
   color: #0F172A;
 }
 
+.rn-staff-chip.active .rn-staff-name,
 .rn-staff-chip.active .rn-staff-meta strong {
   color: #047857;
 }
 
+.rn-staff-rate-badge,
 .rn-staff-meta small {
   font-size: 0.58rem;
   color: #64748B;
+  font-weight: 600;
 }
 
-/* 3. Service Box */
+.rn-staff-chip.active .rn-staff-rate-badge,
+.rn-staff-chip.active .rn-staff-meta small {
+  color: #059669;
+}
+
+/* 3. Service Box & Smart Service Card */
+.rn-service-card,
 .rn-service-box {
   background: #FFFFFF;
   border: 1px solid #E2E8F0;
@@ -4246,6 +4256,7 @@ button {
   margin-bottom: 8px;
 }
 
+.rn-service-card-header,
 .rn-service-header {
   display: flex;
   align-items: center;
@@ -4443,6 +4454,7 @@ button {
 
 .rn-tip-chips-row {
   display: flex;
+  align-items: center;
   gap: 4px;
 }
 
@@ -4466,7 +4478,51 @@ button {
   color: #059669;
 }
 
+.rn-tip-manual-wrap {
+  display: flex;
+  align-items: center;
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 6px;
+  padding: 3px 5px;
+  max-width: 58px;
+}
+
+.rn-tip-taka-sign {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #64748B;
+  margin-right: 2px;
+}
+
+.rn-tip-input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #0F172A;
+  outline: none;
+  padding: 0;
+}
+
+.rn-tip-clear-btn {
+  background: #F1F5F9;
+  border: 1px solid #E2E8F0;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+  color: #64748B;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
 /* 5. 3x2 Payment Grid */
+.rn-pay-section,
 .rn-payment-section {
   background: #FFFFFF;
   border: 1px solid #E2E8F0;
@@ -4475,6 +4531,7 @@ button {
   margin-bottom: 8px;
 }
 
+.rn-pay-label,
 .rn-payment-header {
   display: flex;
   align-items: center;
@@ -4485,6 +4542,7 @@ button {
   margin-bottom: 6px;
 }
 
+.rn-pay-grid,
 .rn-payment-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -4505,6 +4563,29 @@ button {
   transition: all 0.15s ease;
   box-sizing: border-box;
   min-height: 32px;
+}
+
+.rn-pay-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
+.rn-pay-name,
+.rn-pay-card .pay-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #1E293B;
+  flex: 1;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .rn-pay-card .pay-logo-img {
@@ -4590,18 +4671,21 @@ button {
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
 }
 
+.rn-bar-total-col,
 .rn-action-total {
   display: flex;
   flex-direction: column;
   line-height: 1.1;
 }
 
+.rn-bar-total-label,
 .rn-action-label {
   font-size: 0.62rem;
   font-weight: 600;
   color: #64748B;
 }
 
+.rn-bar-total-val,
 .rn-action-val {
   font-size: 1.15rem;
   font-weight: 800;
@@ -4661,6 +4745,7 @@ button {
 }
 
 /* 6. Live Executive Summary & Collapsible Notes */
+.rn-summary-card,
 .rn-summary-bar-card {
   background: #1b261e;
   border: 1px solid rgba(74, 124, 89, 0.35);
@@ -4668,6 +4753,72 @@ button {
   padding: 8px 10px;
   margin-bottom: 8px;
   box-shadow: 0 3px 10px rgba(27, 38, 30, 0.2);
+}
+
+.rn-summary-title-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 6px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.rn-summary-title {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #34D399;
+}
+
+.rn-summary-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rn-summary-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rn-sum-left {
+  font-size: 0.62rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.rn-sum-right {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.rn-sum-staff-row {
+  margin-top: 2px;
+}
+
+.rn-sum-staff-label-wrap {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.rn-sum-avatar {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #4a7c59;
+  color: #FFFFFF;
+  font-size: 0.5rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.staff-highlight {
+  color: #34D399;
+  font-size: 0.88rem;
 }
 
 .rn-summary-split {
@@ -4738,6 +4889,7 @@ button {
   border: 1px solid rgba(255, 255, 255, 0.1);
   cursor: pointer;
   transition: all 0.15s ease;
+  margin-top: 4px;
 }
 
 .rn-notes-toggle-btn.active {
@@ -4752,6 +4904,7 @@ button {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.rn-notes-input,
 .rn-notes-expand-input {
   width: 100%;
   background: #172033;
@@ -4762,6 +4915,7 @@ button {
   color: #FFFFFF;
   outline: none;
   font-family: inherit;
+  box-sizing: border-box;
 }
 
 /* Selected Services Tag List */
