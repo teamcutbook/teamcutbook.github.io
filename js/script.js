@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // 4. Counter Up Animation for Stats
   initCounterAnimation();
 
-  // 5. Interactive Product Overview Tabs
-  initProductTabs();
+  // Google Labs Feature Showcase Carousel
+  initLabsShowcaseCarousel();
 
   // 6. Interactive Pricing Calculator Simulator
   initPricingCalculator();
@@ -181,41 +181,6 @@ function animateValue(obj, start, end, duration, prefix = '', suffix = '', isDec
   window.requestAnimationFrame(step);
 }
 
-/* --------------------------------------------------------------------------
-   5. Interactive Product Tabs (Grassfeld Style)
-   -------------------------------------------------------------------------- */
-function initProductTabs() {
-  const tabButtons = document.querySelectorAll('.tab-btn');
-  const tabPanes = document.querySelectorAll('.tab-pane');
-
-  if (!tabButtons.length || !tabPanes.length) return;
-
-  tabButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const targetTab = button.getAttribute('data-tab');
-
-      // Update active button & ARIA state
-      tabButtons.forEach(btn => {
-        btn.classList.remove('active');
-        btn.setAttribute('aria-selected', 'false');
-      });
-      button.classList.add('active');
-      button.setAttribute('aria-selected', 'true');
-
-      // Smoothly center active button in scrollable container on smaller screens
-      button.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-
-      // Update active pane
-      tabPanes.forEach(pane => {
-        if (pane.getAttribute('data-pane') === targetTab) {
-          pane.classList.add('active');
-        } else {
-          pane.classList.remove('active');
-        }
-      });
-    });
-  });
-}
 
 /* --------------------------------------------------------------------------
    6. Testimonial Carousel
@@ -763,10 +728,10 @@ function initGalaxyOrbit() {
   // 2. Responsive Scale & Positioning (Empty center comfortably below header text)
   function getResponsiveScale() {
     const w = window.innerWidth;
-    if (w < 480)  return 0.48;
-    if (w < 768)  return 0.62;
-    if (w < 1100) return 0.82;
-    return 0.98;
+    if (w < 480)  return 0.52;
+    if (w < 768)  return 0.68;
+    if (w < 1100) return 0.88;
+    return 1.04;
   }
 
   function getCenterY(h) {
@@ -804,9 +769,9 @@ function initGalaxyOrbit() {
   // Orbit 1 (Mid track):       semiMajor: 315, semiMinor: 155, tiltZ: +0.20 rad
   // Orbit 2 (Outer track):     semiMajor: 405, semiMinor: 190, tiltZ: -0.10 rad
   const ORBIT_TRACKS = [
-    { semiMajor: 215, semiMinor: 110, tiltZ: -0.24, speed: 0.16,  dir: 1,  photons: [0.15, 0.65], stroke: 'rgba(251, 191, 36, 0.18)' },
-    { semiMajor: 315, semiMinor: 155, tiltZ: 0.20,  speed: -0.11, dir: -1, photons: [0.05, 0.45, 0.80], stroke: 'rgba(96, 165, 250, 0.16)' },
-    { semiMajor: 405, semiMinor: 190, tiltZ: -0.10, speed: 0.08,  dir: 1,  photons: [0.30, 0.75], stroke: 'rgba(167, 139, 250, 0.15)' }
+    { semiMajor: 230, semiMinor: 118, tiltZ: -0.24, speed: 0.15,  dir: 1,  photons: [0.15, 0.65], stroke: 'rgba(251, 191, 36, 0.18)' },
+    { semiMajor: 335, semiMinor: 165, tiltZ: 0.20,  speed: -0.10, dir: -1, photons: [0.05, 0.45, 0.80], stroke: 'rgba(96, 165, 250, 0.16)' },
+    { semiMajor: 435, semiMinor: 205, tiltZ: -0.10, speed: 0.075, dir: 1,  photons: [0.30, 0.75], stroke: 'rgba(167, 139, 250, 0.15)' }
   ];
 
   // 5. Initialize the 7 Orbiting Salon Operation Nodes
@@ -973,7 +938,7 @@ function initGalaxyOrbit() {
   // NOTE: The center remains completely clear! We skip lines that would cross the central void.
   function drawConstellations(cx, cy, rs, t) {
     const maxLinkDist = 240 * rs;
-    const centerClearance = 55 * rs; // Exact center stays 100% empty
+    const centerClearance = 78 * rs; // Clear space around center salon owner disc
 
     for (let i = 0; i < satellites.length; i++) {
       for (let j = i + 1; j < satellites.length; j++) {
@@ -1051,6 +1016,13 @@ function initGalaxyOrbit() {
     const cy = getCenterY(h);
     const rs = getResponsiveScale();
 
+    // Position Center Cartoon Salon Owner precisely at focal center (cx, cy)
+    const ownerEl = document.getElementById('cosmicCenterOwner');
+    if (ownerEl) {
+      ownerEl.style.left = `${cx}px`;
+      ownerEl.style.top = `${cy}px`;
+    }
+
     // Smooth lerp for interactive 3D camera parallax
     curTiltX += (mouseTiltX - curTiltX) * 0.05;
     curTiltY += (mouseTiltY - curTiltY) * 0.05;
@@ -1120,7 +1092,7 @@ function initGalaxyOrbit() {
     });
 
     // Soft Collision Repulsion pass: ensure cards glide past each other without overlap
-    const minCardDist = 110 * rs;
+    const minCardDist = 145 * rs;
     for (let i = 0; i < satellites.length; i++) {
       for (let j = i + 1; j < satellites.length; j++) {
         const s1 = satellites[i];
@@ -3147,13 +3119,13 @@ function initSimulatorBottomNav() {
     item.addEventListener('click', () => {
       const label = item.querySelector('span')?.textContent.trim();
       if (label === 'হোম') {
-        document.querySelector('.tab-btn[data-tab="dashboard"]')?.click();
+        document.getElementById('feature-dashboard')?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
       } else if (label === 'খরচ') {
-        document.querySelector('.tab-btn[data-tab="expenses"]')?.click();
+        document.getElementById('feature-expenses')?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
       } else if (label === 'টিম') {
-        document.querySelector('.tab-btn[data-tab="commissions"]')?.click();
+        document.getElementById('feature-commissions')?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
       } else if (label === 'আমার অ্যাকাউন্ট' || label === 'লগার') {
-        document.querySelector('.tab-btn[data-tab="quick-entry"]')?.click();
+        document.getElementById('feature-quick-entry')?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
       }
     });
   });
@@ -3359,8 +3331,7 @@ function initStaffPayoutsSimulator() {
   const backBtn = document.querySelector('.rn-payout-header .rn-header-back-btn');
   if (backBtn) {
     backBtn.addEventListener('click', () => {
-      const expensesTab = document.querySelector('.tab-btn[data-tab="expenses"]');
-      if (expensesTab) expensesTab.click();
+      document.getElementById('feature-expenses')?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     });
   }
 
@@ -3495,9 +3466,9 @@ function initEmployeeDashboardSimulator() {
         item.classList.add('active');
         const label = item.querySelector('span')?.textContent.trim();
         if (label === 'কাজের হিস্ট্রি') {
-          document.querySelector('.tab-btn[data-tab="commissions"]')?.click();
+          document.getElementById('feature-commissions')?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
         } else if (label === 'প্রোফাইল') {
-          document.querySelector('.tab-btn[data-tab="payout"]')?.click();
+          document.getElementById('feature-payout')?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
         }
       });
     });
@@ -3713,8 +3684,7 @@ function initReportsScreenSimulator() {
     // Back button
     if (backBtn) {
       backBtn.addEventListener('click', () => {
-        const dashTab = document.querySelector('.tab-btn[data-tab="dashboard"]');
-        if (dashTab) dashTab.click();
+        document.getElementById('feature-dashboard')?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
       });
     }
 
@@ -3742,3 +3712,104 @@ function initReportsScreenSimulator() {
 
 
 
+
+/* --------------------------------------------------------------------------
+   Google Labs Feature Showcase Carousel Logic
+   -------------------------------------------------------------------------- */
+function initLabsShowcaseCarousel() {
+  const track = document.getElementById('labsCarouselTrack');
+  const prevBtn = document.getElementById('labsCarouselPrev');
+  const nextBtn = document.getElementById('labsCarouselNext');
+  const dotsContainer = document.getElementById('labsCarouselDots');
+
+  if (!track) return;
+
+  const cards = Array.from(track.querySelectorAll('.labs-card'));
+  if (!cards.length) return;
+
+  // Create Pagination Dots
+  if (dotsContainer) {
+    dotsContainer.innerHTML = '';
+    cards.forEach((card, index) => {
+      const dot = document.createElement('button');
+      dot.className = 'labs-dot' + (index === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'কার্ড ' + (index + 1));
+      dot.addEventListener('click', () => {
+        card.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      });
+      dotsContainer.appendChild(dot);
+    });
+  }
+
+  const dots = dotsContainer ? Array.from(dotsContainer.querySelectorAll('.labs-dot')) : [];
+
+  // Update Active Dot on Scroll
+  function updateActiveDot() {
+    if (!dots.length) return;
+    const trackRect = track.getBoundingClientRect();
+    const trackCenter = trackRect.left + trackRect.width / 2;
+
+    let closestIndex = 0;
+    let minDistance = Infinity;
+
+    cards.forEach((card, index) => {
+      const cardRect = card.getBoundingClientRect();
+      const cardCenter = cardRect.left + cardRect.width / 2;
+      const distance = Math.abs(trackCenter - cardCenter);
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestIndex = index;
+      }
+    });
+
+    dots.forEach((dot, idx) => {
+      dot.classList.toggle('active', idx === closestIndex);
+    });
+  }
+
+  let scrollTimeout;
+  track.addEventListener('scroll', () => {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(updateActiveDot, 35);
+  }, { passive: true });
+
+  // Prev / Next Navigation
+  function scrollByCard(direction) {
+    const cardWidth = cards[0].offsetWidth + 24; // width + gap
+    track.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => scrollByCard(-1));
+  }
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => scrollByCard(1));
+  }
+
+  // Mouse Drag to Scroll
+  let isDown = false;
+  let startX = 0;
+  let scrollLeft = 0;
+
+  track.addEventListener('mousedown', (e) => {
+    if (e.target.closest('.app-interactive-phone, .rn-simulator-screen, .rn-scroll-body, button, input, select, textarea, a, .rn-tab, .rn-chip, .cat-chip')) return;
+    isDown = true;
+    track.classList.add('is-dragging');
+    startX = e.pageX - track.offsetLeft;
+    scrollLeft = track.scrollLeft;
+  });
+
+  window.addEventListener('mouseup', () => {
+    if (!isDown) return;
+    isDown = false;
+    track.classList.remove('is-dragging');
+  });
+
+  track.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - track.offsetLeft;
+    const walk = (x - startX) * 1.35;
+    track.scrollLeft = scrollLeft - walk;
+  });
+}
