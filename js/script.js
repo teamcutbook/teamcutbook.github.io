@@ -40,6 +40,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 13. CutBook Owner Dashboard Screen UI Simulator
   initDashSimulatorInteractive();
+
+  // 14. CutBook Work Entries & Transactions History Screen Simulator
+  initWorkEntriesSimulator();
+
+  // 15. CutBook Shop Expenses & Petty Cash Screen Simulator
+  initExpensesSimulator();
+
+  // 16. CutBook Staff Express Payout Screen Simulator
+  initExpressPayoutSimulator();
+
+  // 17. CutBook Stylist / Employee Dashboard Screen Simulator
+  initEmployeeDashboardSimulator();
+
+  // 18. CutBook P&L Reports & Net Profit Screen Simulator
+  initReportsScreenSimulator();
+
+  // 19. Simulator Bottom Navigation Inter-Tab Wiring
+  initSimulatorBottomNav();
+
+  // 12. Galaxy Orbit System — 3D perspective projection
+  initGalaxyOrbit();
 });
 
 /* --------------------------------------------------------------------------
@@ -248,56 +269,19 @@ function initTestimonialCarousel() {
 }
 
 /* --------------------------------------------------------------------------
-   7. Interactive Pricing Calculator Simulator
+   7. Final Pricing Model Interactive Pills
    -------------------------------------------------------------------------- */
 function initPricingCalculator() {
-  const slider = document.getElementById('pricingEntriesSlider');
-  const countEl = document.getElementById('calcEntriesCount');
-  const paidCountEl = document.getElementById('calcPaidCount');
-  const dailyCostEl = document.getElementById('calcDailyCost');
-  const monthlyCostEl = document.getElementById('calcMonthlyCost');
-  const equivTagEl = document.getElementById('calcEquivalentTag');
-
-  if (!slider || !countEl || !paidCountEl || !dailyCostEl || !monthlyCostEl) return;
-
-  function updatePricing() {
-    const totalEntries = parseInt(slider.value, 10) || 5;
-    const freeQuota = 5;
-    const paidEntries = Math.max(0, totalEntries - freeQuota);
-    const dailyCost = paidEntries * 1; // ৳1 per entry
-    const monthlyCost = dailyCost * 30; // 30-day billing cycle
-
-    countEl.textContent = totalEntries;
-    paidCountEl.textContent = paidEntries;
-    dailyCostEl.textContent = '৳ ' + dailyCost.toLocaleString('en-US');
-    monthlyCostEl.textContent = '৳ ' + monthlyCost.toLocaleString('en-US');
-
-    // Dynamic equivalent comparator
-    if (equivTagEl) {
-      if (dailyCost === 0) {
-        equivTagEl.textContent = '🎉 100% Free Forever (0 Taka)';
-      } else if (monthlyCost <= 300) {
-        equivTagEl.textContent = '☕ Less than 1 cup of roadside tea per day';
-      } else if (monthlyCost <= 750) {
-        equivTagEl.textContent = '✂️ Cheaper than 1 single haircut (৳800)';
-      } else if (monthlyCost <= 1200) {
-        equivTagEl.textContent = '💆 Less than 1 facial or hair spa treatment';
-      } else {
-        equivTagEl.textContent = '⚡ High salon volume! Super cost-effective';
-      }
-    }
-
-    // Dynamic slider track fill gradient
-    const min = parseInt(slider.min, 10) || 5;
-    const max = parseInt(slider.max, 10) || 100;
-    const pct = ((totalEntries - min) / (max - min)) * 100;
-    slider.style.background = `linear-gradient(to right, #10B981 0%, #10B981 ${pct}%, #E2E8F0 ${pct}%, #E2E8F0 100%)`;
-  }
-
-  slider.addEventListener('input', updatePricing);
-  // Initial run to render correct styles and values
-  updatePricing();
+  const pills = document.querySelectorAll('.scan-pill-item');
+  if (!pills.length) return;
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      pills.forEach(p => p.classList.remove('featured-example'));
+      pill.classList.add('featured-example');
+    });
+  });
 }
+
 
 /* --------------------------------------------------------------------------
    8. FAQ Accordion
@@ -726,414 +710,549 @@ function initSharedFutureCarousel() {
 }
 
 /* --------------------------------------------------------------------------
-   12. 360° Interactive Three.js 3D Ecosystem Universe (Classy & Centered)
+   12. ONE SINGLE SOURCE OF TRUTH (Cosmic Ecosystem Engine)
+   ─────────────────────────────────────────────────────────────────────────
+   • Pure empty center representing the invisible connected salon core
+   • 7 Salon Operation Nodes: Sales, Staff, Work Entries, Payments, Expenses, Earnings, Reports
+   • 3 Intersecting graceful elliptical orbits with flowing light pulses
+   • Celestial starlight dust & fine constellation lines
+   • Interactive 3D camera parallax & smooth chip navigation
    -------------------------------------------------------------------------- */
-function init3DEcosystem() {
-  const container = document.getElementById('ecosystem-three-canvas');
-  const stage = document.getElementById('ecosystem3DStage');
-  if (!container || !stage) return;
+function initGalaxyOrbit() {
+  const canvasEl  = document.getElementById('galaxyOrbitCanvas');
+  const stageEl   = document.getElementById('ecosystemStage') || document.getElementById('ecosystem');
+  const cvs       = document.getElementById('cosmicCanvas');
+  if (!canvasEl || !cvs) return;
 
-  if (typeof THREE === 'undefined') {
-    let attempts = 0;
-    const pollTimer = setInterval(() => {
-      attempts++;
-      if (typeof THREE !== 'undefined') {
-        clearInterval(pollTimer);
-        init3DEcosystem();
-      } else if (attempts > 30) {
-        clearInterval(pollTimer);
-      }
-    }, 100);
-    return;
-  }
+  const nodeEls   = Array.from(canvasEl.querySelectorAll('.orbit-cosmic-node'));
+  const chips     = Array.from(document.querySelectorAll('.eco-chip'));
+  const toggleBtn = document.getElementById('ecoToggleOrbit');
+  const ctx       = cvs.getContext('2d');
+  if (!nodeEls.length || !ctx) return;
 
-  // Scene & Sizing
-  const scene = new THREE.Scene();
-  let width = stage.clientWidth || 1040;
-  let height = stage.clientHeight || 640;
-
-  // Perspective Camera (Generous spatial depth)
-  const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 1000);
-  camera.position.set(0, 0, 50);
-
-  // High-Performance WebGL Renderer
-  const renderer = new THREE.WebGLRenderer({
-    alpha: true,
-    antialias: true,
-    powerPreference: 'high-performance'
-  });
-  renderer.setSize(width, height);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  container.innerHTML = '';
-  container.appendChild(renderer.domElement);
-
-  // Master Universe Group for 360° Rotation (Generous vertical clearance from header)
-  const universeGroup = new THREE.Group();
-  universeGroup.position.set(0, -3.2, 0);
-  scene.add(universeGroup);
-
-  // 1. Perspective Horizon Grid (Cyber Spatial Floor)
-  const polarGrid = new THREE.PolarGridHelper(36, 18, 8, 64, 0x10B981, 0x064E3B);
-  polarGrid.position.y = -10.5;
-  if (polarGrid.material) {
-    polarGrid.material.transparent = true;
-    polarGrid.material.opacity = 0.16;
-  }
-  universeGroup.add(polarGrid);
-
-  // 2. Central 3D Radiant Holographic Crystal Core (Replaces static 2D badge)
-  const coreGroup = new THREE.Group();
-  universeGroup.add(coreGroup);
-
-  // A. Inner Radiant Octahedron Crystal Nucleus
-  const crystalGeo = new THREE.OctahedronGeometry(2.2, 0);
-  const crystalMat = new THREE.MeshBasicMaterial({
-    color: 0x10B981,
-    wireframe: false,
-    transparent: true,
-    opacity: 0.85
-  });
-  const crystalMesh = new THREE.Mesh(crystalGeo, crystalMat);
-  coreGroup.add(crystalMesh);
-
-  // B. Inner Glowing Plasma Sphere Core
-  const innerGeo = new THREE.SphereGeometry(1.4, 32, 32);
-  const innerMat = new THREE.MeshBasicMaterial({
-    color: 0x047857,
-    transparent: true,
-    opacity: 0.9
-  });
-  const innerMesh = new THREE.Mesh(innerGeo, innerMat);
-  coreGroup.add(innerMesh);
-
-  // C. Outer Sacred Geometry Lattice (Glowing Icosahedron Wireframe)
-  const wireGeo = new THREE.IcosahedronGeometry(3.3, 1);
-  const wireMat = new THREE.MeshBasicMaterial({
-    color: 0x34D399,
-    wireframe: true,
-    transparent: true,
-    opacity: 0.65
-  });
-  const wireMesh = new THREE.Mesh(wireGeo, wireMat);
-  coreGroup.add(wireMesh);
-
-  // D. Ambient Holographic Halo Cloud (Pulsing Energy Stardust)
-  const haloParticleCount = 90;
-  const haloGeo = new THREE.BufferGeometry();
-  const haloPositions = new Float32Array(haloParticleCount * 3);
-  for (let h = 0; h < haloParticleCount * 3; h += 3) {
-    const hr = 2.2 + Math.random() * 2.8;
-    const htheta = Math.random() * Math.PI * 2;
-    const hphi = (Math.random() - 0.5) * Math.PI;
-    haloPositions[h] = hr * Math.cos(htheta) * Math.cos(hphi);
-    haloPositions[h + 1] = hr * Math.sin(hphi);
-    haloPositions[h + 2] = hr * Math.sin(htheta) * Math.cos(hphi);
-  }
-  haloGeo.setAttribute('position', new THREE.BufferAttribute(haloPositions, 3));
-  const haloMat = new THREE.PointsMaterial({
-    color: 0x6EE7B7,
-    size: 0.35,
-    transparent: true,
-    opacity: 0.8
-  });
-  const haloPoints = new THREE.Points(haloGeo, haloMat);
-  coreGroup.add(haloPoints);
-
-  // E. Concentric Gimbal Gyro Rings (Multi-Axis Cyber Gimbal)
-  const ringGeo1 = new THREE.TorusGeometry(4.2, 0.05, 16, 120);
-  const ringMat1 = new THREE.MeshBasicMaterial({ color: 0x10B981, transparent: true, opacity: 0.75 });
-  const ring1 = new THREE.Mesh(ringGeo1, ringMat1);
-  ring1.rotation.x = Math.PI / 3;
-  coreGroup.add(ring1);
-
-  const ringGeo2 = new THREE.TorusGeometry(5.2, 0.045, 16, 120);
-  const ringMat2 = new THREE.MeshBasicMaterial({ color: 0x38BDF8, transparent: true, opacity: 0.65 });
-  const ring2 = new THREE.Mesh(ringGeo2, ringMat2);
-  ring2.rotation.y = Math.PI / 4;
-  ring2.rotation.x = -Math.PI / 6;
-  coreGroup.add(ring2);
-
-  const ringGeo3 = new THREE.TorusGeometry(6.2, 0.04, 16, 120);
-  const ringMat3 = new THREE.MeshBasicMaterial({ color: 0x818CF8, transparent: true, opacity: 0.45 });
-  const ring3 = new THREE.Mesh(ringGeo3, ringMat3);
-  ring3.rotation.z = Math.PI / 5;
-  ring3.rotation.y = Math.PI / 3;
-  coreGroup.add(ring3);
-
-  // Primary Elliptical Orbital Track (Planetary Guide - Expanded)
-  const orbitRingGeo = new THREE.TorusGeometry(23.4, 0.035, 16, 180);
-  const orbitRingMat = new THREE.MeshBasicMaterial({ color: 0x10B981, transparent: true, opacity: 0.28 });
-  const orbitGuideRing = new THREE.Mesh(orbitRingGeo, orbitRingMat);
-  orbitGuideRing.rotation.x = Math.PI / 2.06;
-  universeGroup.add(orbitGuideRing);
-
-  // Secondary Outer Halo Orbit (Expanded)
-  const outerHaloGeo = new THREE.TorusGeometry(27.8, 0.02, 16, 160);
-  const outerHaloMat = new THREE.MeshBasicMaterial({ color: 0x38BDF8, transparent: true, opacity: 0.14 });
-  const outerHalo = new THREE.Mesh(outerHaloGeo, outerHaloMat);
-  outerHalo.rotation.x = Math.PI / 2.12;
-  universeGroup.add(outerHalo);
-
-  // 3. Ambient Floating Starfield / Cosmic Telemetry Particles
-  const particleCount = 560;
-  const particleGeo = new THREE.BufferGeometry();
-  const particlePositions = new Float32Array(particleCount * 3);
-  for (let i = 0; i < particleCount * 3; i += 3) {
-    const r = 14 + Math.random() * 36;
-    const theta = Math.random() * Math.PI * 2;
-    const phi = (Math.random() - 0.5) * Math.PI;
-    particlePositions[i] = r * Math.cos(theta) * Math.cos(phi);
-    particlePositions[i + 1] = r * Math.sin(phi) * 0.5;
-    particlePositions[i + 2] = r * Math.sin(theta) * Math.cos(phi);
-  }
-  particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
-  const particleMat = new THREE.PointsMaterial({
-    color: 0x34D399,
-    size: 0.22,
-    transparent: true,
-    opacity: 0.45
-  });
-  const particleSystem = new THREE.Points(particleGeo, particleMat);
-  universeGroup.add(particleSystem);
-
-  // 4. 6 Satellite 3D Node Anchors & Data Connection Beams (Expanded Breathable Orbit)
-  const nodeConfigs = [
-    { angle: 0, r: 23.4, y: 0.6, color: 0x10B981 },
-    { angle: (Math.PI / 3), r: 24.2, y: -2.0, color: 0x38BDF8 },
-    { angle: (2 * Math.PI / 3), r: 23.2, y: 0.8, color: 0xA855F7 },
-    { angle: Math.PI, r: 23.8, y: -1.8, color: 0xF59E0B },
-    { angle: (4 * Math.PI / 3), r: 23.0, y: 0.6, color: 0x06B6D4 },
-    { angle: (5 * Math.PI / 3), r: 24.2, y: -2.0, color: 0xF43F5E }
+  // Harmonious Cosmic Palette per Salon Operation
+  const NODE_CONFIG = [
+    { name: 'Sales',        color: { r: 251, g: 191, b: 36,  hex: '#FBBF24' }, orbit: 0, slot: 0 },
+    { name: 'Staff',        color: { r: 96,  g: 165, b: 250, hex: '#60A5FA' }, orbit: 1, slot: 0 },
+    { name: 'Work Entries', color: { r: 52,  g: 211, b: 153, hex: '#34D399' }, orbit: 1, slot: 1 },
+    { name: 'Payments',     color: { r: 56,  g: 189, b: 248, hex: '#38BDF8' }, orbit: 0, slot: 1 },
+    { name: 'Expenses',     color: { r: 244, g: 114, b: 182, hex: '#F472B6' }, orbit: 2, slot: 0 },
+    { name: 'Earnings',     color: { r: 250, g: 204, b: 21,  hex: '#FACC15' }, orbit: 1, slot: 2 },
+    { name: 'Reports',      color: { r: 167, g: 139, b: 250, hex: '#A78BFA' }, orbit: 2, slot: 1 }
   ];
 
-  const nodeMeshes = [];
-  const beamLines = [];
-  const beamPackets = [];
-  const htmlNodes = [];
+  // 1. High-DPI Canvas Resize
+  let dpr = window.devicePixelRatio || 1;
+  let stageW = 0;
+  let stageH = 0;
 
-  for (let i = 0; i < 6; i++) {
-    const el = document.getElementById('ecoNode' + i);
-    if (el) htmlNodes.push(el);
+  function resizeCvs() {
+    dpr = window.devicePixelRatio || 1;
+    stageW = canvasEl.offsetWidth || window.innerWidth;
+    stageH = canvasEl.offsetHeight || window.innerHeight;
+    cvs.width = stageW * dpr;
+    cvs.height = stageH * dpr;
+    cvs.style.width = stageW + 'px';
+    cvs.style.height = stageH + 'px';
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(dpr, dpr);
+  }
+  resizeCvs();
+  window.addEventListener('resize', resizeCvs);
+
+  // 2. Responsive Scale & Positioning (Empty center comfortably below header text)
+  function getResponsiveScale() {
+    const w = window.innerWidth;
+    if (w < 480)  return 0.48;
+    if (w < 768)  return 0.62;
+    if (w < 1100) return 0.82;
+    return 0.98;
   }
 
-  nodeConfigs.forEach((cfg, idx) => {
-    const nodeObj = new THREE.Group();
-    const x = cfg.r * Math.cos(cfg.angle);
-    const z = cfg.r * Math.sin(cfg.angle);
-    const y = cfg.y;
-    nodeObj.position.set(x, y, z);
-    universeGroup.add(nodeObj);
-    nodeMeshes.push(nodeObj);
+  function getCenterY(h) {
+    const w = window.innerWidth;
+    return h * (w < 768 ? 0.64 : 0.61);
+  }
 
-    const beaconGeo = new THREE.SphereGeometry(0.4, 16, 16);
-    const beaconMat = new THREE.MeshBasicMaterial({ color: cfg.color, transparent: true, opacity: 0.85 });
-    const beacon = new THREE.Mesh(beaconGeo, beaconMat);
-    nodeObj.add(beacon);
+  // 3. Celestial Starlight & Cosmic Dust Particles (Subtle glowing dust motes)
+  const DUST_COUNT = window.innerWidth < 768 ? 75 : 150;
+  const dustParticles = [];
+  for (let i = 0; i < DUST_COUNT; i++) {
+    const isGold = Math.random() < 0.22;
+    const isBlue = Math.random() < 0.25;
+    const isViolet = Math.random() < 0.25;
+    let color = 'rgba(255, 255, 255, ';
+    if (isGold) color = 'rgba(251, 191, 36, ';
+    else if (isBlue) color = 'rgba(147, 197, 253, ';
+    else if (isViolet) color = 'rgba(196, 181, 253, ';
 
-    const lineGeo = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0, 0, 0), new THREE.Vector3(x, y, z)]);
-    const lineMat = new THREE.LineBasicMaterial({ color: cfg.color, transparent: true, opacity: 0.35 });
-    const line = new THREE.Line(lineGeo, lineMat);
-    universeGroup.add(line);
-    beamLines.push(line);
+    dustParticles.push({
+      x: Math.random(),
+      y: Math.random(),
+      radius: 0.6 + Math.random() * 1.5,
+      baseAlpha: 0.12 + Math.random() * 0.45,
+      twinkleSpeed: 0.8 + Math.random() * 2.2,
+      phase: Math.random() * Math.PI * 2,
+      driftX: (Math.random() - 0.5) * 0.003,
+      driftY: (Math.random() - 0.5) * 0.003,
+      color
+    });
+  }
 
-    for (let p = 0; p < 2; p++) {
-      const pktGeo = new THREE.SphereGeometry(0.18, 12, 12);
-      const pktMat = new THREE.MeshBasicMaterial({
-        color: cfg.color,
-        transparent: true,
-        opacity: 0.95
-      });
-      const pkt = new THREE.Mesh(pktGeo, pktMat);
-      pkt.position.set(0, 0, 0);
-      universeGroup.add(pkt);
-      beamPackets.push({
-        mesh: pkt,
-        targetPos: new THREE.Vector3(x, y, z),
-        progress: p * 0.5,
-        speed: 0.007 + p * 0.003
-      });
+  // 4. Definition of 3 Graceful Elliptical Orbits Surrounding the Empty Center
+  // Orbit 0 (Inner-Mid track): semiMajor: 215, semiMinor: 110, tiltZ: -0.24 rad
+  // Orbit 1 (Mid track):       semiMajor: 315, semiMinor: 155, tiltZ: +0.20 rad
+  // Orbit 2 (Outer track):     semiMajor: 405, semiMinor: 190, tiltZ: -0.10 rad
+  const ORBIT_TRACKS = [
+    { semiMajor: 215, semiMinor: 110, tiltZ: -0.24, speed: 0.16,  dir: 1,  photons: [0.15, 0.65], stroke: 'rgba(251, 191, 36, 0.18)' },
+    { semiMajor: 315, semiMinor: 155, tiltZ: 0.20,  speed: -0.11, dir: -1, photons: [0.05, 0.45, 0.80], stroke: 'rgba(96, 165, 250, 0.16)' },
+    { semiMajor: 405, semiMinor: 190, tiltZ: -0.10, speed: 0.08,  dir: 1,  photons: [0.30, 0.75], stroke: 'rgba(167, 139, 250, 0.15)' }
+  ];
+
+  // 5. Initialize the 7 Orbiting Salon Operation Nodes
+  const satellites = nodeEls.map((el, idx) => {
+    const cfg = NODE_CONFIG[idx];
+
+    // Compute base angle spacing on its orbit
+    let baseAngle = 0;
+    if (cfg.orbit === 0) {
+      baseAngle = cfg.slot === 0 ? 0.3 : Math.PI + 0.3;
+    } else if (cfg.orbit === 1) {
+      baseAngle = (cfg.slot * (Math.PI * 2 / 3)) + 0.5;
+    } else {
+      baseAngle = (cfg.slot * Math.PI) + 1.2;
     }
+
+    return {
+      el,
+      idx,
+      name: cfg.name,
+      color: cfg.color,
+      orbitIdx: cfg.orbit,
+      angle: baseAngle,
+      targetAngle: null,
+      x: 0,
+      y: 0,
+      z: 0,
+      screenX: 0,
+      screenY: 0,
+      depth: 0.5,
+      scale: 1,
+      isHovered: false
+    };
   });
 
-  // Enable direct click-to-focus on 3D node cards
-  htmlNodes.forEach((node, idx) => {
-    node.addEventListener('mouseenter', () => { isHoveringNode = true; });
-    node.addEventListener('mouseleave', () => { isHoveringNode = false; });
-    node.addEventListener('click', () => {
-      if (dragDistance > 8) return;
-      focusOnNode(idx);
+  // 6. Interactive 3D Cursor Parallax
+  let mouseTiltX = 0;
+  let mouseTiltY = 0;
+  let curTiltX = 0;
+  let curTiltY = 0;
+
+  if (stageEl) {
+    stageEl.addEventListener('mousemove', (e) => {
+      const rect = stageEl.getBoundingClientRect();
+      const nx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      const ny = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+      mouseTiltX = ny * 0.08; // ±4.5° pitch
+      mouseTiltY = nx * 0.11; // ±6.3° yaw
+    });
+    stageEl.addEventListener('mouseleave', () => {
+      mouseTiltX = 0;
+      mouseTiltY = 0;
+    });
+  }
+
+  // 7. Node Hover Listeners (Slows down orbital speed gently)
+  let isUserInteracting = false;
+  satellites.forEach((sat) => {
+    sat.el.addEventListener('mouseenter', () => {
+      sat.isHovered = true;
+      isUserInteracting = true;
+    });
+    sat.el.addEventListener('mouseleave', () => {
+      sat.isHovered = false;
+      isUserInteracting = false;
     });
   });
 
-  const chips = document.querySelectorAll('.eco-chip');
+  // 8. Draw Celestial Starlight & Dust
+  function renderDust(w, h, t, dt) {
+    dustParticles.forEach((p) => {
+      p.x += p.driftX * dt;
+      p.y += p.driftY * dt;
+      if (p.x < 0) p.x = 1;
+      if (p.x > 1) p.x = 0;
+      if (p.y < 0) p.y = 1;
+      if (p.y > 1) p.y = 0;
+
+      const alpha = p.baseAlpha * (0.6 + 0.4 * Math.sin(t * p.twinkleSpeed + p.phase));
+      ctx.beginPath();
+      ctx.arc(p.x * w, p.y * h, p.radius, 0, Math.PI * 2);
+      ctx.fillStyle = p.color + alpha.toFixed(3) + ')';
+      ctx.fill();
+    });
+  }
+
+  // 9. Draw 3D Perspective Elliptical Orbit Rail with Flowing Light Photons
+  const FOCAL = 950;
+  const BASE_PITCH = 67 * (Math.PI / 180);
+
+  function drawEllipticalOrbit(track, cx, cy, rs, tiltX, tiltY, dt, t) {
+    const a = track.semiMajor * rs;
+    const b = track.semiMinor * rs;
+    const cosRoll = Math.cos(track.tiltZ);
+    const sinRoll = Math.sin(track.tiltZ);
+
+    ctx.save();
+    ctx.beginPath();
+    const segments = 100;
+    for (let i = 0; i <= segments; i++) {
+      const theta = (i / segments) * Math.PI * 2;
+      const ex = a * Math.cos(theta);
+      const ey = b * Math.sin(theta);
+
+      const rx = ex * cosRoll - ey * sinRoll;
+      const rz = ex * sinRoll + ey * cosRoll;
+
+      const x3 = rx * Math.cos(tiltY) - rz * Math.sin(tiltY);
+      const y3 = (rx * Math.sin(tiltY) + rz * Math.cos(tiltY)) * Math.sin(tiltX);
+      const z3 = (rx * Math.sin(tiltY) + rz * Math.cos(tiltY)) * Math.cos(tiltX);
+
+      const sc = FOCAL / (FOCAL - z3);
+      const px = cx + x3 * sc;
+      const py = cy + y3 * sc;
+
+      if (i === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    }
+    ctx.closePath();
+    ctx.strokeStyle = track.stroke;
+    ctx.lineWidth = 1.0;
+    ctx.stroke();
+
+    // Flowing light particles traveling gracefully along the elliptical orbit
+    track.photons.forEach((progress, pIdx) => {
+      const newProgress = (progress + track.dir * 0.12 * dt + 1) % 1;
+      track.photons[pIdx] = newProgress;
+
+      const theta = newProgress * Math.PI * 2;
+      const ex = a * Math.cos(theta);
+      const ey = b * Math.sin(theta);
+      const rx = ex * cosRoll - ey * sinRoll;
+      const rz = ex * sinRoll + ey * cosRoll;
+
+      const x3 = rx * Math.cos(tiltY) - rz * Math.sin(tiltY);
+      const y3 = (rx * Math.sin(tiltY) + rz * Math.cos(tiltY)) * Math.sin(tiltX);
+      const z3 = (rx * Math.sin(tiltY) + rz * Math.cos(tiltY)) * Math.cos(tiltX);
+
+      const sc = FOCAL / (FOCAL - z3);
+      const px = cx + x3 * sc;
+      const py = cy + y3 * sc;
+
+      const depth = Math.max(0, Math.min(1, (z3 + a) / (2 * a)));
+      const alpha = 0.35 + depth * 0.55;
+
+      ctx.beginPath();
+      ctx.arc(px, py, 2.2, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 255, 255, ${alpha.toFixed(2)})`;
+      ctx.fill();
+
+      const grad = ctx.createRadialGradient(px, py, 0, px, py, 7.0);
+      grad.addColorStop(0, `rgba(255, 255, 255, ${(alpha * 0.6).toFixed(2)})`);
+      grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+      ctx.beginPath();
+      ctx.arc(px, py, 7.0, 0, Math.PI * 2);
+      ctx.fillStyle = grad;
+      ctx.fill();
+    });
+
+    ctx.restore();
+  }
+
+  // 10. Draw Fine Constellation-like Connection Lines between Orbiting Nodes
+  // NOTE: The center remains completely clear! We skip lines that would cross the central void.
+  function drawConstellations(cx, cy, rs, t) {
+    const maxLinkDist = 240 * rs;
+    const centerClearance = 55 * rs; // Exact center stays 100% empty
+
+    for (let i = 0; i < satellites.length; i++) {
+      for (let j = i + 1; j < satellites.length; j++) {
+        const s1 = satellites[i];
+        const s2 = satellites[j];
+
+        const dx = s1.screenX - s2.screenX;
+        const dy = s1.screenY - s2.screenY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < maxLinkDist && dist > 20) {
+          const midX = (s1.screenX + s2.screenX) * 0.5;
+          const midY = (s1.screenY + s2.screenY) * 0.5;
+          const distToCenter = Math.hypot(midX - cx, midY - cy);
+
+          if (distToCenter > centerClearance) {
+            const linkRatio = 1 - (dist / maxLinkDist);
+            const alpha = linkRatio * 0.22 * ((s1.depth + s2.depth) * 0.5);
+
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(s1.screenX, s1.screenY);
+            ctx.lineTo(s2.screenX, s2.screenY);
+
+            const grad = ctx.createLinearGradient(s1.screenX, s1.screenY, s2.screenX, s2.screenY);
+            grad.addColorStop(0, `rgba(${s1.color.r}, ${s1.color.g}, ${s1.color.b}, ${alpha.toFixed(3)})`);
+            grad.addColorStop(1, `rgba(${s2.color.r}, ${s2.color.g}, ${s2.color.b}, ${alpha.toFixed(3)})`);
+
+            ctx.strokeStyle = grad;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+
+            // Occasional gentle energy pulse along active constellation lines
+            const pulseT = (t * 0.6 + (i + j) * 0.4) % 1;
+            const pulseX = s1.screenX + (s2.screenX - s1.screenX) * pulseT;
+            const pulseY = s1.screenY + (s2.screenY - s1.screenY) * pulseT;
+
+            ctx.beginPath();
+            ctx.arc(pulseX, pulseY, 1.4, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255, 255, 255, ${(alpha * 2.2).toFixed(2)})`;
+            ctx.fill();
+
+            ctx.restore();
+          }
+        }
+      }
+    }
+  }
+
+  // 11. Main 60-120fps Animation Loop (IntersectionObserver Throttled)
+  let isPaused = false;
+  let isIntersecting = false;
+  let animFrameId = null;
+  let lastTs = null;
+  let highlightTimer = null;
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function animate(ts) {
+    if (!isIntersecting) {
+      animFrameId = null;
+      return;
+    }
+    animFrameId = requestAnimationFrame(animate);
+
+    if (isPaused && !isUserInteracting) return;
+
+    const dt = lastTs ? Math.min((ts - lastTs) * 0.001, 0.05) : 0.016;
+    lastTs = ts;
+    const t = ts * 0.001;
+
+    const w = canvasEl.offsetWidth || window.innerWidth;
+    const h = canvasEl.offsetHeight || window.innerHeight;
+    const cx = w * 0.5;
+    const cy = getCenterY(h);
+    const rs = getResponsiveScale();
+
+    // Smooth lerp for interactive 3D camera parallax
+    curTiltX += (mouseTiltX - curTiltX) * 0.05;
+    curTiltY += (mouseTiltY - curTiltY) * 0.05;
+
+    const tiltX = BASE_PITCH + curTiltX;
+    const tiltY = curTiltY;
+
+    // Clear Canvas
+    ctx.clearRect(0, 0, w, h);
+
+    // Layer 1: Celestial Micro Dust
+    renderDust(w, h, t, dt);
+
+    // Layer 2: 3 Graceful Elliptical Orbits with Flowing Photons
+    ORBIT_TRACKS.forEach((track) => {
+      drawEllipticalOrbit(track, cx, cy, rs, tiltX, tiltY, dt, t);
+    });
+
+    // Speed damping on user hover
+    const speedDamping = prefersReduced ? 0 : (isUserInteracting ? 0.22 : 1.0);
+
+    // Layer 3: Calculate 3D Orbital Trajectory for the 7 Salon Nodes
+    satellites.forEach((sat) => {
+      const track = ORBIT_TRACKS[sat.orbitIdx];
+
+      if (sat.targetAngle !== null) {
+        let diff = sat.targetAngle - sat.angle;
+        diff = Math.atan2(Math.sin(diff), Math.cos(diff));
+        sat.angle += diff * 0.08;
+        if (Math.abs(diff) < 0.005) {
+          sat.targetAngle = null;
+        }
+      } else {
+        sat.angle += track.speed * speedDamping * dt;
+      }
+
+      const a = track.semiMajor * rs;
+      const b = track.semiMinor * rs;
+      const cosRoll = Math.cos(track.tiltZ);
+      const sinRoll = Math.sin(track.tiltZ);
+
+      const ex = a * Math.cos(sat.angle);
+      const ey = b * Math.sin(sat.angle);
+
+      const rx = ex * cosRoll - ey * sinRoll;
+      const rz = ex * sinRoll + ey * cosRoll;
+
+      const x3 = rx * Math.cos(tiltY) - rz * Math.sin(tiltY);
+      const y3 = (rx * Math.sin(tiltY) + rz * Math.cos(tiltY)) * Math.sin(tiltX);
+      const z3 = (rx * Math.sin(tiltY) + rz * Math.cos(tiltY)) * Math.cos(tiltX);
+
+      const floatOffsetY = Math.sin(t * 1.5 + sat.idx) * 3.5;
+
+      const sc = FOCAL / (FOCAL - z3);
+      const sx = cx + x3 * sc;
+      const sy = cy + (y3 + floatOffsetY) * sc;
+
+      const depth = Math.max(0, Math.min(1, (z3 + a) / (2 * a)));
+
+      sat.x = x3;
+      sat.y = y3;
+      sat.z = z3;
+      sat.screenX = sx;
+      sat.screenY = sy;
+      sat.depth = depth;
+      sat.scale = sc;
+    });
+
+    // Soft Collision Repulsion pass: ensure cards glide past each other without overlap
+    const minCardDist = 110 * rs;
+    for (let i = 0; i < satellites.length; i++) {
+      for (let j = i + 1; j < satellites.length; j++) {
+        const s1 = satellites[i];
+        const s2 = satellites[j];
+        const dx = s1.screenX - s2.screenX;
+        const dy = s1.screenY - s2.screenY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < minCardDist && dist > 1) {
+          const overlap = (minCardDist - dist) * 0.5;
+          const nx = (dx / dist) * overlap * 0.35;
+          const ny = (dy / dist) * overlap * 0.35;
+          s1.screenX += nx;
+          s1.screenY += ny;
+          s2.screenX -= nx;
+          s2.screenY -= ny;
+        }
+      }
+    }
+
+    // Layer 4: Draw Fine Constellation Connection Lines between Nodes
+    drawConstellations(cx, cy, rs, t);
+
+    // Layer 5: Apply Physical CSS 3D Transforms to Floating Glass Cards
+    satellites.forEach((sat) => {
+      const sx = sat.screenX;
+      const sy = sat.screenY;
+      const depth = sat.depth;
+      const isBehind = sat.z < 0;
+
+      sat.el.style.left = `${sx}px`;
+      sat.el.style.top  = `${sy}px`;
+
+      const visualScale = (0.85 + depth * 0.25) * (sat.isHovered ? 1.08 : 1.0);
+      sat.el.style.transform = `translate(-50%, -50%) scale(${visualScale.toFixed(3)})`;
+      sat.el.style.opacity = (0.52 + depth * 0.48).toFixed(2);
+
+      if (depth < 0.32) {
+        sat.el.style.filter = 'blur(1.2px)';
+      } else if (depth < 0.50) {
+        sat.el.style.filter = 'blur(0.5px)';
+      } else {
+        sat.el.style.filter = 'none';
+      }
+
+      sat.el.style.zIndex = isBehind ? 6 : 14;
+    });
+  }
+
+  // 12. Quick-Select Chips (Smoothly guides targeted operation card to front focal center)
   chips.forEach((chip) => {
     chip.addEventListener('click', () => {
-      const idx = parseInt(chip.getAttribute('data-node'), 10);
-      focusOnNode(idx);
+      const targetIdx = parseInt(chip.dataset.node, 10);
+      chips.forEach((c) => c.classList.remove('active'));
+      chip.classList.add('active');
+
+      nodeEls.forEach((n) => n.classList.remove('is-focused'));
+      const tgtNode = document.getElementById('cosmicNode' + targetIdx);
+      if (tgtNode) tgtNode.classList.add('is-focused');
+
+      const targetSat = satellites[targetIdx];
+      if (targetSat) {
+        const desiredAngle = Math.PI * 0.5;
+        const currentAngle = targetSat.angle;
+        const delta = desiredAngle - currentAngle;
+
+        satellites.forEach((s) => {
+          if (s.orbitIdx === targetSat.orbitIdx) {
+            s.targetAngle = s.angle + delta;
+          }
+        });
+      }
+
+      clearTimeout(highlightTimer);
+      highlightTimer = setTimeout(() => {
+        chips.forEach((c) => c.classList.remove('active'));
+        nodeEls.forEach((n) => n.classList.remove('is-focused'));
+      }, 4000);
     });
   });
 
-  function focusOnNode(nodeIdx) {
-    if (nodeIdx < 0 || nodeIdx >= nodeConfigs.length) return;
-    const cfg = nodeConfigs[nodeIdx];
-    targetRotY = Math.PI / 2 - cfg.angle;
-    targetRotX = 0.05;
-    chips.forEach(c => {
-      if (parseInt(c.getAttribute('data-node'), 10) === nodeIdx) {
-        c.classList.add('active');
-      } else {
-        c.classList.remove('active');
-      }
-    });
-  }
-
-  // 5. Interactive Mouse Orbit Controls (Smooth drag inertia with deadband)
-  let isDragging = false;
-  let isOrbitPaused = false;
-  let isHoveringNode = false;
-  let previousMousePosition = { x: 0, y: 0 };
-  let targetRotY = 0;
-  let targetRotX = 0.04;
-  let currentRotX = 0.04;
-  let currentRotY = 0;
-  let dragDistance = 0;
-
-  const toggleBtn = document.getElementById('ecoToggleOrbit');
-  const resetBtn = document.getElementById('ecoResetOrbit');
-
+  // 13. Accessible Pause / Resume Toggle
   if (toggleBtn) {
+    const pauseIcon = toggleBtn.querySelector('.icon-pause');
+    const playIcon  = toggleBtn.querySelector('.icon-play');
+    const labelSpan = toggleBtn.querySelector('.ctrl-label');
+
     toggleBtn.addEventListener('click', () => {
-      isOrbitPaused = !isOrbitPaused;
-      toggleBtn.classList.toggle('active', isOrbitPaused);
-    });
-  }
+      isPaused = !isPaused;
+      if (!isPaused) lastTs = null;
+      toggleBtn.classList.toggle('active', isPaused);
 
-  if (resetBtn) {
-    resetBtn.addEventListener('click', () => {
-      targetRotX = 0.04;
-      targetRotY = 0;
-      chips.forEach(c => c.classList.remove('active'));
-    });
-  }
-
-  stage.addEventListener('pointerdown', (e) => {
-    isDragging = true;
-    dragDistance = 0;
-    previousMousePosition = { x: e.clientX, y: e.clientY };
-  });
-
-  stage.addEventListener('pointermove', (e) => {
-    if (!isDragging) return;
-    const deltaX = e.clientX - previousMousePosition.x;
-    const deltaY = e.clientY - previousMousePosition.y;
-    dragDistance += Math.abs(deltaX) + Math.abs(deltaY);
-
-    targetRotY += deltaX * 0.0055;
-    targetRotX += deltaY * 0.0035;
-
-    targetRotX = Math.max(-0.25, Math.min(0.35, targetRotX));
-
-    previousMousePosition = { x: e.clientX, y: e.clientY };
-  });
-
-  function stopDrag() {
-    setTimeout(() => {
-      isDragging = false;
-    }, 40);
-  }
-  stage.addEventListener('pointerup', stopDrag);
-  stage.addEventListener('pointercancel', stopDrag);
-
-  // Responsive Resize Handling
-  let stageW = stage.clientWidth || 1040;
-  let stageH = stage.clientHeight || 640;
-  function onResize() {
-    width = stage.clientWidth || 1040;
-    height = stage.clientHeight || 640;
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-    renderer.setSize(width, height);
-    stageW = width;
-    stageH = height;
-  }
-  window.addEventListener('resize', onResize, { passive: true });
-
-  // 6. Animation Render Loop
-  const tempVec = new THREE.Vector3();
-
-  function animate(timestamp) {
-    requestAnimationFrame(animate);
-
-    if (!isOrbitPaused && !isDragging) {
-      targetRotY += isHoveringNode ? 0.001 : 0.005;
-    }
-
-    currentRotY += (targetRotY - currentRotY) * 0.08;
-    currentRotX += (targetRotX - currentRotX) * 0.08;
-    universeGroup.rotation.y = currentRotY;
-    universeGroup.rotation.x = currentRotX;
-
-    // Internal Core Animations (Holographic Crystal & Multi-Axis Gyro)
-    const timeSec = (timestamp || performance.now()) * 0.0018;
-    const corePulse = 1 + Math.sin(timeSec * 2.5) * 0.07;
-    crystalMesh.scale.set(corePulse, corePulse, corePulse);
-    crystalMesh.rotation.y += 0.014;
-    crystalMesh.rotation.x += 0.009;
-
-    wireMesh.rotation.y -= 0.006;
-    wireMesh.rotation.x += 0.004;
-
-    haloPoints.rotation.y += 0.004;
-
-    ring1.rotation.z += 0.012;
-    ring1.rotation.x += 0.008;
-    ring2.rotation.z -= 0.014;
-    ring2.rotation.y += 0.006;
-    ring3.rotation.x += 0.009;
-    ring3.rotation.z -= 0.005;
-
-    // Animate Data Packets along beams
-    beamPackets.forEach(pkt => {
-      pkt.progress = (pkt.progress + pkt.speed) % 1.0;
-      pkt.mesh.position.lerpVectors(new THREE.Vector3(0, 0, 0), pkt.targetPos, pkt.progress);
-    });
-
-    renderer.render(scene, camera);
-
-    nodeMeshes.forEach((mesh, idx) => {
-      const el = htmlNodes[idx];
-      if (!el) return;
-
-      mesh.getWorldPosition(tempVec);
-      const worldZ = tempVec.z;
-      const depthFactor = Math.max(0, Math.min(1, (worldZ + 25) / 50));
-
-      tempVec.project(camera);
-      const screenX = (tempVec.x * 0.5 + 0.5) * stageW;
-      const screenY = (-(tempVec.y * 0.5) + 0.5) * stageH;
-      const bobY = Math.sin(timeSec + idx * 1.05) * 5.0;
-
-      const scale = 0.72 + depthFactor * 0.36;
-      const opacity = 0.38 + depthFactor * 0.62;
-      const zIndex = worldZ >= 0 ? Math.round(20 + depthFactor * 20) : Math.round(4 + depthFactor * 8);
-
-      el.style.transform = `translate3d(${screenX}px, ${(screenY + bobY).toFixed(1)}px, 0) translate(-50%, -50%) scale(${scale.toFixed(3)})`;
-      el.style.opacity = opacity.toFixed(2);
-      el.style.zIndex = zIndex;
-
-      if (depthFactor > 0.82) {
-        el.classList.add('is-front-active');
-      } else {
-        el.classList.remove('is-front-active');
+      if (pauseIcon && playIcon) {
+        pauseIcon.style.display = isPaused ? 'none' : 'block';
+        playIcon.style.display  = isPaused ? 'block' : 'none';
+      }
+      if (labelSpan) {
+        labelSpan.textContent = isPaused ? 'চালান' : 'পজ';
       }
     });
   }
 
-  animate();
+  // 14. Visibility and IntersectionObserver (Save 100% CPU/GPU when out of view or tab inactive)
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      lastTs = null;
+    } else if (isIntersecting && !animFrameId) {
+      lastTs = null;
+      animFrameId = requestAnimationFrame(animate);
+    }
+  });
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        isIntersecting = entry.isIntersecting;
+        if (isIntersecting && !animFrameId) {
+          lastTs = null;
+          animFrameId = requestAnimationFrame(animate);
+        }
+      });
+    }, { rootMargin: '150px 0px 150px 0px' });
+    const targetSection = canvasEl.closest('.section-ecosystem') || canvasEl;
+    observer.observe(targetSection);
+  } else {
+    isIntersecting = true;
+    animFrameId = requestAnimationFrame(animate);
+  }
 }
 
+
 /* --------------------------------------------------------------------------
-   13. Interactive 5-in-1 Problem & CutBook Terminal Stream Linkage
+   13. Interactive 5-in-1 Problem &amp; CutBook Terminal Stream Linkage
    -------------------------------------------------------------------------- */
 function initProblemStreamHover() {
   const headacheCards = document.querySelectorAll('.headache-card');
@@ -1313,6 +1432,28 @@ function initCommissionModeSwitcher() {
 
       const mode = btn.getAttribute('data-comm-mode');
       const data = modeData[mode];
+
+      // Dynamically reflect compensation model on the payroll phone simulator
+      const payrollPhone = document.querySelector('.payroll-phone-wrapper');
+      if (payrollPhone) {
+        const ratePill = payrollPhone.querySelector('#payrollRatePill') || payrollPhone.querySelector('.rn-emp-rate-pill');
+        const commLabel = payrollPhone.querySelector('#empCommLabel');
+        const commAmount = payrollPhone.querySelector('#empCommAmount');
+        if (mode === 'percentage') {
+          if (ratePill) ratePill.textContent = '৩৫% কমিশন';
+          if (commLabel) commLabel.textContent = 'কমিশন (৩৫%)';
+          if (commAmount) commAmount.textContent = '৳4,340.00';
+        } else if (mode === 'fixed') {
+          if (ratePill) ratePill.textContent = '৳১৫০ ফিক্সড';
+          if (commLabel) commLabel.textContent = 'ফিক্সড রেট (৳১৫০)';
+          if (commAmount) commAmount.textContent = '৳3,600.00';
+        } else if (mode === 'salary') {
+          if (ratePill) ratePill.textContent = 'মাসিক বেতন + টিপস';
+          if (commLabel) commLabel.textContent = 'দিন প্রতি হাজিরা';
+          if (commAmount) commAmount.textContent = '৳1,650.00';
+        }
+      }
+
       if (!data) return;
 
       if (modeStatusText) modeStatusText.innerHTML = data.statusHtml;
@@ -1927,28 +2068,28 @@ function initPosSimulatorInteractive() {
 
   if (!billPriceEl || !totalDisplayEl) return;
 
-  let currentPrice = 150;
-  let currentTip = 50;
+  let currentPrice = 0;
+  let currentTip = 0;
   let currentStaff = 'kabbo';
   let currentStaffName = 'kabbo';
   let currentStaffInitials = 'KA';
   let currentStaffRate = 'owner'; // 'owner' | 35 | 40
-  let currentPaymentMethod = 'Cash';
-  let currentPaymentColor = '#4a7c59';
+  let currentPaymentMethod = 'ক্যাশ';
+  let currentPaymentColor = '#059669';
   let customServiceName = '';
   let customServicePrice = 0;
 
   // Services catalog database
   const catalogData = {
     haircut: { name: 'চুল কাটা', price: 150, cat: 'hair', icon: '✂️' },
+    spa: { name: 'Spa', price: 50000, cat: 'spa', icon: '✂️' },
+    facial: { name: 'Facial', price: 6000, cat: 'facial', icon: '✂️' },
     beard: { name: 'দাড়ি ট্রিম', price: 100, cat: 'beard', icon: '🧔' },
     shave: { name: 'ক্লিন শেভ', price: 80, cat: 'shave', icon: '🪒' },
-    facial: { name: 'গোল্ডেন ফেসিয়াল', price: 800, cat: 'facial', icon: '🧖‍♂️' },
-    spa: { name: 'হেড স্পা ও ম্যাসাজ', price: 500, cat: 'spa', icon: '💆' },
     color: { name: 'হেয়ার কালার / ডাই', price: 450, cat: 'color', icon: '🎨' }
   };
 
-  let activeServiceIds = new Set(['haircut']);
+  let activeServiceIds = new Set();
 
   function renderSelectedTags() {
     if (!selectedCardsWrap) return;
@@ -2041,6 +2182,15 @@ function initPosSimulatorInteractive() {
     const total = currentPrice + currentTip;
     billPriceEl.textContent = currentPrice.toString();
     totalDisplayEl.textContent = `৳${total.toFixed(2)}`;
+
+    if (saveBtn) {
+      if (total > 0) {
+        saveBtn.style.background = '#059669';
+        saveBtn.style.cursor = 'pointer';
+      } else {
+        saveBtn.style.background = '#8492A6';
+      }
+    }
 
     if (summaryBillEl) summaryBillEl.textContent = `৳${total.toFixed(2)}`;
 
@@ -2256,14 +2406,12 @@ function initPosSimulatorInteractive() {
 
   // Switch Payment
   const paymentMap = {
-    cash: { name: 'Cash', color: '#4a7c59' },
+    cash: { name: 'ক্যাশ', color: '#059669' },
     bkash: { name: 'bKash', color: '#E2136E' },
     nagad: { name: 'Nagad', color: '#F37021' },
-    card: { name: 'Card', color: '#2563EB' },
-    split: { name: 'Split', color: '#7C3AED' },
-    due: { name: 'Due', color: '#DC2626' },
-    bangla_qr: { name: 'Bangla QR', color: '#006A4E' },
-    rocket: { name: 'Rocket', color: '#8C2D8B' }
+    qr: { name: 'Bangla QR', color: '#006A4E' },
+    rocket: { name: 'Rocket', color: '#8C2D8B' },
+    card: { name: 'কার্ড', color: '#2563EB' }
   };
 
   payCards.forEach((card) => {
@@ -2499,6 +2647,10 @@ function initPosSimulatorInteractive() {
 /* --------------------------------------------------------------------------
    23. CutBook Owner Dashboard Screen Native UI Simulator
    -------------------------------------------------------------------------- */
+/**
+ * CutBook Owner Dashboard Screen Native UI Simulator Logic
+ * 100% DashboardScreen.tsx Parity
+ */
 function initDashSimulatorInteractive() {
   const dashData = {
     today: {
@@ -2592,6 +2744,7 @@ function initDashSimulatorInteractive() {
       const d = dashData[period];
       if (!d) return;
 
+      // Subtle scale and fade transition
       if (elBalance) {
         elBalance.style.opacity = '0.3';
         elBalance.style.transform = 'scale(0.96)';
@@ -2618,21 +2771,972 @@ function initDashSimulatorInteractive() {
     });
   });
 
-  // Floating Action Button
+  // FAB Trigger
   const fabBtn = document.querySelector('.rn-dash-fab');
   if (fabBtn) {
     fabBtn.addEventListener('click', () => {
-      const quickLoggerTab = document.querySelector('.tab-chip[data-tab="quick-entry"]');
+      const quickLoggerTab = document.querySelector('[data-tab="quick-entry"]');
       if (quickLoggerTab) {
         quickLoggerTab.click();
-        const loggerSection = document.getElementById('features');
-        if (loggerSection) {
-          loggerSection.scrollIntoView({ behavior: 'smooth' });
-        }
       }
     });
   }
 }
+
+/* --------------------------------------------------------------------------
+   24. CutBook Work Entries & Transactions History Screen Simulator
+   -------------------------------------------------------------------------- */
+/**
+ * CutBook Work Entries & Transactions History Screen Simulator Logic
+ * 100% WorkEntriesScreen.tsx Parity with Dynamic User Filter & Financial Summary
+ */
+function initTransactionsHistorySimulator() {
+  // Staff Database with Commissions & Real Transactions
+  const staffData = {
+    masum: {
+      name: 'masum',
+      role: 'স্টাফ',
+      rate: '৩৫%',
+      grossWork: '৳12,400.00',
+      commission: '৳4,340.00',
+      tips: '৳450.00',
+      payouts: '-৳3,000.00',
+      netBalance: '৳1,790.00',
+      transactions: [
+        { type: 'entry', name: 'হেড স্পা ও ম্যাসাজ', meta: 'Cash • masum', amount: '+৳500.00', time: '11:15 AM' },
+        { type: 'entry', name: 'চুল কাটা & স্টাইলিং', meta: 'bKash • masum', amount: '+৳350.00', time: '11:45 AM' },
+        { type: 'payout', name: 'স্টাফ কমিশন পরিশোধ', meta: 'Cash Payout • masum', amount: '-৳3,000.00', time: '12:30 PM' },
+        { type: 'entry', name: 'গোল্ডেন ফেসিয়াল', meta: 'Cash • masum', amount: '+৳800.00', time: '02:15 PM' }
+      ]
+    },
+    xman: {
+      name: 'xMan',
+      role: 'স্টাফ',
+      rate: '৪০%',
+      grossWork: '৳18,200.00',
+      commission: '৳7,280.00',
+      tips: '৳800.00',
+      payouts: '-৳5,000.00',
+      netBalance: '৳3,080.00',
+      transactions: [
+        { type: 'entry', name: 'গোল্ডেন ফেসিয়াল & শেভ', meta: 'Nagad • xMan', amount: '+৳880.00', time: '12:30 PM' },
+        { type: 'entry', name: 'হেয়ার কালার & স্পা', meta: 'bKash • xMan', amount: '+৳1,450.00', time: '01:20 PM' },
+        { type: 'payout', name: 'স্টাফ অগ্রিম প্রদান', meta: 'Cash Payout • xMan', amount: '-৳5,000.00', time: '03:00 PM' }
+      ]
+    },
+    kabbo: {
+      name: 'kabbo',
+      role: 'মালিক',
+      rate: '১০০%',
+      grossWork: '৳24,500.00',
+      commission: '৳24,500.00',
+      tips: '৳1,200.00',
+      payouts: '৳0.00',
+      netBalance: '৳25,700.00',
+      transactions: [
+        { type: 'entry', name: 'এক্সিকিউটিভ হেয়ারকাট & বিয়ার্ড', meta: 'Cash • kabbo', amount: '+৳650.00', time: '10:15 AM' },
+        { type: 'entry', name: 'কেরাটিন হেয়ার ট্রিটমেন্ট', meta: 'Card • kabbo', amount: '+৳2,500.00', time: '01:45 PM' }
+      ]
+    }
+  };
+
+  // DOM Elements
+  const empChips = document.querySelectorAll('.rn-emp-chip');
+  const datePills = document.querySelectorAll('.rn-date-pill');
+  const earningsView = document.getElementById('rnEmployeeEarningsView');
+  const salonView = document.getElementById('rnSalonSummaryView');
+  
+  const elGrossMini = document.getElementById('rnEmpGrossWork');
+  const elCommMini = document.getElementById('rnEmpCommission');
+  const elTitle = document.getElementById('rnEmpSummaryTitle');
+  const elGrossFull = document.getElementById('rnEmpGrossWorkFull');
+  const elCommLabel = document.getElementById('rnEmpCommLabel');
+  const elCommFull = document.getElementById('rnEmpCommFull');
+  const elTips = document.getElementById('rnEmpTips');
+  const elPayouts = document.getElementById('rnEmpPayouts');
+  const elNet = document.getElementById('rnEmpNetBalance');
+  const txnCountEl = document.getElementById('rnTxnCount');
+  const txnContainer = document.getElementById('rnTxnItemsContainer');
+
+  let currentEmployee = 'masum';
+
+  function renderView() {
+    // 1. Check if 'all' or specific employee is selected
+    if (currentEmployee === 'all') {
+      if (earningsView) earningsView.style.display = 'none';
+      if (salonView) salonView.style.display = 'block';
+
+      // Combine all transactions for 'all' view
+      const allTxns = [
+        ...staffData.masum.transactions,
+        ...staffData.xman.transactions,
+        ...staffData.kabbo.transactions,
+        { type: 'expense', name: 'সেলুনের চা ও নাস্তা', meta: 'Cash • Expense', amount: '-৳180.00', time: '04:00 PM' }
+      ];
+
+      renderTransactions(allTxns);
+      if (txnCountEl) txnCountEl.textContent = `${allTxns.length}টি এন্ট্রি`;
+    } else {
+      if (salonView) salonView.style.display = 'none';
+      if (earningsView) earningsView.style.display = 'block';
+
+      const data = staffData[currentEmployee];
+      if (!data) return;
+
+      // Update Financial Summary Breakdown Cards
+      if (elGrossMini) elGrossMini.textContent = data.grossWork;
+      if (elCommMini) elCommMini.textContent = data.commission;
+      if (elTitle) elTitle.textContent = `${data.name} এর কাজের ও আয়ের হিসাব`;
+      if (elGrossFull) elGrossFull.textContent = data.grossWork;
+      if (elCommLabel) elCommLabel.textContent = `স্টাফ কমিশন (${data.rate}):`;
+      if (elCommFull) elCommFull.textContent = data.commission;
+      if (elTips) elTips.textContent = data.tips;
+      if (elPayouts) elPayouts.textContent = data.payouts;
+      if (elNet) elNet.textContent = data.netBalance;
+
+      // Render Filtered Transactions
+      renderTransactions(data.transactions);
+      if (txnCountEl) txnCountEl.textContent = `${data.transactions.length}টি এন্ট্রি`;
+    }
+  }
+
+  function renderTransactions(txns) {
+    if (!txnContainer) return;
+    txnContainer.innerHTML = '';
+
+    txns.forEach((t) => {
+      const card = document.createElement('div');
+      card.className = 'rn-custom-txn-card';
+
+      let iconClass = 'icon-entry';
+      let iconEmoji = '✂️';
+      let amtColor = '#059669';
+
+      if (t.type === 'payout') {
+        iconClass = 'icon-payout';
+        iconEmoji = '💸';
+        amtColor = '#D97706';
+      } else if (t.type === 'expense') {
+        iconClass = 'icon-expense';
+        iconEmoji = '🛒';
+        amtColor = '#EF4444';
+      }
+
+      card.innerHTML = `
+        <div class="rn-txn-left">
+          <div class="rn-txn-icon-box ${iconClass}">${iconEmoji}</div>
+          <div class="rn-txn-info-col">
+            <span class="rn-txn-name">${t.name}</span>
+            <span class="rn-txn-meta">
+              <span class="rn-txn-pay-tag">${t.meta}</span>
+            </span>
+          </div>
+        </div>
+        <div class="rn-txn-right">
+          <strong class="rn-txn-amount" style="color:${amtColor}">${t.amount}</strong>
+          <span class="rn-txn-time">${t.time}</span>
+        </div>
+      `;
+      txnContainer.appendChild(card);
+    });
+  }
+
+  // Employee Filter Click Event
+  empChips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      empChips.forEach((c) => c.classList.remove('active'));
+      chip.classList.add('active');
+      currentEmployee = chip.dataset.employee;
+      renderView();
+    });
+  });
+
+  // Date Filter Click Event
+  datePills.forEach((pill) => {
+    pill.addEventListener('click', () => {
+      datePills.forEach((p) => p.classList.remove('active'));
+      pill.classList.add('active');
+    });
+  });
+
+  // Initial Execution
+  renderView();
+
+  // Add work & back button triggers
+  const btnBack = document.querySelector('.rn-txn-header .rn-header-back-btn');
+  const btnAddWork = document.querySelector('.rn-add-work-btn');
+  if (btnBack) {
+    btnBack.addEventListener('click', () => {
+      const loggerTab = document.querySelector('[data-tab="quick-entry"]');
+      if (loggerTab) loggerTab.click();
+    });
+  }
+  if (btnAddWork) {
+    btnAddWork.addEventListener('click', () => {
+      const loggerTab = document.querySelector('[data-tab="quick-entry"]');
+      if (loggerTab) loggerTab.click();
+    });
+  }
+}
+const initWorkEntriesSimulator = initTransactionsHistorySimulator;
+
+/* --------------------------------------------------------------------------
+   15. CutBook Shop Expenses & Petty Cash Screen Simulator
+   -------------------------------------------------------------------------- */
+/**
+ * CutBook Shop Expenses & Petty Cash Screen Simulator Logic
+ * 100% ExpensesScreen.tsx Parity with Dynamic Adding & Presets
+ */
+function initExpensesScreenSimulator() {
+  // Expenses Database
+  let expensesList = [
+    { id: 1, name: 'চা ও নাস্তা (কাস্টমার ও স্টাফ)', amount: 180, time: 'Today, 03:45 PM', creator: 'kabbo (মালিক)' },
+    { id: 2, name: 'ব্লেড ও কটন রোল প্যাক', amount: 450, time: 'Today, 01:20 PM', creator: 'masum (ম্যানেজার)' },
+    { id: 3, name: 'দোকান ভাড়া ও ক্লিনিং', amount: 12220, time: '20 Sep, 11:00 AM', creator: 'kabbo (মালিক)' }
+  ];
+
+  // DOM Elements
+  const tabButtons = document.querySelectorAll('.rn-exp-nav-tab');
+  const paneExpenses = document.getElementById('rnPaneExpenses');
+  const panePayouts = document.getElementById('rnPanePayouts');
+  const headerTitle = document.getElementById('rnExpHeaderTitle');
+  const headerSub = document.getElementById('rnExpHeaderSub');
+  const totalAmountEl = document.getElementById('rnExpTotalAmount');
+  const numEntriesEl = document.getElementById('rnExpNumEntries');
+  const countSubEl = document.getElementById('rnExpCountSub');
+  const listBadgeEl = document.getElementById('rnExpListCountBadge');
+  const itemsContainer = document.getElementById('rnExpItemsContainer');
+  
+  const inputName = document.getElementById('rnInputExpName');
+  const inputAmount = document.getElementById('rnInputExpAmount');
+  const btnAdd = document.getElementById('rnBtnAddExpense');
+  const pettyChips = document.querySelectorAll('.rn-petty-chip');
+  const btnPayout = document.getElementById('rnBtnSendPayout');
+
+  // Recalculate & Render Expenses
+  function renderExpenses() {
+    const total = expensesList.reduce((sum, item) => sum + item.amount, 0);
+
+    if (totalAmountEl) {
+      totalAmountEl.textContent = total.toLocaleString('en-BD', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
+
+    const countText = `${expensesList.length} টি এন্ট্রি`;
+    if (numEntriesEl) numEntriesEl.textContent = countText;
+    if (countSubEl) countSubEl.textContent = countText;
+    if (listBadgeEl) listBadgeEl.textContent = `সর্বমোট ${expensesList.length}টি`;
+
+    if (!itemsContainer) return;
+    itemsContainer.innerHTML = '';
+
+    expensesList.forEach((item) => {
+      const card = document.createElement('div');
+      card.className = 'rn-exp-item-card';
+      card.innerHTML = `
+        <div class="rn-exp-item-left">
+          <span class="rn-exp-item-name">${item.name}</span>
+          <div class="rn-exp-item-meta">
+            <span>${item.time}</span>
+            <span class="rn-creator-badge">
+              <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              ${item.creator}
+            </span>
+          </div>
+        </div>
+        <div class="rn-exp-item-right">
+          <strong class="rn-exp-item-amount">-৳${item.amount.toLocaleString()}</strong>
+          <button type="button" class="rn-exp-delete-btn" title="মুছুন">✕</button>
+        </div>
+      `;
+
+      card.querySelector('.rn-exp-delete-btn').addEventListener('click', () => {
+        deleteExpense(item.id);
+      });
+
+      itemsContainer.appendChild(card);
+    });
+  }
+
+  function deleteExpense(id) {
+    expensesList = expensesList.filter(item => item.id !== id);
+    renderExpenses();
+  }
+
+  // 1-Tap Petty Cash Quick Fill
+  pettyChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      if (inputName) inputName.value = chip.dataset.name;
+      if (inputAmount) inputAmount.value = chip.dataset.price;
+      if (inputName) inputName.focus();
+    });
+  });
+
+  // Add Expense Handler
+  if (btnAdd) {
+    btnAdd.addEventListener('click', () => {
+      const name = inputName.value.trim();
+      const amount = parseFloat(inputAmount.value) || 0;
+
+      if (!name || amount <= 0) {
+        alert('অনুগ্রহ করে খরচের বিবরণ এবং সঠিক পরিমাণ লিখুন!');
+        return;
+      }
+
+      const newExpense = {
+        id: Date.now(),
+        name: name,
+        amount: amount,
+        time: 'Just now',
+        creator: 'kabbo (মালিক)'
+      };
+
+      expensesList.unshift(newExpense);
+      inputName.value = '';
+      inputAmount.value = '';
+      renderExpenses();
+    });
+  }
+
+  // Tab Switching
+  tabButtons.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabButtons.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      const target = tab.dataset.tab;
+      if (target === 'expenses') {
+        if (paneExpenses) paneExpenses.style.display = 'block';
+        if (panePayouts) panePayouts.style.display = 'none';
+        if (headerTitle) headerTitle.textContent = 'দোকানের খরচ';
+      } else {
+        if (paneExpenses) paneExpenses.style.display = 'none';
+        if (panePayouts) panePayouts.style.display = 'block';
+        if (headerTitle) headerTitle.textContent = 'স্টাফ পেআউট';
+      }
+    });
+  });
+
+  // Payout Button Demo
+  if (btnPayout) {
+    btnPayout.addEventListener('click', () => {
+      alert('✓ পেআউট সফলভাবে সম্পন্ন হয়েছে!');
+    });
+  }
+
+  // Back button
+  const backBtn = document.querySelector('.rn-exp-header .rn-header-back-btn');
+  if (backBtn) {
+    backBtn.addEventListener('click', () => {
+      const dashTab = document.querySelector('[data-tab="dashboard"]');
+      if (dashTab) dashTab.click();
+    });
+  }
+
+  // Initial Run
+  renderExpenses();
+}
+const initExpensesSimulator = initExpensesScreenSimulator;
+
+function initSimulatorBottomNav() {
+  // Bottom navigation inter-tab wiring across all simulator screens
+  const bottomNavItems = document.querySelectorAll('.rn-bottom-nav-item');
+  bottomNavItems.forEach((item) => {
+    item.addEventListener('click', () => {
+      const label = item.querySelector('span')?.textContent.trim();
+      if (label === 'হোম') {
+        document.querySelector('.tab-btn[data-tab="dashboard"]')?.click();
+      } else if (label === 'খরচ') {
+        document.querySelector('.tab-btn[data-tab="expenses"]')?.click();
+      } else if (label === 'টিম') {
+        document.querySelector('.tab-btn[data-tab="commissions"]')?.click();
+      } else if (label === 'আমার অ্যাকাউন্ট' || label === 'লগার') {
+        document.querySelector('.tab-btn[data-tab="quick-entry"]')?.click();
+      }
+    });
+  });
+}
+
+
+/* --------------------------------------------------------------------------
+   16. CutBook Staff Express Payout Simulator Logic (ExpressPayoutModal.tsx)
+   -------------------------------------------------------------------------- */
+function initStaffPayoutsSimulator() {
+  // Staff Database
+  const staffLedger = {
+    masum: {
+      name: 'masum',
+      meta: '01712-345678 • ৩৫% কমিশন',
+      paid: '৳9,840',
+      due: 1790
+    },
+    xman: {
+      name: 'xMan',
+      meta: '01823-456789 • ৪০% কমিশন',
+      paid: '৳14,200',
+      due: 3080
+    },
+    farzana: {
+      name: 'Farzana',
+      meta: '01934-567890 • বেতন + ১০%',
+      paid: '৳18,000',
+      due: 4500
+    }
+  };
+
+  // Payout History Receipts
+  let historyReceipts = [
+    { name: 'masum', initials: 'MA', meta: '[CASH] সাপ্তাহিক কমিশন সেটেলমেন্ট', amount: '৳3,000', time: 'Today, 12:30 PM' },
+    { name: 'xMan', initials: 'XM', meta: '[BKASH] অগ্রিম স্টাফ উইথড্রয়াল', amount: '৳5,000', time: 'Yesterday, 03:00 PM' },
+    { name: 'Farzana', initials: 'FA', meta: '[NAGAD] প্রোডাক্ট ইনসেনティブ বোনাস', amount: '৳2,500', time: '20 Sep, 06:15 PM' }
+  ];
+
+  // DOM Elements
+  const staffChips = document.querySelectorAll('.rn-payout-staff-chip');
+  const statNameEl = document.getElementById('rnStaffStatName');
+  const statMetaEl = document.getElementById('rnStaffStatMeta');
+  const statDueEl = document.getElementById('rnStaffStatDue');
+  const statPaidEl = document.getElementById('rnStaffStatPaid');
+  const amountInput = document.getElementById('rnPayoutAmountInput');
+  const clearAmtBtn = document.getElementById('rnPayoutClearBtn');
+  const quickAmtChips = document.querySelectorAll('.rn-quick-amt-chip');
+  const btnFullDue = document.getElementById('rnBtnFullDue');
+  const methodPills = document.querySelectorAll('.rn-method-pill');
+  const noteInput = document.getElementById('rnPayoutNote');
+  const submitBtn = document.getElementById('rnBtnConfirmPayout');
+  const submitTextEl = document.getElementById('rnPayoutSubmitText');
+  const historyListEl = document.getElementById('rnPayoutHistoryList');
+
+  let currentStaffId = 'masum';
+  let activeMethod = 'CASH';
+
+  // Render Selected Staff Details
+  function updateStaffDetails() {
+    const data = staffLedger[currentStaffId];
+    if (!data) return;
+
+    if (statNameEl) statNameEl.textContent = data.name;
+    if (statMetaEl) statMetaEl.textContent = data.meta;
+    if (statDueEl) statDueEl.textContent = `৳${data.due.toLocaleString()}`;
+    if (statPaidEl) statPaidEl.textContent = data.paid;
+
+    // Default amount to full due
+    if (amountInput) {
+      amountInput.value = data.due;
+      updateSubmitButtonText();
+    }
+  }
+
+  function updateSubmitButtonText() {
+    if (!amountInput) return;
+    const val = parseFloat(amountInput.value) || 0;
+    if (submitTextEl) {
+      submitTextEl.textContent = `টাকা পরিশোধ নিশ্চিত করুন (৳${val.toLocaleString()})`;
+    }
+  }
+
+  // Render History Receipts
+  function renderHistory() {
+    if (!historyListEl) return;
+    historyListEl.innerHTML = '';
+
+    historyReceipts.forEach((r) => {
+      const card = document.createElement('div');
+      card.className = 'rn-p-history-card';
+      card.innerHTML = `
+        <div class="rn-ph-left">
+          <div class="rn-ph-avatar">${r.initials}</div>
+          <div class="rn-ph-info">
+            <span class="rn-ph-name">${r.name}</span>
+            <span class="rn-ph-meta">${r.meta} • ${r.time}</span>
+          </div>
+        </div>
+        <div class="rn-ph-right">
+          <strong class="rn-ph-amount">-${r.amount}</strong>
+          <span class="rn-ph-settled">✓ Settled</span>
+        </div>
+      `;
+      historyListEl.appendChild(card);
+    });
+  }
+
+  // Staff Selection Click
+  staffChips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      staffChips.forEach((c) => c.classList.remove('active'));
+      chip.classList.add('active');
+      currentStaffId = chip.dataset.staffId;
+      updateStaffDetails();
+    });
+  });
+
+  // Quick Amount Chips
+  quickAmtChips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      quickAmtChips.forEach((c) => c.classList.remove('active'));
+      chip.classList.add('active');
+
+      const amtAttr = chip.dataset.amt;
+      if (amtAttr === 'due') {
+        amountInput.value = staffLedger[currentStaffId].due;
+      } else {
+        amountInput.value = amtAttr;
+      }
+      updateSubmitButtonText();
+    });
+  });
+
+  // Amount Input Typing
+  if (amountInput) {
+    amountInput.addEventListener('input', () => {
+      quickAmtChips.forEach((c) => c.classList.remove('active'));
+      updateSubmitButtonText();
+    });
+  }
+
+  // Clear Input
+  if (clearAmtBtn) {
+    clearAmtBtn.addEventListener('click', () => {
+      amountInput.value = '';
+      quickAmtChips.forEach((c) => c.classList.remove('active'));
+      updateSubmitButtonText();
+    });
+  }
+
+  // Payment Method Selection
+  methodPills.forEach((pill) => {
+    pill.addEventListener('click', () => {
+      methodPills.forEach((p) => p.classList.remove('active'));
+      pill.classList.add('active');
+      activeMethod = pill.dataset.method.toUpperCase();
+    });
+  });
+
+  // Confirm Payout Submission
+  if (submitBtn) {
+    submitBtn.addEventListener('click', () => {
+      const amt = parseFloat(amountInput.value) || 0;
+      if (amt <= 0) {
+        alert('অনুগ্রহ করে সঠিক টাকার পরিমাণ লিখুন!');
+        return;
+      }
+
+      const staff = staffLedger[currentStaffId];
+      const note = (noteInput && noteInput.value.trim()) || 'কমিশন পেআউট';
+
+      // Insert new receipt
+      historyReceipts.unshift({
+        name: staff.name,
+        initials: staff.name.slice(0, 2).toUpperCase(),
+        meta: `[${activeMethod}] ${note}`,
+        amount: `৳${amt.toLocaleString()}`,
+        time: 'Just now'
+      });
+
+      // Adjust remaining due
+      staff.due = Math.max(0, staff.due - amt);
+
+      // Button animation
+      submitBtn.innerHTML = `<span>✓ পেআউট সম্পন্ন হয়েছে!</span>`;
+      submitBtn.style.background = '#10B981';
+
+      setTimeout(() => {
+        submitBtn.innerHTML = `
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span id="rnPayoutSubmitText">টাকা পরিশোধ নিশ্চিত করুন (৳${staff.due.toLocaleString()})</span>
+        `;
+        submitBtn.style.background = '#059669';
+        updateStaffDetails();
+        renderHistory();
+        if (noteInput) noteInput.value = '';
+      }, 1600);
+    });
+  }
+
+  // Back button
+  const backBtn = document.querySelector('.rn-payout-header .rn-header-back-btn');
+  if (backBtn) {
+    backBtn.addEventListener('click', () => {
+      const expensesTab = document.querySelector('.tab-btn[data-tab="expenses"]');
+      if (expensesTab) expensesTab.click();
+    });
+  }
+
+  // Initial Run
+  updateStaffDetails();
+  renderHistory();
+}
+const initExpressPayoutSimulator = initStaffPayoutsSimulator;
+
+/* --------------------------------------------------------------------------
+   17. CutBook Stylist / Employee Dashboard Simulator (EmployeeHomeScreen.tsx)
+   -------------------------------------------------------------------------- */
+function initEmployeeDashboardSimulator() {
+  const staffTimeData = {
+    today: {
+      totalEarnings: '৳4,790.00',
+      subtitle: 'কমিশন: ৳৪,৩৪০ • বকশিস: ৳৪৫০',
+      cutsCount: '12',
+      cutsSub: 'আজকের সম্পন্ন কাজ',
+      tips: '৳450.00',
+      commission: '৳4,340.00',
+      payouts: '৳3,000.00',
+      genValue: '৳12,400',
+      myCut: '৳4,790',
+      works: '12',
+      avg: '৳1,033',
+      due: '৳1,790'
+    },
+    weekly: {
+      totalEarnings: '৳28,450.00',
+      subtitle: 'কমিশন: ৳২৫,৬৫০ • বকশিস: ৳২,৮০০',
+      cutsCount: '68',
+      cutsSub: 'সাপ্তাহিক সম্পন্ন কাজ',
+      tips: '৳2,800.00',
+      commission: '৳25,650.00',
+      payouts: '৳20,000.00',
+      genValue: '৳73,280',
+      myCut: '৳28,450',
+      works: '68',
+      avg: '৳1,077',
+      due: '৳8,450'
+    },
+    monthly: {
+      totalEarnings: '৳118,500.00',
+      subtitle: 'কমিশন: ৳১০৭,৩০০ • বকশিস: ৳১১,২০০',
+      cutsCount: '284',
+      cutsSub: 'মাসিক সম্পন্ন কাজ',
+      tips: '৳11,200.00',
+      commission: '৳107,300.00',
+      payouts: '৳95,000.00',
+      genValue: '৳306,500',
+      myCut: '৳118,500',
+      works: '284',
+      avg: '৳1,079',
+      due: '৳23,500'
+    },
+    yearly: {
+      totalEarnings: '৳1,420,000.00',
+      subtitle: 'কমিশন: ৳১,২৮০,০০০ • বকশিস: ৳১৪০,০০০',
+      cutsCount: '3,450',
+      cutsSub: 'বাৎসরিক সম্পন্ন কাজ',
+      tips: '৳140,000.00',
+      commission: '৳1,280,000.00',
+      payouts: '৳1,350,000.00',
+      genValue: '৳3,650,000',
+      myCut: '৳1,420,000',
+      works: '3,450',
+      avg: '৳1,057',
+      due: '৳70,000'
+    }
+  };
+
+  const simViewports = document.querySelectorAll('.rn-emp-dash-scroll-body');
+  if (!simViewports.length) return;
+
+  simViewports.forEach((scrollBody) => {
+    const parent = scrollBody.closest('.phone-screen-viewport') || scrollBody;
+    const tabs = parent.querySelectorAll('.rn-emp-tab');
+    const elHeroBal = parent.querySelector('#empHeroBalance') || parent.querySelector('.rn-emp-hero-balance');
+    const elHeroSub = parent.querySelector('#empHeroSub') || parent.querySelector('.rn-emp-hero-sub');
+    const elCutsCount = parent.querySelector('#empCutsCount');
+    const elCutsSub = parent.querySelector('#empCutsSub');
+    const elTips = parent.querySelector('#empTipsAmount');
+    const elComm = parent.querySelector('#empCommAmount');
+    const elPayouts = parent.querySelector('#empPayoutsAmount');
+    const elGenValue = parent.querySelector('#empGenValue');
+    const elMyCut = parent.querySelector('#empMyCut');
+    const elMicroWorks = parent.querySelector('#empMicroWorks');
+    const elMicroAvg = parent.querySelector('#empMicroAvg');
+    const elMicroDue = parent.querySelector('#empMicroDue');
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        tabs.forEach((t) => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        const period = tab.dataset.period || 'today';
+        const d = staffTimeData[period];
+        if (!d) return;
+
+        // Smooth transition
+        if (elHeroBal) {
+          elHeroBal.style.opacity = '0.3';
+          elHeroBal.style.transform = 'scale(0.96)';
+
+          setTimeout(() => {
+            elHeroBal.textContent = d.totalEarnings;
+            if (elHeroSub) elHeroSub.textContent = d.subtitle;
+            if (elCutsCount) elCutsCount.textContent = d.cutsCount;
+            if (elCutsSub) elCutsSub.textContent = d.cutsSub;
+            if (elTips) elTips.textContent = d.tips;
+            if (elComm) elComm.textContent = d.commission;
+            if (elPayouts) elPayouts.textContent = d.payouts;
+            if (elGenValue) elGenValue.textContent = d.genValue;
+            if (elMyCut) elMyCut.textContent = d.myCut;
+            if (elMicroWorks) elMicroWorks.textContent = d.works;
+            if (elMicroAvg) elMicroAvg.textContent = d.avg;
+            if (elMicroDue) elMicroDue.textContent = d.due;
+
+            elHeroBal.style.opacity = '1';
+            elHeroBal.style.transform = 'scale(1)';
+          }, 130);
+        }
+      });
+    });
+
+    // Stylist bottom nav items
+    const empNavItems = parent.querySelectorAll('.rn-bottom-nav-bar .rn-nav-item');
+    empNavItems.forEach((item) => {
+      item.addEventListener('click', () => {
+        empNavItems.forEach(n => n.classList.remove('active'));
+        item.classList.add('active');
+        const label = item.querySelector('span')?.textContent.trim();
+        if (label === 'কাজের হিস্ট্রি') {
+          document.querySelector('.tab-btn[data-tab="commissions"]')?.click();
+        } else if (label === 'প্রোফাইল') {
+          document.querySelector('.tab-btn[data-tab="payout"]')?.click();
+        }
+      });
+    });
+  });
+}
+
+/* --------------------------------------------------------------------------
+   18. CutBook P&L Reports & Net Profit Screen Simulator (ReportsScreen.tsx)
+   -------------------------------------------------------------------------- */
+function initReportsScreenSimulator() {
+  const reportsData = {
+    today: {
+      rangeSubtitle: 'আজকের হিসাব • মায়ের দোয়া সেলুন',
+      rangeHero: 'আজ',
+      netProfit: '৳28,450.00',
+      grossSales: '৳52,400',
+      expenses: '-৳6,200',
+      staffTotal: '৳17,750',
+      entries: '24 টি',
+      tips: '৳1,450',
+      serviceNoTips: '৳50,950',
+      margin: '54.3%',
+      bars: [
+        { green: 65, blue: 45 },
+        { green: 80, blue: 55 },
+        { green: 50, blue: 35 },
+        { green: 70, blue: 48 },
+        { green: 95, blue: 68 },
+        { green: 60, blue: 40 },
+        { green: 100, blue: 72 }
+      ],
+      cashPct: '55.4%',
+      cashAmt: '৳29,050.00',
+      bkashPct: '32.1%',
+      bkashAmt: '৳16,800.00',
+      nagadPct: '12.5%',
+      nagadAmt: '৳6,550.00'
+    },
+    week: {
+      rangeSubtitle: 'এই সপ্তাহের হিসাব • মায়ের দোয়া সেলুন',
+      rangeHero: 'এই সপ্তাহ',
+      netProfit: '৳184,200.00',
+      grossSales: '৳348,000',
+      expenses: '-৳38,500',
+      staffTotal: '৳125,300',
+      entries: '156 টি',
+      tips: '৳9,800',
+      serviceNoTips: '৳338,200',
+      margin: '52.9%',
+      bars: [
+        { green: 75, blue: 50 },
+        { green: 60, blue: 40 },
+        { green: 85, blue: 60 },
+        { green: 90, blue: 65 },
+        { green: 70, blue: 45 },
+        { green: 100, blue: 75 },
+        { green: 95, blue: 70 }
+      ],
+      cashPct: '52.0%',
+      cashAmt: '৳180,960.00',
+      bkashPct: '35.5%',
+      bkashAmt: '৳123,540.00',
+      nagadPct: '12.5%',
+      nagadAmt: '৳43,500.00'
+    },
+    month: {
+      rangeSubtitle: 'চলতি মাসের হিসাব • মায়ের দোয়া সেলুন',
+      rangeHero: 'এই মাস',
+      netProfit: '৳792,500.00',
+      grossSales: '৳1,520,000',
+      expenses: '-৳165,000',
+      staffTotal: '৳562,500',
+      entries: '680 টি',
+      tips: '৳42,000',
+      serviceNoTips: '৳1,478,000',
+      margin: '52.1%',
+      bars: [
+        { green: 60, blue: 40 },
+        { green: 75, blue: 50 },
+        { green: 85, blue: 60 },
+        { green: 95, blue: 70 },
+        { green: 70, blue: 45 },
+        { green: 80, blue: 55 },
+        { green: 100, blue: 75 }
+      ],
+      cashPct: '48.5%',
+      cashAmt: '৳737,200.00',
+      bkashPct: '38.5%',
+      bkashAmt: '৳585,200.00',
+      nagadPct: '13.0%',
+      nagadAmt: '৳197,600.00'
+    },
+    year: {
+      rangeSubtitle: '২০২৬ সালের হিসাব • মায়ের দোয়া সেলুন',
+      rangeHero: 'এই বছর',
+      netProfit: '৳9,850,000.00',
+      grossSales: '৳18,500,000',
+      expenses: '-৳1,950,000',
+      staffTotal: '৳6,700,000',
+      entries: '8,450 টি',
+      tips: '৳520,000',
+      serviceNoTips: '৳17,980,000',
+      margin: '53.2%',
+      bars: [
+        { green: 70, blue: 48 },
+        { green: 85, blue: 60 },
+        { green: 65, blue: 42 },
+        { green: 90, blue: 65 },
+        { green: 80, blue: 55 },
+        { green: 95, blue: 70 },
+        { green: 100, blue: 75 }
+      ],
+      cashPct: '46.0%',
+      cashAmt: '৳8,510,000.00',
+      bkashPct: '41.0%',
+      bkashAmt: '৳7,585,000.00',
+      nagadPct: '13.0%',
+      nagadAmt: '৳2,405,000.00'
+    }
+  };
+
+  const simViewports = document.querySelectorAll('.rn-rep-scroll-body');
+  if (!simViewports.length) return;
+
+  simViewports.forEach((scrollBody) => {
+    const parent = scrollBody.closest('.phone-screen-viewport') || scrollBody;
+    const dateButtons = parent.querySelectorAll('.rn-rep-date-btn');
+    const subTitleEl = parent.querySelector('#rnRepHeaderSubtitle') || parent.querySelector('.rn-rep-subtitle');
+    const heroRangeEl = parent.querySelector('#rnRepHeroRange') || parent.querySelector('.rn-rep-range-label');
+    const netProfitEl = parent.querySelector('#rnRepNetProfit') || parent.querySelector('.rn-rep-hero-amount');
+    const grossSalesEl = parent.querySelector('#rnRepGrossSales');
+    const expensesEl = parent.querySelector('#rnRepExpenses');
+    const staffTotalEl = parent.querySelector('#rnRepStaffTotal');
+    const entriesEl = parent.querySelector('#rnRepEntries');
+    const tipsEl = parent.querySelector('#rnRepTips');
+    const serviceWithoutTipsEl = parent.querySelector('#rnRepServiceWithoutTips');
+    const marginEl = parent.querySelector('#rnRepMargin');
+    const chartBars = parent.querySelectorAll('.rn-chart-col');
+    const backBtn = parent.querySelector('.rn-header-back-btn');
+    const exportBtn = parent.querySelector('.rn-rep-export-btn');
+    const payStatItems = parent.querySelectorAll('.rn-pay-stat-item');
+
+    dateButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        dateButtons.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const range = btn.dataset.range || 'today';
+        const d = reportsData[range];
+        if (!d) return;
+
+        // Smooth number update
+        if (netProfitEl) {
+          netProfitEl.style.opacity = '0.3';
+          netProfitEl.style.transform = 'scale(0.96)';
+
+          setTimeout(() => {
+            if (subTitleEl) subTitleEl.textContent = d.rangeSubtitle;
+            if (heroRangeEl) heroRangeEl.textContent = d.rangeHero;
+            netProfitEl.textContent = d.netProfit;
+            if (grossSalesEl) grossSalesEl.textContent = d.grossSales;
+            if (expensesEl) expensesEl.textContent = d.expenses;
+            if (staffTotalEl) staffTotalEl.textContent = d.staffTotal;
+            if (entriesEl) entriesEl.textContent = d.entries;
+            if (tipsEl) tipsEl.textContent = d.tips;
+            if (serviceWithoutTipsEl) serviceWithoutTipsEl.textContent = d.serviceNoTips;
+            if (marginEl) marginEl.textContent = d.margin;
+
+            // Update chart bars
+            chartBars.forEach((col, idx) => {
+              if (d.bars[idx]) {
+                const gBar = col.querySelector('.bar-green');
+                const bBar = col.querySelector('.bar-blue');
+                if (gBar) gBar.style.height = `${d.bars[idx].green}%`;
+                if (bBar) bBar.style.height = `${d.bars[idx].blue}%`;
+              }
+            });
+
+            // Update Payment Channels
+            if (payStatItems.length >= 3) {
+              // Cash
+              const cashBar = payStatItems[0].querySelector('.rn-psi-bar-fill');
+              const cashAmt = payStatItems[0].querySelector('.rn-psi-amount');
+              const cashPct = payStatItems[0].querySelector('.rn-psi-pct');
+              if (cashBar) cashBar.style.width = d.cashPct;
+              if (cashAmt) cashAmt.textContent = d.cashAmt;
+              if (cashPct) cashPct.textContent = d.cashPct;
+
+              // bKash
+              const bkashBar = payStatItems[1].querySelector('.rn-psi-bar-fill');
+              const bkashAmt = payStatItems[1].querySelector('.rn-psi-amount');
+              const bkashPct = payStatItems[1].querySelector('.rn-psi-pct');
+              if (bkashBar) bkashBar.style.width = d.bkashPct;
+              if (bkashAmt) bkashAmt.textContent = d.bkashAmt;
+              if (bkashPct) bkashPct.textContent = d.bkashPct;
+
+              // Nagad
+              const nagadBar = payStatItems[2].querySelector('.rn-psi-bar-fill');
+              const nagadAmt = payStatItems[2].querySelector('.rn-psi-amount');
+              const nagadPct = payStatItems[2].querySelector('.rn-psi-pct');
+              if (nagadBar) nagadBar.style.width = d.nagadPct;
+              if (nagadAmt) nagadAmt.textContent = d.nagadAmt;
+              if (nagadPct) nagadPct.textContent = d.nagadPct;
+            }
+
+            netProfitEl.style.opacity = '1';
+            netProfitEl.style.transform = 'scale(1)';
+          }, 130);
+        }
+      });
+    });
+
+    // Back button
+    if (backBtn) {
+      backBtn.addEventListener('click', () => {
+        const dashTab = document.querySelector('.tab-btn[data-tab="dashboard"]');
+        if (dashTab) dashTab.click();
+      });
+    }
+
+    // Export CSV button feedback
+    if (exportBtn) {
+      exportBtn.addEventListener('click', () => {
+        const originalHtml = exportBtn.innerHTML;
+        exportBtn.innerHTML = `<span>✓ এক্সপোর্ট সম্পন্ন!</span>`;
+        exportBtn.style.background = '#059669';
+        exportBtn.style.color = '#FFFFFF';
+        setTimeout(() => {
+          exportBtn.innerHTML = originalHtml;
+          exportBtn.style.background = '#ECFDF5';
+          exportBtn.style.color = '#059669';
+        }, 1800);
+      });
+    }
+  });
+}
+
+
+
 
 
 
