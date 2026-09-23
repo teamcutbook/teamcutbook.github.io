@@ -16877,6 +16877,20 @@ button {
   box-shadow: 0 6px 18px rgba(255, 255, 255, 0.2);
 }
 
+.social-tt:hover {
+  background: #000000;
+  border-color: #00f2fe;
+  color: #FFFFFF;
+  box-shadow: 0 6px 18px rgba(0, 242, 254, 0.45);
+}
+
+.social-pin:hover {
+  background: #E60023;
+  border-color: #E60023;
+  color: #FFFFFF;
+  box-shadow: 0 6px 18px rgba(230, 0, 35, 0.45);
+}
+
 /* Pocket Download Banner in Section 12 */
 .pocket-download-bar {
   margin-top: 36px;
