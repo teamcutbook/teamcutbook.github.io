@@ -61,6 +61,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 12. Galaxy Orbit System — 3D perspective projection
   initGalaxyOrbit();
+
+  // Multi-Language Translation Engine (BN, EN, HI)
+  initLanguageSwitcher();
 });
 
 /* --------------------------------------------------------------------------
@@ -3813,3 +3816,203 @@ function initLabsShowcaseCarousel() {
     track.scrollLeft = scrollLeft - walk;
   });
 }
+
+/* --------------------------------------------------------------------------
+   Multi-Language Translation Engine (Bengali, English, Hindi)
+   -------------------------------------------------------------------------- */
+function initLanguageSwitcher() {
+  const langToggleBtn = document.getElementById('langToggleBtn');
+  const langDropdownMenu = document.getElementById('langDropdownMenu');
+  const currentLangDesktop = document.getElementById('currentLangDesktop');
+  const desktopOptions = document.querySelectorAll('.lang-option-btn');
+  const mobilePills = document.querySelectorAll('.mobile-lang-pill');
+  const footerButtons = document.querySelectorAll('.footer-lang-btn');
+
+  const langMetadata = {
+    bn: { name: 'বাংলা', flag: '🇧🇩', iso: 'BN' },
+    en: { name: 'English', flag: '🇺🇸', iso: 'EN' },
+    hi: { name: 'हिन्दी', flag: '🇮🇳', iso: 'HI' },
+    ar: { name: 'العربية', flag: '🇦🇪', iso: 'AR' }
+  };
+
+  // Helper to read cookie
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+  }
+
+  // Detect current language
+  function getCurrentLanguage() {
+    const stored = localStorage.getItem('cutbook_language');
+    if (stored && ['bn', 'en', 'hi', 'ar'].includes(stored)) return stored;
+
+    const googCookie = getCookie('googtrans');
+    if (googCookie) {
+      if (googCookie.includes('/ar')) return 'ar';
+      if (googCookie.includes('/en')) return 'en';
+      if (googCookie.includes('/hi')) return 'hi';
+      if (googCookie.includes('/bn')) return 'bn';
+    }
+    return 'bn';
+  }
+
+  function updateUiState(lang) {
+    const meta = langMetadata[lang] || langMetadata.bn;
+
+    // Update Desktop button label
+    if (currentLangDesktop) {
+      currentLangDesktop.textContent = meta.name;
+    }
+
+    // Update Desktop menu items
+    desktopOptions.forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+    });
+
+    // Update Mobile Drawer pills
+    mobilePills.forEach(pill => {
+      pill.classList.toggle('active', pill.getAttribute('data-lang') === lang);
+    });
+
+    // Update Footer buttons
+    footerButtons.forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+    });
+  }
+
+  function clearGoogTransCookies() {
+    const hostname = window.location.hostname;
+    const domains = ['', hostname, `.${hostname}`];
+    if (hostname.includes('.')) {
+      const rootDomain = '.' + hostname.split('.').slice(-2).join('.');
+      domains.push(rootDomain);
+    }
+    const paths = ['/', window.location.pathname];
+
+    ['googtrans', 'googtrans_saved'].forEach(name => {
+      paths.forEach(p => {
+        domains.forEach(d => {
+          const dPart = d ? `; domain=${d}` : '';
+          document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${p}${dPart};`;
+        });
+      });
+    });
+  }
+
+  function setLanguage(lang) {
+    if (!['bn', 'en', 'hi', 'ar'].includes(lang)) return;
+
+    updateUiState(lang);
+    localStorage.setItem('cutbook_language', lang);
+
+    if (lang === 'bn') {
+      clearGoogTransCookies();
+      document.cookie = 'googtrans=/bn/bn; path=/;';
+      const combo = document.querySelector('.goog-te-combo');
+      if (combo) {
+        combo.value = 'bn';
+        combo.dispatchEvent(new Event('change'));
+      }
+      setTimeout(() => {
+        window.location.reload();
+      }, 120);
+      return;
+    }
+
+    // Setting English, Hindi or Arabic
+    const cookieVal = `/bn/${lang}`;
+    const hostname = window.location.hostname;
+    document.cookie = `googtrans=${cookieVal}; path=/;`;
+    document.cookie = `googtrans=${cookieVal}; path=/; domain=${hostname};`;
+    if (hostname.includes('.')) {
+      const rootDomain = '.' + hostname.split('.').slice(-2).join('.');
+      document.cookie = `googtrans=${cookieVal}; path=/; domain=${rootDomain};`;
+    }
+
+    const combo = document.querySelector('.goog-te-combo');
+    if (combo) {
+      combo.value = lang;
+      combo.dispatchEvent(new Event('change'));
+    } else {
+      window.location.reload();
+    }
+  }
+
+  // Bind Desktop Dropdown Toggle
+  if (langToggleBtn && langDropdownMenu) {
+    langToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = langDropdownMenu.classList.contains('show');
+      langDropdownMenu.classList.toggle('show', !isOpen);
+      langToggleBtn.setAttribute('aria-expanded', !isOpen);
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('#langDropdown')) {
+        langDropdownMenu.classList.remove('show');
+        langToggleBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        langDropdownMenu.classList.remove('show');
+        langToggleBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  // Bind Desktop Options
+  desktopOptions.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const selected = btn.getAttribute('data-lang');
+      if (langDropdownMenu) langDropdownMenu.classList.remove('show');
+      if (langToggleBtn) langToggleBtn.setAttribute('aria-expanded', 'false');
+      setLanguage(selected);
+    });
+  });
+
+  // Bind Mobile Drawer Pills
+  mobilePills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      const selected = pill.getAttribute('data-lang');
+      setLanguage(selected);
+    });
+  });
+
+  // Bind Footer Buttons
+  footerButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const selected = btn.getAttribute('data-lang');
+      setLanguage(selected);
+    });
+  });
+
+  // Initial UI state setup
+  const currentLang = getCurrentLanguage();
+  updateUiState(currentLang);
+
+  // Define Google Translate Element Init callback on window
+  window.googleTranslateElementInit = function() {
+    if (window.google && window.google.translate) {
+      new window.google.translate.TranslateElement({
+        pageLanguage: 'bn',
+        includedLanguages: 'bn,en,hi,ar',
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  };
+
+  // Load Google Translate script dynamically if not already present
+  if (!document.getElementById('google-translate-script')) {
+    const script = document.createElement('script');
+    script.id = 'google-translate-script';
+    script.type = 'text/javascript';
+    script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    script.async = true;
+    document.body.appendChild(script);
+  }
+}
+
