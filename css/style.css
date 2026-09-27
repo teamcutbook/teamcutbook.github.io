@@ -17320,77 +17320,67 @@ button {
 }
 
 .cost-step-box {
-  background: rgba(242, 243, 255, 0.5);
-  border: 1px solid rgba(13, 106, 77, 0.06);
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
   border-radius: 20px;
-  padding: 24px 20px;
+  padding: 28px 24px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: transform 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.03);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
 }
 
 .cost-step-box:hover {
-  background: rgba(242, 243, 255, 0.9);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(13, 106, 77, 0.06);
-}
-
-.cost-step-box-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 18px;
-}
-
-.cost-step-icon-sq {
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-}
-
-.icon-sq-amber {
-  background: #ffddb8;
-  color: #633d00;
-}
-
-.icon-sq-green {
-  background: rgba(134, 215, 179, 0.4);
-  color: #005038;
-}
-
-.icon-sq-mint {
-  background: rgba(111, 251, 190, 0.5);
-  color: #00714d;
-}
-
-.cost-step-number-badge {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
   background: #FFFFFF;
-  color: #005038;
-  font-family: var(--font-heading);
-  font-size: 1.05rem;
-  font-weight: 850;
-  display: flex;
+  border-color: rgba(0, 80, 56, 0.28);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0, 80, 56, 0.08);
+}
+
+.cost-step-badge {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  padding: 5px 14px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 18px;
+  width: fit-content;
+}
+
+.badge-amber {
+  background: #FFFBEB;
+  color: #D97706;
+  border: 1px solid rgba(217, 119, 6, 0.2);
+}
+
+.badge-green {
+  background: #ECFDF5;
+  color: #005038;
+  border: 1px solid rgba(0, 80, 56, 0.2);
+}
+
+.badge-mint {
+  background: #F0FDF4;
+  color: #059669;
+  border: 1px solid rgba(5, 150, 105, 0.2);
+}
+
+.cost-step-body {
+  flex: 1;
 }
 
 .cost-step-name {
   font-family: var(--font-heading);
-  font-size: 1.15rem;
+  font-size: 1.22rem;
   font-weight: 800;
-  color: #131b2e;
-  line-height: 1.25;
-  margin: 0 0 8px 0;
+  color: #0F172A;
+  line-height: 1.3;
+  margin: 0 0 10px 0;
+  letter-spacing: -0.01em;
 }
 
 .step-bn-line {
@@ -17402,9 +17392,9 @@ button {
 }
 
 .cost-step-p {
-  font-size: 0.9rem;
-  color: #5E697C;
-  line-height: 1.55;
+  font-size: 0.92rem;
+  color: #64748B;
+  line-height: 1.6;
   margin: 0;
 }
 
@@ -17413,6 +17403,17 @@ button {
   font-size: 0.82rem;
   color: #64748B;
   margin-top: 4px;
+}
+
+.cost-step-highlight {
+  margin-top: 22px;
+  padding-top: 14px;
+  border-top: 1px dashed #E2E8F0;
+  font-size: 0.86rem;
+  font-weight: 750;
+  color: #005038;
+  display: flex;
+  align-items: center;
 }
 
 .cost-step-footer-link {
