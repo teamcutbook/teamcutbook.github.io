@@ -18558,13 +18558,83 @@ button {
   }
 }
 
-/* Mobile Floating Card Sequence — centered fade-in/out with gentle scale */
-@keyframes mobileCardFloat {
-  0%   { opacity: 0; transform: translateY(6px) scale(0.93); }
-  10%  { opacity: 1; transform: translateY(0px)  scale(1.00); }
-  75%  { opacity: 1; transform: translateY(-3px) scale(1.00); }
-  88%  { opacity: 0; transform: translateY(-5px) scale(0.95); }
-  100% { opacity: 0; transform: translateY(6px)  scale(0.93); }
+/* ==========================================================================
+   MOBILE 3D ORBITAL CHOREOGRAPHY (Authentic 3D Orbiting Around Central Phone)
+   Cards rotate in 3D: Front Focus -> Dip Behind Right -> Orbit Back -> Swoop Left -> Front
+   ========================================================================== */
+@keyframes mobileOrbit3DLoop {
+  0% {
+    /* Stage 1: Front Center Focus — readable, crisp, in front of phone */
+    transform: translate3d(0px, 45px, 85px) rotateY(0deg) scale(1.0);
+    opacity: 1;
+    z-index: 25;
+  }
+  20% {
+    /* Stage 1b: Hovering in front center focus so user can comfortably read */
+    transform: translate3d(5px, 47px, 80px) rotateY(-2deg) scale(1.0);
+    opacity: 1;
+    z-index: 25;
+  }
+  32% {
+    /* Stage 2: Curving rightward into midground */
+    transform: translate3d(45px, 15px, 25px) rotateY(-12deg) scale(0.88);
+    opacity: 0.92;
+    z-index: 20;
+  }
+  45% {
+    /* Stage 3: Dipping behind the right edge of phone */
+    transform: translate3d(55px, -35px, -60px) rotateY(-20deg) scale(0.72);
+    opacity: 0.55;
+    z-index: 2;
+  }
+  58% {
+    /* Stage 4: Directly behind center of phone */
+    transform: translate3d(0px, -70px, -110px) rotateY(0deg) scale(0.58);
+    opacity: 0.2;
+    z-index: 1;
+  }
+  72% {
+    /* Stage 5: Emerging from behind left edge of phone */
+    transform: translate3d(-55px, -30px, -60px) rotateY(20deg) scale(0.72);
+    opacity: 0.55;
+    z-index: 2;
+  }
+  85% {
+    /* Stage 6: Swooping forward into front-left */
+    transform: translate3d(-42px, 18px, 30px) rotateY(10deg) scale(0.88);
+    opacity: 0.92;
+    z-index: 20;
+  }
+  100% {
+    /* Stage 7: Back to Front Center Focus */
+    transform: translate3d(0px, 45px, 85px) rotateY(0deg) scale(1.0);
+    opacity: 1;
+    z-index: 25;
+  }
+}
+
+/* Mobile-Safe 3D Star Orbit Loops (Contained within mobile viewport) */
+@keyframes mobileStarOrbit_A {
+  0%   { transform: translate3d(-105px, 15px, 60px) rotate(0deg) scale(0.85); opacity: 0.8; }
+  25%  { transform: translate3d(-20px, 115px, 90px) rotate(90deg) scale(1.0); opacity: 0.9; }
+  50%  { transform: translate3d(110px, 30px, 50px) rotate(180deg) scale(0.9); opacity: 0.8; }
+  75%  { transform: translate3d(0px, -100px, -70px) rotate(270deg) scale(0.65); opacity: 0.4; }
+  100% { transform: translate3d(-105px, 15px, 60px) rotate(360deg) scale(0.85); opacity: 0.8; }
+}
+
+@keyframes mobileStarOrbit_B {
+  0%   { transform: translate3d(105px, -55px, 60px) rotate(0deg) scale(0.9); opacity: 0.8; }
+  25%  { transform: translate3d(115px, 25px, 40px) rotate(-90deg) scale(1.0); opacity: 0.9; }
+  50%  { transform: translate3d(45px, 115px, 75px) rotate(-180deg) scale(1.05); opacity: 0.9; }
+  75%  { transform: translate3d(-90px, -90px, -50px) rotate(-270deg) scale(0.65); opacity: 0.4; }
+  100% { transform: translate3d(105px, -55px, 60px) rotate(-360deg) scale(0.9); opacity: 0.8; }
+}
+
+@keyframes mobileStarOrbit_C {
+  0%   { transform: translate3d(70px, 90px, 70px) rotate(0deg) scale(0.8); opacity: 0.75; }
+  33%  { transform: translate3d(-75px, 45px, 35px) rotate(120deg) scale(0.9); opacity: 0.8; }
+  66%  { transform: translate3d(0px, -80px, -65px) rotate(240deg) scale(0.6); opacity: 0.35; }
+  100% { transform: translate3d(70px, 90px, 70px) rotate(360deg) scale(0.8); opacity: 0.75; }
 }
 
 @media (max-width: 768px) {
@@ -18938,94 +19008,107 @@ button {
   }
 
   /* ==================================================================
-     MOBILE FLOATING CARD SYSTEM — v3 Centered Safe
-     Cards are centered (left:50%) so they NEVER get clipped by hero-section overflow:hidden.
-     Phone is ~255px wide, centered in wrapper. Cards are 185px wide, also centered.
-     Since both phone and cards are horizontally centered, cards always sit centered
-     on the phone and are always within the section's safe viewport width.
-     Cards appear at different top positions so 4 cards create a stacked sequence.
+     MOBILE 3D CONTINUOUS ORBITAL SYSTEM (Matches Desktop 3D Experience)
+     Cards orbit smoothly around phone: Foreground -> Dip Right -> Pass Behind -> Swoop Left
      ================================================================== */
+  .hero-visual-wrapper {
+    height: 520px !important;
+    perspective: 1100px !important;
+    transform-style: preserve-3d !important;
+  }
+
   .orbit-card {
     position: absolute !important;
+    top: 45% !important;
     left: 50% !important;
-    margin-left: -90px !important;
+    width: 215px !important;
+    max-width: 220px !important;
+    margin-left: -108px !important;
+    margin-top: -65px !important;
     bottom: auto !important;
     right: auto !important;
-    margin-top: 0 !important;
-    width: 180px !important;
-    max-width: 182px !important;
-    z-index: 25 !important;
-    transform-origin: center top;
-    will-change: transform, opacity;
-    opacity: 0;
-    box-shadow: 0 12px 30px -6px rgba(15, 23, 42, 0.28), 0 0 0 1px rgba(255, 255, 255, 0.9) inset !important;
-    backdrop-filter: blur(20px) !important;
-    -webkit-backdrop-filter: blur(20px) !important;
+    transform-origin: center center !important;
+    transform-style: preserve-3d !important;
+    will-change: transform, opacity, z-index !important;
+    backdrop-filter: blur(22px) !important;
+    -webkit-backdrop-filter: blur(22px) !important;
     background: rgba(255, 255, 255, 0.98) !important;
     border: 1.5px solid rgba(226, 232, 240, 0.95) !important;
+    border-radius: 18px !important;
+    box-shadow: 0 16px 36px -8px rgba(15, 23, 42, 0.22), 0 0 0 1px rgba(255, 255, 255, 0.9) inset !important;
     pointer-events: none !important;
-    border-radius: 16px !important;
   }
-  /* Each card occupies same position, takes turns appearing */
-  .orbit-card-1 { top: 28px !important; animation: mobileCardFloat 16s ease-in-out 0s infinite !important; }
-  .orbit-card-2 { top: 28px !important; animation: mobileCardFloat 16s ease-in-out -4s infinite !important; }
+
+  /* 4 Orbit Cards with Staggered 4.5s Delays for Continuous 360° Flow */
+  .orbit-card-1 {
+    animation: mobileOrbit3DLoop 18s cubic-bezier(0.4, 0, 0.2, 1) 0s infinite !important;
+  }
+  .orbit-card-2 {
+    animation: mobileOrbit3DLoop 18s cubic-bezier(0.4, 0, 0.2, 1) -4.5s infinite !important;
+  }
   .orbit-card-3 {
-    top: 28px !important;
     background: linear-gradient(145deg, #0F172A 0%, #1E293B 60%, #0F2942 100%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
     color: #FFFFFF !important;
-    box-shadow: 0 12px 30px -6px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.1) inset !important;
-    animation: mobileCardFloat 16s ease-in-out -8s infinite !important;
+    box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.1) inset !important;
+    animation: mobileOrbit3DLoop 18s cubic-bezier(0.4, 0, 0.2, 1) -9s infinite !important;
   }
   .orbit-card-3 .dash-bal-header { color: #34D399 !important; }
   .orbit-card-3 .dash-bal-amount { color: #FFFFFF !important; }
   .orbit-card-3 .dash-bal-sub { color: #94A3B8 !important; }
-  .orbit-card-4 { top: 28px !important; animation: mobileCardFloat 16s ease-in-out -12s infinite !important; }
 
-  /* Card internal paddings on mobile — compact for 180px wide cards */
+  .orbit-card-4 {
+    animation: mobileOrbit3DLoop 18s cubic-bezier(0.4, 0, 0.2, 1) -13.5s infinite !important;
+  }
+
+  /* Card internal paddings on mobile — crisp, readable proportions */
   .add-entry-card,
   .commission-calc-card,
   .dashboard-balance-card,
   .feed-card-box {
-    padding: 10px 12px !important;
-    border-radius: 14px !important;
+    padding: 12px 14px !important;
+    border-radius: 18px !important;
   }
-  .add-entry-header { display: flex; align-items: center; gap: 6px; margin-bottom: 5px; }
-  .add-entry-header h4 { font-size: 0.75rem; white-space: nowrap; font-weight: 800; overflow: hidden; text-overflow: ellipsis; max-width: 120px; }
-  .add-entry-field { padding: 3px 6px; font-size: 0.62rem; }
-  .add-entry-field-label { font-size: 0.58rem; }
-  .add-entry-field-value { font-size: 0.65rem; }
+  .add-entry-header { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
+  .add-entry-header h4 { font-size: 0.80rem; white-space: nowrap; font-weight: 800; }
+  .add-entry-field { padding: 4px 7px; font-size: 0.68rem; }
+  .add-entry-field-label { font-size: 0.62rem; }
+  .add-entry-field-value { font-size: 0.70rem; }
   .add-entry-payment-row { gap: 4px; }
-  .pay-badge { font-size: 0.58rem; padding: 2px 5px; }
-  .add-entry-commission-preview { font-size: 0.62rem; padding: 4px 6px; }
-  .comm-calc-title, .dash-bal-header, .feed-header { font-size: 0.70rem; }
-  .comm-breakdown { gap: 2px; font-size: 0.62rem; }
-  .comm-staff-row { gap: 6px; margin-bottom: 5px; }
-  .comm-avatar { width: 24px; height: 24px; font-size: 0.52rem; flex-shrink: 0; }
-  .comm-staff-info strong { font-size: 0.65rem; }
-  .comm-staff-info span { font-size: 0.58rem; }
-  .comm-payout-btn { font-size: 0.62rem; padding: 4px 8px; }
-  .dash-bal-amount { font-size: 1.05rem; line-height: 1.2; }
-  .dash-bal-sub { font-size: 0.56rem; }
-  .dash-bal-grid { gap: 4px; grid-template-columns: 1fr 1fr; }
-  .dash-metric { padding: 4px; }
-  .dash-metric span { font-size: 0.54rem; }
-  .dash-metric strong { font-size: 0.68rem; }
-  .feed-rows { gap: 3px; }
-  .feed-row-item { padding: 4px 5px; }
-  .feed-row-icon { width: 20px; height: 20px; font-size: 0.65rem; }
-  .feed-row-info strong { font-size: 0.64rem; }
-  .feed-row-info small { font-size: 0.56rem; }
-  .feed-row-price { font-size: 0.68rem; }
-  .feed-badge { font-size: 0.54rem; padding: 2px 6px; }
-  .feed-live-dot { width: 5px; height: 5px; }
+  .pay-badge { font-size: 0.62rem; padding: 2px 6px; }
+  .add-entry-commission-preview { font-size: 0.68rem; padding: 4px 8px; }
+  .comm-calc-title, .dash-bal-header, .feed-header { font-size: 0.76rem; font-weight: 800; }
+  .comm-breakdown { gap: 3px; font-size: 0.68rem; }
+  .comm-staff-row { gap: 6px; margin-bottom: 6px; }
+  .comm-avatar { width: 26px; height: 26px; font-size: 0.58rem; flex-shrink: 0; }
+  .comm-staff-info strong { font-size: 0.70rem; }
+  .comm-staff-info span { font-size: 0.62rem; }
+  .comm-payout-btn { font-size: 0.68rem; padding: 4px 10px; font-weight: 800; }
+  .dash-bal-amount { font-size: 1.15rem; line-height: 1.2; font-weight: 900; }
+  .dash-bal-sub { font-size: 0.60rem; line-height: 1.35; }
+  .dash-bal-grid { gap: 5px; grid-template-columns: 1fr 1fr; }
+  .dash-metric { padding: 4px 6px; border-radius: 8px; }
+  .dash-metric span { font-size: 0.58rem; }
+  .dash-metric strong { font-size: 0.72rem; }
+  .feed-rows { gap: 4px; }
+  .feed-row-item { padding: 4px 6px; border-radius: 8px; }
+  .feed-row-icon { width: 22px; height: 22px; font-size: 0.70rem; }
+  .feed-row-info strong { font-size: 0.68rem; }
+  .feed-row-info small { font-size: 0.60rem; }
+  .feed-row-price { font-size: 0.72rem; }
+  .feed-badge { font-size: 0.58rem; padding: 2px 6px; }
+  .feed-live-dot { width: 6px; height: 6px; }
 
-
-
-  /* Stars scaled for mobile */
+  /* 3D Stars in Mobile Viewport */
   .hero-3d-star {
-    opacity: 0.45;
+    opacity: 0.8 !important;
   }
+  .star-pos-1 { animation: mobileStarOrbit_A 22s cubic-bezier(0.42, 0, 0.58, 1) 0s infinite !important; }
+  .star-pos-2 { animation: mobileStarOrbit_B 18s cubic-bezier(0.42, 0, 0.58, 1) 0s infinite !important; }
+  .star-pos-3 { animation: mobileStarOrbit_C 15s cubic-bezier(0.42, 0, 0.58, 1) 0s infinite !important; }
+  .star-pos-4 { animation: mobileStarOrbit_A 22s cubic-bezier(0.42, 0, 0.58, 1) -11s infinite !important; }
+  .star-pos-5 { animation: mobileStarOrbit_B 18s cubic-bezier(0.42, 0, 0.58, 1) -9s infinite !important; }
+  .star-pos-6 { animation: mobileStarOrbit_C 15s cubic-bezier(0.42, 0, 0.58, 1) -7.5s infinite !important; }
 
   /* Category pills wrapping */
   .trust-categories-bar {
@@ -19073,19 +19156,20 @@ button {
     line-height: 1.5;
   }
   .hero-visual-wrapper {
-    height: 480px;
+    height: 500px !important;
     overflow: visible !important;
   }
   .phone-mockup-frame {
-    width: min(250px, calc(100vw - 32px)) !important;
-    height: 440px !important;
+    width: min(235px, calc(100vw - 32px)) !important;
+    height: 425px !important;
     border: 6px solid #0F172A !important;
     border-radius: 36px !important;
   }
   .orbit-card {
-    width: 170px !important;
-    max-width: 172px !important;
-    margin-left: -85px !important;
+    width: 190px !important;
+    max-width: 195px !important;
+    margin-left: -95px !important;
+    margin-top: -60px !important;
   }
   .hero-rn-screen .rn-scroll-body {
     padding: 5px 5px 48px;
