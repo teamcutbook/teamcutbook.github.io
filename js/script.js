@@ -64,6 +64,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Multi-Language Translation Engine (BN, EN, HI)
   initLanguageSwitcher();
+
+  // Mobile Sticky Download Pill Dock
+  initMobileStickyDock();
 });
 
 /* --------------------------------------------------------------------------
@@ -78,6 +81,29 @@ function initStickyHeader() {
       header.classList.add('scrolled');
     } else {
       header.classList.remove('scrolled');
+    }
+  }, { passive: true });
+}
+
+/* --------------------------------------------------------------------------
+   Mobile Sticky Download Pill Dock
+   -------------------------------------------------------------------------- */
+function initMobileStickyDock() {
+  const dock = document.getElementById('mobileStickyDock');
+  if (!dock) return;
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        if (window.scrollY > 350) {
+          dock.classList.add('is-visible');
+        } else {
+          dock.classList.remove('is-visible');
+        }
+        ticking = false;
+      });
+      ticking = true;
     }
   }, { passive: true });
 }
@@ -237,17 +263,63 @@ function initTestimonialCarousel() {
 }
 
 /* --------------------------------------------------------------------------
-   7. Final Pricing Model Interactive Pills
+   7. Simple and Clear Costs Interactive Estimator & Tier Switcher
    -------------------------------------------------------------------------- */
 function initPricingCalculator() {
-  const pills = document.querySelectorAll('.scan-pill-item');
-  if (!pills.length) return;
-  pills.forEach(pill => {
-    pill.addEventListener('click', () => {
-      pills.forEach(p => p.classList.remove('featured-example'));
-      pill.classList.add('featured-example');
+  const tierButtons = document.querySelectorAll('.cost-tier-btn');
+  const selectedLabel = document.getElementById('selected-label');
+  const selectedCost = document.getElementById('selected-cost');
+  const selectedAvg = document.getElementById('selected-avg');
+  const selectedKeep = document.getElementById('selected-keep');
+
+  if (tierButtons.length) {
+    tierButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tierButtons.forEach(b => {
+          b.classList.remove('active');
+          const icon = b.querySelector('.check-icon');
+          if (icon) {
+            icon.textContent = 'radio_button_unchecked';
+          }
+        });
+
+        btn.classList.add('active');
+        const activeIcon = btn.querySelector('.check-icon');
+        if (activeIcon) {
+          activeIcon.textContent = 'check_circle';
+        }
+
+        const isEnglish = localStorage.getItem('cutbook_language') === 'en' || (document.cookie.includes('googtrans=/bn/en'));
+        const count = btn.getAttribute('data-count') || '১০';
+        const cost = btn.getAttribute('data-cost') || '১০';
+        const avg = btn.getAttribute('data-avg') || '~৩,০০০';
+        const keep = btn.getAttribute('data-keep') || '২,৯৯০';
+
+        if (isEnglish) {
+          const countEn = count === '১০০' ? '100' : (count === '৫০' ? '50' : '10');
+          if (selectedLabel) selectedLabel.textContent = `${countEn} Customers Logged`;
+          if (selectedCost) selectedCost.textContent = `৳${countEn}`;
+          if (selectedAvg) selectedAvg.textContent = `~৳${countEn === '100' ? '30,000' : (countEn === '50' ? '15,000' : '3,000')}`;
+          if (selectedKeep) selectedKeep.textContent = `৳${countEn === '100' ? '29,900' : (countEn === '50' ? '14,950' : '2,990')}`;
+        } else {
+          if (selectedLabel) selectedLabel.textContent = `${count}টি কাজের হিসাব`;
+          if (selectedCost) selectedCost.textContent = `${cost} টাকা`;
+          if (selectedAvg) selectedAvg.textContent = `${avg} টাকা`;
+          if (selectedKeep) selectedKeep.textContent = `${keep} টাকা`;
+        }
+      });
     });
-  });
+  }
+
+  const pills = document.querySelectorAll('.scan-pill-item');
+  if (pills.length) {
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        pills.forEach(p => p.classList.remove('featured-example'));
+        pill.classList.add('featured-example');
+      });
+    });
+  }
 }
 
 
@@ -698,15 +770,15 @@ function initGalaxyOrbit() {
   const ctx       = cvs.getContext('2d');
   if (!nodeEls.length || !ctx) return;
 
-  // Harmonious Cosmic Palette per Salon Operation
+  // Harmonious Cosmic Palette per Salon Operation (Royal Emerald, Mint & Warm Gold)
   const NODE_CONFIG = [
-    { name: 'Sales',        color: { r: 251, g: 191, b: 36,  hex: '#FBBF24' }, orbit: 0, slot: 0 },
-    { name: 'Staff',        color: { r: 96,  g: 165, b: 250, hex: '#60A5FA' }, orbit: 1, slot: 0 },
-    { name: 'Work Entries', color: { r: 52,  g: 211, b: 153, hex: '#34D399' }, orbit: 1, slot: 1 },
-    { name: 'Payments',     color: { r: 56,  g: 189, b: 248, hex: '#38BDF8' }, orbit: 0, slot: 1 },
+    { name: 'Sales',        color: { r: 245, g: 158, b: 11,  hex: '#F59E0B' }, orbit: 0, slot: 0 },
+    { name: 'Staff',        color: { r: 16,  g: 185, b: 129, hex: '#10B981' }, orbit: 1, slot: 0 },
+    { name: 'Work Entries', color: { r: 111, g: 251, b: 190, hex: '#6FFBBE' }, orbit: 1, slot: 1 },
+    { name: 'Payments',     color: { r: 5,   g: 150, b: 105, hex: '#059669' }, orbit: 0, slot: 1 },
     { name: 'Expenses',     color: { r: 244, g: 114, b: 182, hex: '#F472B6' }, orbit: 2, slot: 0 },
-    { name: 'Earnings',     color: { r: 250, g: 204, b: 21,  hex: '#FACC15' }, orbit: 1, slot: 2 },
-    { name: 'Reports',      color: { r: 167, g: 139, b: 250, hex: '#A78BFA' }, orbit: 2, slot: 1 }
+    { name: 'Earnings',     color: { r: 217, g: 119, b: 6,   hex: '#D97706' }, orbit: 1, slot: 2 },
+    { name: 'Reports',      color: { r: 52,  g: 211, b: 153, hex: '#34D399' }, orbit: 2, slot: 1 }
   ];
 
   // 1. High-DPI Canvas Resize
@@ -746,13 +818,13 @@ function initGalaxyOrbit() {
   const DUST_COUNT = window.innerWidth < 768 ? 75 : 150;
   const dustParticles = [];
   for (let i = 0; i < DUST_COUNT; i++) {
-    const isGold = Math.random() < 0.22;
-    const isBlue = Math.random() < 0.25;
-    const isViolet = Math.random() < 0.25;
+    const isGold = Math.random() < 0.28;
+    const isMint = Math.random() < 0.32;
+    const isEmerald = Math.random() < 0.22;
     let color = 'rgba(255, 255, 255, ';
     if (isGold) color = 'rgba(251, 191, 36, ';
-    else if (isBlue) color = 'rgba(147, 197, 253, ';
-    else if (isViolet) color = 'rgba(196, 181, 253, ';
+    else if (isMint) color = 'rgba(111, 251, 190, ';
+    else if (isEmerald) color = 'rgba(52, 211, 153, ';
 
     dustParticles.push({
       x: Math.random(),
@@ -768,13 +840,13 @@ function initGalaxyOrbit() {
   }
 
   // 4. Definition of 3 Graceful Elliptical Orbits Surrounding the Empty Center
-  // Orbit 0 (Inner-Mid track): semiMajor: 215, semiMinor: 110, tiltZ: -0.24 rad
-  // Orbit 1 (Mid track):       semiMajor: 315, semiMinor: 155, tiltZ: +0.20 rad
-  // Orbit 2 (Outer track):     semiMajor: 405, semiMinor: 190, tiltZ: -0.10 rad
+  // Orbit 0 (Inner-Mid track): semiMajor: 230, semiMinor: 118, tiltZ: -0.24 rad
+  // Orbit 1 (Mid track):       semiMajor: 335, semiMinor: 165, tiltZ: +0.20 rad
+  // Orbit 2 (Outer track):     semiMajor: 435, semiMinor: 205, tiltZ: -0.10 rad
   const ORBIT_TRACKS = [
-    { semiMajor: 230, semiMinor: 118, tiltZ: -0.24, speed: 0.15,  dir: 1,  photons: [0.15, 0.65], stroke: 'rgba(251, 191, 36, 0.18)' },
-    { semiMajor: 335, semiMinor: 165, tiltZ: 0.20,  speed: -0.10, dir: -1, photons: [0.05, 0.45, 0.80], stroke: 'rgba(96, 165, 250, 0.16)' },
-    { semiMajor: 435, semiMinor: 205, tiltZ: -0.10, speed: 0.075, dir: 1,  photons: [0.30, 0.75], stroke: 'rgba(167, 139, 250, 0.15)' }
+    { semiMajor: 230, semiMinor: 118, tiltZ: -0.24, speed: 0.15,  dir: 1,  photons: [0.15, 0.65], stroke: 'rgba(245, 158, 11, 0.20)' },
+    { semiMajor: 335, semiMinor: 165, tiltZ: 0.20,  speed: -0.10, dir: -1, photons: [0.05, 0.45, 0.80], stroke: 'rgba(111, 251, 190, 0.22)' },
+    { semiMajor: 435, semiMinor: 205, tiltZ: -0.10, speed: 0.075, dir: 1,  photons: [0.30, 0.75], stroke: 'rgba(16, 185, 129, 0.18)' }
   ];
 
   // 5. Initialize the 7 Orbiting Salon Operation Nodes
