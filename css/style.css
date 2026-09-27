@@ -17703,48 +17703,40 @@ button {
   }
 }
 
-/* 3D Orbiting loop for mobile devices — visible arc with dynamic front/back depth */
-@keyframes orbit3DLoopMobile {
+/* Clean Sequential Spotlight for Mobile — exactly 1 card visible at a time */
+@keyframes mobileSpotlightCard {
   0% {
-    /* Stage 1: Behind-left peeking out */
-    transform: translate3d(-80px, -25px, -60px) rotateY(12deg) scale(0.76);
-    opacity: 0.85;
-    z-index: 5;
+    opacity: 0;
+    transform: translate3d(0, 20px, 40px) scale(0.92);
+    pointer-events: none;
+    visibility: hidden;
   }
-  18% {
-    /* Stage 2: Sweeping down into front-left */
-    transform: translate3d(-30px, 45px, 80px) rotateY(6deg) scale(0.90);
+  3% {
     opacity: 1;
-    z-index: 25;
+    transform: translate3d(0, 0, 80px) scale(1);
+    pointer-events: auto;
+    visibility: visible;
   }
-  42% {
-    /* Stage 3: Front-center hero focus — overlapping in front of phone frame */
-    transform: translate3d(15px, 80px, 140px) rotateY(0deg) scale(0.96);
+  12% {
+    transform: translate3d(0, -6px, 85px) scale(1.01);
+  }
+  21% {
     opacity: 1;
-    z-index: 25;
+    transform: translate3d(0, 0, 80px) scale(1);
+    pointer-events: auto;
+    visibility: visible;
   }
-  68% {
-    /* Stage 4: Sweeping up toward front-right */
-    transform: translate3d(75px, 35px, 80px) rotateY(-8deg) scale(0.88);
-    opacity: 1;
-    z-index: 25;
+  24% {
+    opacity: 0;
+    transform: translate3d(0, -16px, 40px) scale(0.92);
+    pointer-events: none;
+    visibility: hidden;
   }
-  84% {
-    /* Stage 5: Dipping behind right edge of phone */
-    transform: translate3d(70px, -30px, -60px) rotateY(-14deg) scale(0.72);
-    opacity: 0.7;
-    z-index: 5;
-  }
-  94% {
-    /* Stage 6: Passing behind center */
-    transform: translate3d(-10px, -45px, -90px) rotateY(0deg) scale(0.65);
-    opacity: 0.25;
-    z-index: 5;
-  }
-  100% {
-    transform: translate3d(-80px, -25px, -60px) rotateY(12deg) scale(0.76);
-    opacity: 0.85;
-    z-index: 5;
+  25%, 100% {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0) scale(0.9);
+    pointer-events: none;
+    visibility: hidden;
   }
 }
 
@@ -18080,26 +18072,34 @@ button {
     pointer-events: none !important;
   }
 
-  /* Mobile Orbit Cards — scaled down and orbiting in fluid dynamic envelope */
+  /* Mobile Spotlight Cards — docked cleanly over the lower part of the phone */
   .orbit-card {
-    transform-origin: center center;
-    max-width: 205px !important;
-    width: 200px !important;
-    margin-left: -100px !important;
-    margin-top: -60px !important;
-    will-change: transform, opacity, z-index;
+    position: absolute !important;
+    left: 50% !important;
+    top: auto !important;
+    bottom: 24px !important;
+    width: min(250px, calc(100vw - 64px)) !important;
+    max-width: 260px !important;
+    margin-left: -125px !important;
+    margin-top: 0 !important;
+    z-index: 30 !important;
+    transform-origin: center bottom;
+    will-change: transform, opacity, visibility;
+    box-shadow: 0 16px 40px -8px rgba(15, 23, 42, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.7) inset !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
   }
   .orbit-card-1 {
-    animation: orbit3DLoopMobile 18s cubic-bezier(0.4, 0, 0.2, 1) 0s infinite !important;
+    animation: mobileSpotlightCard 16s cubic-bezier(0.16, 1, 0.3, 1) 0s infinite !important;
   }
   .orbit-card-2 {
-    animation: orbit3DLoopMobile 18s cubic-bezier(0.4, 0, 0.2, 1) -4.5s infinite !important;
+    animation: mobileSpotlightCard 16s cubic-bezier(0.16, 1, 0.3, 1) 4s infinite !important;
   }
   .orbit-card-3 {
-    animation: orbit3DLoopMobile 18s cubic-bezier(0.4, 0, 0.2, 1) -9s infinite !important;
+    animation: mobileSpotlightCard 16s cubic-bezier(0.16, 1, 0.3, 1) 8s infinite !important;
   }
   .orbit-card-4 {
-    animation: orbit3DLoopMobile 18s cubic-bezier(0.4, 0, 0.2, 1) -13.5s infinite !important;
+    animation: mobileSpotlightCard 16s cubic-bezier(0.16, 1, 0.3, 1) 12s infinite !important;
   }
 
   /* Card internal paddings on mobile */
@@ -18184,9 +18184,10 @@ button {
     border-radius: 38px;
   }
   .orbit-card {
-    max-width: 190px !important;
-    width: 185px !important;
-    margin-left: -92px !important;
+    bottom: 20px !important;
+    width: min(240px, calc(100vw - 44px)) !important;
+    max-width: 245px !important;
+    margin-left: -120px !important;
   }
   .hero-rn-screen .rn-scroll-body {
     padding: 5px 5px 48px;
