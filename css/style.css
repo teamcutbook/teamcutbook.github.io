@@ -90,7 +90,7 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: clip;
+  overflow-x: hidden;
   width: 100%;
   max-width: 100%;
 }
@@ -100,7 +100,7 @@ body {
   background-color: var(--bg-body);
   color: var(--text-main);
   line-height: 1.55;
-  overflow-x: clip;
+  overflow-x: hidden;
   width: 100%;
   max-width: 100%;
   position: relative;
@@ -18538,92 +18538,142 @@ button {
   .gallery-cards-row { flex-direction: column; align-items: center; }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 768px) {
   .site-header {
-    height: 68px;
+    height: 64px !important;
   }
   .site-header.scrolled {
-    height: 64px;
+    height: 60px !important;
+  }
+  .nav-container {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
   }
   .brand-logo {
-    font-size: 1.35rem;
-    gap: 8px;
+    font-size: 1.25rem !important;
+    gap: 8px !important;
   }
   .brand-logo-img {
-    width: 34px;
-    height: 34px;
+    width: 32px !important;
+    height: 32px !important;
   }
   .nav-actions {
-    gap: 8px;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    flex-shrink: 0 !important;
   }
-  .lang-toggle-btn {
-    padding: 5px 8px;
-    font-size: 0.8rem;
-    gap: 4px;
+  .nav-actions .btn-sm,
+  .nav-actions .nav-download-btn {
+    display: none !important;
   }
   .hamburger-btn {
-    width: 40px;
-    height: 40px;
-    padding: 8px;
+    display: flex !important;
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    padding: 9px !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    gap: 4.5px !important;
+    border-radius: 10px !important;
+    background: rgba(241, 245, 249, 0.95) !important;
+    border: 1.5px solid rgba(226, 232, 240, 0.9) !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+    cursor: pointer !important;
+  }
+  .hamburger-btn span {
+    display: block !important;
+    width: 100% !important;
+    height: 2px !important;
+    background-color: #0F172A !important;
+    border-radius: 2px !important;
   }
 }
 
 @media (max-width: 380px) {
   .brand-logo {
-    font-size: 1.22rem;
-    gap: 6px;
+    font-size: 1.15rem !important;
+    gap: 6px !important;
   }
   .brand-logo-img {
-    width: 30px;
-    height: 30px;
-  }
-  .lang-toggle-btn {
-    padding: 4px 6px;
-    font-size: 0.75rem;
+    width: 28px !important;
+    height: 28px !important;
   }
 }
 
 /* ==========================================================================
-   MOBILE 3D CARD SPOTLIGHT CHOREOGRAPHY (Sleek Sequential Showcase Around Central Phone)
-   Each of the 4 cards smoothly swoops into 3D front focus, hovers legibly, then glides away.
-   Zero collision, zero overlap, zero text clashing, perfect legibility!
+   MOBILE 3D CONTINUOUS ORBITAL SYSTEM (Authentic 3D Carousel Around Phone)
+   Smooth continuous 3D loop: Front Spotlight -> Curving Right -> Passing Behind -> Swooping Left
+   Zero text overlap, zero screen overflow, crystal-clear foreground legibility!
    ========================================================================== */
-@keyframes mobileCardSpotlight {
+@keyframes mobileCardOrbit3D {
   0% {
-    transform: translate3d(-28px, 55px, -35px) rotateY(10deg) scale(0.92);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-  }
-  2.5% {
-    visibility: visible;
-  }
-  6% {
-    /* Front Center Spotlight: perfectly framed over lower half of phone */
-    transform: translate3d(0px, 48px, 50px) rotateY(0deg) scale(1.0);
+    /* Stage 1: Front Center Focus (Spotlight foreground, prime readability over lower phone) */
+    transform: translate3d(0px, 48px, 65px) rotateY(0deg) scale(1.0);
     opacity: 1;
-    pointer-events: auto;
+    z-index: 38;
+    box-shadow: 0 16px 36px -8px rgba(15, 23, 42, 0.28), 0 0 0 1px rgba(255, 255, 255, 0.9) inset;
   }
-  20% {
-    /* Gentle floating hover in front focus for easy reading */
-    transform: translate3d(0px, 50px, 50px) rotateY(-1deg) scale(1.0);
+  18% {
+    /* Stage 1b: Gentle floating hover in front focus */
+    transform: translate3d(0px, 50px, 65px) rotateY(-1deg) scale(1.0);
     opacity: 1;
-    pointer-events: auto;
+    z-index: 38;
   }
-  24.5% {
-    /* Glides out smoothly into midground right and fades */
-    transform: translate3d(28px, 45px, -35px) rotateY(-10deg) scale(0.92);
-    opacity: 0;
-    pointer-events: none;
+  28% {
+    /* Stage 2: Gliding to Front-Right Foreground */
+    transform: translate3d(36px, 28px, 32px) rotateY(-10deg) scale(0.88);
+    opacity: 0.82;
+    z-index: 30;
   }
-  25% {
-    visibility: hidden;
+  42% {
+    /* Stage 3: Dipping behind the right edge of the phone frame */
+    transform: translate3d(30px, -15px, -45px) rotateY(-16deg) scale(0.72);
+    opacity: 0.40;
+    z-index: 8;
+  }
+  52% {
+    /* Stage 4: Passing behind center top of the phone */
+    transform: translate3d(0px, -42px, -80px) rotateY(0deg) scale(0.60);
+    opacity: 0.18;
+    z-index: 5;
+  }
+  66% {
+    /* Stage 5: Emerging from behind the left edge of the phone */
+    transform: translate3d(-30px, -15px, -45px) rotateY(16deg) scale(0.72);
+    opacity: 0.40;
+    z-index: 8;
+  }
+  80% {
+    /* Stage 6: Swooping into Front-Left Foreground */
+    transform: translate3d(-36px, 28px, 32px) rotateY(10deg) scale(0.88);
+    opacity: 0.82;
+    z-index: 30;
   }
   100% {
-    transform: translate3d(-28px, 55px, -35px) rotateY(10deg) scale(0.92);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
+    /* Return to Front Center Focus */
+    transform: translate3d(0px, 48px, 65px) rotateY(0deg) scale(1.0);
+    opacity: 1;
+    z-index: 38;
+    box-shadow: 0 16px 36px -8px rgba(15, 23, 42, 0.28), 0 0 0 1px rgba(255, 255, 255, 0.9) inset;
+  }
+}
+
+/* Synchronized 3D Feature Indicator Dots Keyframe */
+@keyframes syncDotPulse {
+  0%, 22% {
+    width: 18px;
+    border-radius: 9999px;
+    background: #059669;
+    box-shadow: 0 0 8px rgba(5, 150, 105, 0.45);
+  }
+  25%, 100% {
+    width: 6px;
+    border-radius: 50%;
+    background: #CBD5E1;
+    box-shadow: none;
   }
 }
 
@@ -19085,27 +19135,64 @@ button {
     pointer-events: none !important;
   }
 
-  /* 4 Orbit Cards with Staggered 4s Delays in 16s Seamless Spotlight Loop */
+  /* 4 Orbit Cards with Staggered 4s Delays in 16s Seamless 3D Orbital Carousel */
   .orbit-card-1 {
-    animation: mobileCardSpotlight 16s cubic-bezier(0.25, 1, 0.5, 1) 0s infinite !important;
+    animation: mobileCardOrbit3D 16s cubic-bezier(0.4, 0, 0.2, 1) 0s infinite !important;
   }
   .orbit-card-2 {
-    animation: mobileCardSpotlight 16s cubic-bezier(0.25, 1, 0.5, 1) -4s infinite !important;
+    animation: mobileCardOrbit3D 16s cubic-bezier(0.4, 0, 0.2, 1) -4s infinite !important;
   }
   .orbit-card-3 {
     background: linear-gradient(145deg, #0F172A 0%, #1E293B 60%, #0F2942 100%) !important;
     border: 1px solid rgba(255, 255, 255, 0.18) !important;
     color: #FFFFFF !important;
     box-shadow: 0 16px 38px -8px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1) inset !important;
-    animation: mobileCardSpotlight 16s cubic-bezier(0.25, 1, 0.5, 1) -8s infinite !important;
+    animation: mobileCardOrbit3D 16s cubic-bezier(0.4, 0, 0.2, 1) -8s infinite !important;
   }
   .orbit-card-3 .dash-bal-header { color: #34D399 !important; }
   .orbit-card-3 .dash-bal-amount { color: #FFFFFF !important; }
   .orbit-card-3 .dash-bal-sub { color: #94A3B8 !important; }
+  .orbit-card-3 .dash-metric { background: rgba(255, 255, 255, 0.08) !important; border: 1px solid rgba(255, 255, 255, 0.1) !important; }
+  .orbit-card-3 .dash-metric span { color: #94A3B8 !important; }
+  .orbit-card-3 .dash-metric strong { color: #34D399 !important; }
 
   .orbit-card-4 {
-    animation: mobileCardSpotlight 16s cubic-bezier(0.25, 1, 0.5, 1) -12s infinite !important;
+    animation: mobileCardOrbit3D 16s cubic-bezier(0.4, 0, 0.2, 1) -12s infinite !important;
   }
+
+  /* Synchronized Mobile 3D Orbit Feature Indicator Bar */
+  .hero-orbit-sync-bar {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    position: absolute !important;
+    bottom: 12px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 50 !important;
+    background: rgba(255, 255, 255, 0.94) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    padding: 5px 12px !important;
+    border-radius: 9999px !important;
+    border: 1px solid rgba(226, 232, 240, 0.9) !important;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08) !important;
+    pointer-events: auto !important;
+  }
+  .orbit-sync-dot {
+    display: block !important;
+    width: 6px !important;
+    height: 6px !important;
+    border-radius: 50% !important;
+    background: #CBD5E1 !important;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease !important;
+    flex-shrink: 0 !important;
+  }
+  .orbit-sync-dot.dot-1 { animation: syncDotPulse 16s ease-in-out 0s infinite !important; }
+  .orbit-sync-dot.dot-2 { animation: syncDotPulse 16s ease-in-out -4s infinite !important; }
+  .orbit-sync-dot.dot-3 { animation: syncDotPulse 16s ease-in-out -8s infinite !important; }
+  .orbit-sync-dot.dot-4 { animation: syncDotPulse 16s ease-in-out -12s infinite !important; }
 
   /* Card internal paddings on mobile — crisp, readable proportions */
   .add-entry-card,
@@ -20566,14 +20653,38 @@ font {
 }
 
 @media (max-width: 768px) {
+  .lang-dropdown {
+    display: inline-flex !important;
+    align-items: center !important;
+  }
   .lang-toggle-btn {
-    padding: 5px 9px;
-    font-size: 0.82rem;
-    gap: 5px;
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    max-width: 36px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    justify-content: center !important;
+    align-items: center !important;
+    display: inline-flex !important;
+    background: rgba(241, 245, 249, 0.95) !important;
+    border: 1.5px solid rgba(226, 232, 240, 0.9) !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+    cursor: pointer !important;
+  }
+  .lang-toggle-btn .current-lang-text,
+  .lang-toggle-btn .lang-arrow {
+    display: none !important;
+  }
+  .lang-toggle-btn .lang-icon {
+    width: 17px !important;
+    height: 17px !important;
+    color: #059669 !important;
   }
   .lang-dropdown-menu {
-    right: -10px;
-    min-width: 145px;
+    right: 0 !important;
+    top: calc(100% + 8px) !important;
+    min-width: 145px !important;
   }
   .footer-bottom-actions {
     flex-direction: column;
