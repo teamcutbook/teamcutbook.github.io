@@ -1211,33 +1211,35 @@ button {
   transition: box-shadow 0.3s ease;
 }
 
-/* 4 Orbit Cards with Staggered Delays for Continuous 360° Flow */
-.orbit-card-1 {
-  width: 340px;
-  margin-left: -170px;
-  margin-top: -120px;
-  animation: orbit3DLoop 18s cubic-bezier(0.4, 0, 0.2, 1) 0s infinite;
-}
+@media (min-width: 769px) {
+  /* 4 Orbit Cards with Staggered Delays for Continuous 360° Flow */
+  .orbit-card-1 {
+    width: 340px;
+    margin-left: -170px;
+    margin-top: -120px;
+    animation: orbit3DLoop 18s cubic-bezier(0.4, 0, 0.2, 1) 0s infinite;
+  }
 
-.orbit-card-2 {
-  width: 380px;
-  margin-left: -190px;
-  margin-top: -110px;
-  animation: orbit3DLoop 18s cubic-bezier(0.4, 0, 0.2, 1) -4.5s infinite;
-}
+  .orbit-card-2 {
+    width: 380px;
+    margin-left: -190px;
+    margin-top: -110px;
+    animation: orbit3DLoop 18s cubic-bezier(0.4, 0, 0.2, 1) -4.5s infinite;
+  }
 
-.orbit-card-3 {
-  width: 360px;
-  margin-left: -180px;
-  margin-top: -115px;
-  animation: orbit3DLoop 18s cubic-bezier(0.4, 0, 0.2, 1) -9s infinite;
-}
+  .orbit-card-3 {
+    width: 360px;
+    margin-left: -180px;
+    margin-top: -115px;
+    animation: orbit3DLoop 18s cubic-bezier(0.4, 0, 0.2, 1) -9s infinite;
+  }
 
-.orbit-card-4 {
-  width: 370px;
-  margin-left: -185px;
-  margin-top: -110px;
-  animation: orbit3DLoop 18s cubic-bezier(0.4, 0, 0.2, 1) -13.5s infinite;
+  .orbit-card-4 {
+    width: 370px;
+    margin-left: -185px;
+    margin-top: -110px;
+    animation: orbit3DLoop 18s cubic-bezier(0.4, 0, 0.2, 1) -13.5s infinite;
+  }
 }
 
 /* --- ORBIT CARD 1: ADD WORK ENTRY SHELL --- */
@@ -18610,54 +18612,54 @@ button {
    ========================================================================== */
 @keyframes mobileCardOrbit3D {
   0% {
-    /* Stage 1: Front Center Focus (Spotlight foreground, prime readability over lower phone) */
-    transform: translate3d(0px, 48px, 65px) rotateY(0deg) scale(1.0);
+    /* Stage 1: Front Center-Lower Focus — elegant foreground badge over lower phone, leaving upper phone dashboard completely visible */
+    transform: translate3d(0px, 58px, 50px) rotateY(0deg) scale(1.0);
     opacity: 1;
     z-index: 38;
-    box-shadow: 0 16px 36px -8px rgba(15, 23, 42, 0.28), 0 0 0 1px rgba(255, 255, 255, 0.9) inset;
+    box-shadow: 0 10px 24px -5px rgba(15, 23, 42, 0.24), 0 0 0 1px rgba(255, 255, 255, 0.9) inset;
   }
   18% {
     /* Stage 1b: Gentle floating hover in front focus */
-    transform: translate3d(0px, 50px, 65px) rotateY(-1deg) scale(1.0);
+    transform: translate3d(0px, 60px, 50px) rotateY(-1deg) scale(1.0);
     opacity: 1;
     z-index: 38;
   }
   28% {
-    /* Stage 2: Gliding to Front-Right Foreground */
-    transform: translate3d(36px, 28px, 32px) rotateY(-10deg) scale(0.88);
-    opacity: 0.82;
+    /* Stage 2: Gliding to Front-Right Foreground (Visible right of phone) */
+    transform: translate3d(48px, 22px, 26px) rotateY(-12deg) scale(0.85);
+    opacity: 0.88;
     z-index: 30;
   }
   42% {
     /* Stage 3: Dipping behind the right edge of the phone frame */
-    transform: translate3d(30px, -15px, -45px) rotateY(-16deg) scale(0.72);
-    opacity: 0.40;
+    transform: translate3d(36px, -24px, -45px) rotateY(-18deg) scale(0.66);
+    opacity: 0.42;
     z-index: 8;
   }
   52% {
     /* Stage 4: Passing behind center top of the phone */
-    transform: translate3d(0px, -42px, -80px) rotateY(0deg) scale(0.60);
+    transform: translate3d(0px, -52px, -75px) rotateY(0deg) scale(0.52);
     opacity: 0.18;
     z-index: 5;
   }
   66% {
     /* Stage 5: Emerging from behind the left edge of the phone */
-    transform: translate3d(-30px, -15px, -45px) rotateY(16deg) scale(0.72);
-    opacity: 0.40;
+    transform: translate3d(-36px, -24px, -45px) rotateY(18deg) scale(0.66);
+    opacity: 0.42;
     z-index: 8;
   }
   80% {
-    /* Stage 6: Swooping into Front-Left Foreground */
-    transform: translate3d(-36px, 28px, 32px) rotateY(10deg) scale(0.88);
-    opacity: 0.82;
+    /* Stage 6: Swooping into Front-Left Foreground (Visible left of phone) */
+    transform: translate3d(-48px, 22px, 26px) rotateY(12deg) scale(0.85);
+    opacity: 0.88;
     z-index: 30;
   }
   100% {
     /* Return to Front Center Focus */
-    transform: translate3d(0px, 48px, 65px) rotateY(0deg) scale(1.0);
+    transform: translate3d(0px, 58px, 50px) rotateY(0deg) scale(1.0);
     opacity: 1;
     z-index: 38;
-    box-shadow: 0 16px 36px -8px rgba(15, 23, 42, 0.28), 0 0 0 1px rgba(255, 255, 255, 0.9) inset;
+    box-shadow: 0 10px 24px -5px rgba(15, 23, 42, 0.24), 0 0 0 1px rgba(255, 255, 255, 0.9) inset;
   }
 }
 
@@ -19112,27 +19114,33 @@ button {
     transform-style: preserve-3d !important;
   }
 
-  .orbit-card {
+  .orbit-card,
+  .orbit-card-1,
+  .orbit-card-2,
+  .orbit-card-3,
+  .orbit-card-4 {
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
-    width: min(230px, calc(100vw - 44px)) !important;
-    max-width: 235px !important;
-    margin-left: -115px !important;
-    margin-top: -65px !important;
+    width: 175px !important;
+    max-width: 175px !important;
+    margin-left: -87.5px !important;
+    margin-top: -48px !important;
+    padding: 0 !important;
     bottom: auto !important;
     right: auto !important;
     transform-origin: center center !important;
     transform-style: preserve-3d !important;
     will-change: transform, opacity !important;
-    backdrop-filter: blur(24px) !important;
-    -webkit-backdrop-filter: blur(24px) !important;
-    background: rgba(255, 255, 255, 0.97) !important;
-    border: 1.5px solid rgba(226, 232, 240, 0.95) !important;
-    border-radius: 20px !important;
-    box-shadow: 0 16px 38px -8px rgba(15, 23, 42, 0.28), 0 0 0 1px rgba(255, 255, 255, 0.9) inset !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    background: rgba(255, 255, 255, 0.98) !important;
+    border: 1px solid rgba(226, 232, 240, 0.95) !important;
+    border-radius: 14px !important;
+    box-shadow: 0 10px 24px -5px rgba(15, 23, 42, 0.22), 0 0 0 1px rgba(255, 255, 255, 0.9) inset !important;
     z-index: 35 !important;
     pointer-events: none !important;
+    overflow: hidden !important;
   }
 
   /* 4 Orbit Cards with Staggered 4s Delays in 16s Seamless 3D Orbital Carousel */
@@ -19146,7 +19154,7 @@ button {
     background: linear-gradient(145deg, #0F172A 0%, #1E293B 60%, #0F2942 100%) !important;
     border: 1px solid rgba(255, 255, 255, 0.18) !important;
     color: #FFFFFF !important;
-    box-shadow: 0 16px 38px -8px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1) inset !important;
+    box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1) inset !important;
     animation: mobileCardOrbit3D 16s cubic-bezier(0.4, 0, 0.2, 1) -8s infinite !important;
   }
   .orbit-card-3 .dash-bal-header { color: #34D399 !important; }
@@ -19194,43 +19202,81 @@ button {
   .orbit-sync-dot.dot-3 { animation: syncDotPulse 16s ease-in-out -8s infinite !important; }
   .orbit-sync-dot.dot-4 { animation: syncDotPulse 16s ease-in-out -12s infinite !important; }
 
-  /* Card internal paddings on mobile — crisp, readable proportions */
+  /* Card internal paddings on mobile — ultra-compact, pixel-perfect proportions */
   .add-entry-card,
   .commission-calc-card,
   .dashboard-balance-card,
   .feed-card-box {
-    padding: 10px 12px !important;
-    border-radius: 18px !important;
+    padding: 7px 9px !important;
+    border-radius: 14px !important;
+    box-sizing: border-box !important;
   }
-  .add-entry-header { display: flex; align-items: center; gap: 6px; margin-bottom: 5px; }
-  .add-entry-header h4 { font-size: 0.78rem; white-space: nowrap; font-weight: 800; }
-  .add-entry-field { padding: 3px 6px; font-size: 0.65rem; margin-bottom: 3px; }
-  .add-entry-field-label { font-size: 0.60rem; }
-  .add-entry-field-value { font-size: 0.68rem; }
-  .add-entry-payment-row { gap: 4px; margin-top: 3px; }
-  .pay-badge { font-size: 0.60rem; padding: 2px 6px; }
-  .add-entry-commission-preview { font-size: 0.65rem; padding: 3px 6px; margin-top: 4px; }
-  .comm-calc-title, .dash-bal-header, .feed-header { font-size: 0.75rem; font-weight: 800; }
-  .comm-breakdown { gap: 2.5px; font-size: 0.65rem; }
-  .comm-staff-row { gap: 6px; margin-bottom: 5px; }
-  .comm-avatar { width: 24px; height: 24px; font-size: 0.55rem; flex-shrink: 0; }
-  .comm-staff-info strong { font-size: 0.68rem; }
-  .comm-staff-info span { font-size: 0.60rem; }
-  .comm-payout-btn { font-size: 0.65rem; padding: 4px 8px; font-weight: 800; margin-top: 5px; }
-  .dash-bal-amount { font-size: 1.10rem; line-height: 1.15; font-weight: 900; }
-  .dash-bal-sub { font-size: 0.58rem; line-height: 1.3; margin-bottom: 5px; }
-  .dash-bal-grid { gap: 4px; grid-template-columns: 1fr 1fr; }
-  .dash-metric { padding: 3px 5px; border-radius: 7px; }
-  .dash-metric span { font-size: 0.55rem; }
-  .dash-metric strong { font-size: 0.68rem; }
-  .feed-rows { gap: 3px; }
-  .feed-row-item { padding: 3px 5px; border-radius: 7px; }
-  .feed-row-icon { width: 20px; height: 20px; font-size: 0.65rem; margin-right: 6px; }
-  .feed-row-info strong { font-size: 0.65rem; }
-  .feed-row-info small { font-size: 0.58rem; }
-  .feed-row-price { font-size: 0.68rem; }
-  .feed-badge { font-size: 0.55rem; padding: 2px 5px; }
-  .feed-live-dot { width: 5px; height: 5px; }
+
+  /* Card 1: Add Entry */
+  .add-entry-header { display: flex !important; align-items: center !important; gap: 5px !important; margin-bottom: 4px !important; }
+  .add-entry-icon-box {
+    width: 20px !important;
+    height: 20px !important;
+    border-radius: 6px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: linear-gradient(135deg, #334155, #1E293B) !important;
+    box-shadow: 0 2px 6px rgba(51,65,85,0.2) !important;
+    flex-shrink: 0 !important;
+  }
+  .add-entry-icon-box svg { width: 11px !important; height: 11px !important; stroke: #FFFFFF !important; }
+  .add-entry-header h4 { font-size: 0.68rem !important; white-space: nowrap !important; font-weight: 800 !important; margin: 0 !important; color: #0F172A !important; }
+  .add-entry-fields { display: flex !important; flex-direction: column !important; gap: 2.5px !important; margin-bottom: 4px !important; }
+  .add-entry-field { padding: 2px 5px !important; font-size: 0.54rem !important; margin-bottom: 0 !important; border-radius: 5px !important; border-width: 1px !important; }
+  .add-entry-field-label { font-size: 0.48rem !important; }
+  .add-entry-field-value { font-size: 0.56rem !important; font-weight: 800 !important; }
+  .add-entry-field-value.price-val { font-size: 0.60rem !important; }
+  .add-entry-payment-row { display: flex !important; gap: 3px !important; margin-top: 1px !important; }
+  .pay-badge { font-size: 0.48rem !important; padding: 1.5px 4px !important; border-radius: 4px !important; border-width: 1px !important; }
+  .add-entry-commission-preview { display: flex !important; justify-content: space-between !important; align-items: center !important; font-size: 0.54rem !important; padding: 3px 6px !important; margin-top: 3px !important; border-radius: 6px !important; border-width: 1px !important; }
+  .add-entry-commission-preview strong { font-size: 0.68rem !important; }
+
+  /* Card 2: Commission Summary */
+  .comm-calc-title { display: flex !important; align-items: center !important; gap: 4px !important; font-size: 0.64rem !important; font-weight: 800 !important; margin-bottom: 4px !important; }
+  .comm-calc-title svg { width: 11px !important; height: 11px !important; }
+  .comm-staff-row { display: flex !important; align-items: center !important; gap: 5px !important; margin-bottom: 4px !important; padding: 3px 6px !important; border-radius: 6px !important; border-width: 1px !important; }
+  .comm-avatar { width: 18px !important; height: 18px !important; font-size: 0.46rem !important; flex-shrink: 0 !important; }
+  .comm-staff-info strong { font-size: 0.56rem !important; line-height: 1.1 !important; }
+  .comm-staff-info span { font-size: 0.48rem !important; line-height: 1.1 !important; }
+  .comm-breakdown { display: flex !important; flex-direction: column !important; gap: 2px !important; margin-bottom: 4px !important; font-size: 0.52rem !important; }
+  .comm-row { display: flex !important; justify-content: space-between !important; align-items: center !important; padding: 2px 4px !important; border-radius: 4px !important; font-size: 0.50rem !important; }
+  .comm-row span { font-size: 0.48rem !important; }
+  .comm-row strong { font-size: 0.52rem !important; }
+  .comm-row.comm-row-highlight { border-width: 1px !important; }
+  .comm-earned { font-size: 0.58rem !important; }
+  .comm-tips { font-size: 0.52rem !important; }
+  .comm-payout-btn { font-size: 0.54rem !important; padding: 3px 6px !important; font-weight: 800 !important; margin-top: 3px !important; border-radius: 6px !important; text-align: center !important; }
+
+  /* Card 3: Balance */
+  .dash-bal-header { display: flex !important; align-items: center !important; gap: 4px !important; font-size: 0.62rem !important; font-weight: 700 !important; margin-bottom: 2px !important; }
+  .dash-bal-header svg { width: 10px !important; height: 10px !important; }
+  .dash-bal-amount { font-size: 0.95rem !important; line-height: 1.15 !important; font-weight: 900 !important; margin-bottom: 2px !important; }
+  .dash-bal-sub { font-size: 0.48rem !important; line-height: 1.25 !important; margin-bottom: 4px !important; }
+  .dash-bal-grid { display: grid !important; gap: 3px !important; grid-template-columns: 1fr 1fr !important; }
+  .dash-metric { padding: 3px 5px !important; border-radius: 6px !important; }
+  .dash-metric span { font-size: 0.46rem !important; margin-bottom: 1px !important; }
+  .dash-metric strong { font-size: 0.56rem !important; }
+
+  /* Card 4: Feed */
+  .feed-header { display: flex !important; justify-content: space-between !important; align-items: center !important; margin-bottom: 4px !important; }
+  .feed-title-wrap { display: flex !important; align-items: center !important; gap: 4px !important; }
+  .feed-title-wrap h5 { font-size: 0.64rem !important; font-weight: 800 !important; margin: 0 !important; }
+  .feed-live-dot { width: 5px !important; height: 5px !important; }
+  .feed-badge { font-size: 0.46rem !important; padding: 1.5px 5px !important; border-radius: 9999px !important; }
+  .feed-rows { display: flex !important; flex-direction: column !important; gap: 2.5px !important; }
+  .feed-row-item { display: flex !important; align-items: center !important; padding: 2.5px 5px !important; border-radius: 6px !important; border-width: 1px !important; }
+  .feed-row-icon { width: 18px !important; height: 18px !important; font-size: 0.60rem !important; margin-right: 5px !important; border-radius: 5px !important; }
+  .feed-row-info { flex-grow: 1 !important; }
+  .feed-row-info strong { font-size: 0.52rem !important; line-height: 1.1 !important; }
+  .feed-row-info small { font-size: 0.46rem !important; line-height: 1.1 !important; gap: 3px !important; }
+  .pay-tag { font-size: 0.44rem !important; padding: 1px 3.5px !important; border-radius: 3px !important; }
+  .feed-row-price { font-size: 0.56rem !important; font-weight: 800 !important; }
 
   /* 3D Stars in Mobile Viewport (Safe Perimeter Orbits Outside Phone) */
   .hero-3d-star {
@@ -19306,11 +19352,23 @@ button {
     border: 6px solid #0F172A !important;
     border-radius: 36px !important;
   }
-  .orbit-card {
-    width: min(220px, calc(100vw - 36px)) !important;
-    max-width: 220px !important;
-    margin-left: -110px !important;
-    margin-top: -65px !important;
+  .orbit-card,
+  .orbit-card-1,
+  .orbit-card-2,
+  .orbit-card-3,
+  .orbit-card-4 {
+    width: 162px !important;
+    max-width: 162px !important;
+    margin-left: -81px !important;
+    margin-top: -45px !important;
+    padding: 0 !important;
+    border-radius: 12px !important;
+  }
+  .add-entry-card,
+  .commission-calc-card,
+  .dashboard-balance-card,
+  .feed-card-box {
+    padding: 6px 8px !important;
   }
   .hero-rn-screen .rn-scroll-body {
     padding: 5px 5px 48px;
@@ -19332,6 +19390,27 @@ button {
     max-width: 290px;
     justify-content: center;
     font-size: 0.82rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .orbit-card,
+  .orbit-card-1,
+  .orbit-card-2,
+  .orbit-card-3,
+  .orbit-card-4 {
+    width: 148px !important;
+    max-width: 148px !important;
+    margin-left: -74px !important;
+    margin-top: -42px !important;
+    padding: 0 !important;
+    border-radius: 11px !important;
+  }
+  .add-entry-card,
+  .commission-calc-card,
+  .dashboard-balance-card,
+  .feed-card-box {
+    padding: 5px 7px !important;
   }
 }
 
@@ -19849,6 +19928,11 @@ button {
 .phone-txn-amt.expense { color: #DC2626; }
 
 /* ==========================================================================
+   DESKTOP ONLY: ORBIT CARDS DETAILED CONTENT
+   ========================================================================== */
+@media (min-width: 769px) {
+
+/* ==========================================================================
    ORBIT CARD 1: ADD WORK ENTRY — Premium Inner Content
    ========================================================================== */
 .add-entry-card {
@@ -20201,6 +20285,8 @@ button {
 .cash-tag { background: #ECFDF5; color: #059669; }
 .bkash-tag { background: #FDF2F8; color: #E2136E; }
 .nagad-tag { background: #FFF7ED; color: #F37021; }
+
+} /* End of @media (min-width: 769px) */
 
 /* ==========================================================================
    FLOATING WHATSAPP QUICK ACTION & CONTACT STYLES
