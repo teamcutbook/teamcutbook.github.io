@@ -421,6 +421,40 @@ button {
   flex-shrink: 0;
 }
 
+.nav-webapp-btn {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 750;
+  font-size: 0.88rem;
+  padding: 8px 15px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: #0F172A;
+  background: #F8FAFC;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 999px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+}
+
+.nav-webapp-btn:hover {
+  background: #FFFFFF;
+  border-color: #059669;
+  color: #059669;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.15);
+}
+
+.nav-webapp-btn .webapp-nav-icon {
+  color: #059669;
+  transition: transform 0.2s ease;
+}
+
+.nav-webapp-btn:hover .webapp-nav-icon {
+  transform: scale(1.1);
+}
+
 .btn-hero-download {
   display: inline-flex;
   align-items: center;
@@ -677,6 +711,19 @@ button {
 
 .store-badge-btn.store-badge-coming-soon .store-badge-icon {
   opacity: 0.88;
+}
+
+/* Web App Platform Badge */
+.store-badge-btn.store-badge-webapp {
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.12);
+}
+
+.store-badge-btn.store-badge-webapp:hover {
+  background-color: #0b1320;
+  border-color: rgba(16, 185, 129, 0.75);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.25);
+  transform: translateY(-2px);
 }
 
 .store-badge-btn.store-badge-coming-soon .store-badge-text small {
