@@ -2370,13 +2370,13 @@ function initPosSimulatorInteractive() {
         currentStaffName = 'kabbo';
         currentStaffInitials = 'KA';
         currentStaffRate = 'owner';
-      } else if (staffKey === 'masum') {
-        currentStaffName = 'masum';
-        currentStaffInitials = 'MA';
+      } else if (staffKey === 'ihan' || staffKey === 'masum') {
+        currentStaffName = 'Ihan';
+        currentStaffInitials = 'IH';
         currentStaffRate = 35;
       } else {
-        currentStaffName = 'xMan';
-        currentStaffInitials = 'XM';
+        currentStaffName = 'Atifah';
+        currentStaffInitials = 'AT';
         currentStaffRate = 40;
       }
 
@@ -2840,8 +2840,8 @@ function initDashSimulatorInteractive() {
 function initTransactionsHistorySimulator() {
   // Staff Database with Commissions & Real Transactions
   const staffData = {
-    masum: {
-      name: 'masum',
+    ihan: {
+      name: 'Ihan',
       role: 'স্টাফ',
       rate: '৩৫%',
       grossWork: '৳12,400.00',
@@ -2850,14 +2850,14 @@ function initTransactionsHistorySimulator() {
       payouts: '-৳3,000.00',
       netBalance: '৳1,790.00',
       transactions: [
-        { type: 'entry', name: 'হেড স্পা ও ম্যাসাজ', meta: 'Cash • masum', amount: '+৳500.00', time: '11:15 AM' },
-        { type: 'entry', name: 'চুল কাটা & স্টাইলিং', meta: 'bKash • masum', amount: '+৳350.00', time: '11:45 AM' },
-        { type: 'payout', name: 'স্টাফ কমিশন পরিশোধ', meta: 'Cash Payout • masum', amount: '-৳3,000.00', time: '12:30 PM' },
-        { type: 'entry', name: 'গোল্ডেন ফেসিয়াল', meta: 'Cash • masum', amount: '+৳800.00', time: '02:15 PM' }
+        { type: 'entry', name: 'হেড স্পা ও ম্যাসাজ', meta: 'Cash • Ihan', amount: '+৳500.00', time: '11:15 AM' },
+        { type: 'entry', name: 'চুল কাটা & স্টাইলিং', meta: 'bKash • Ihan', amount: '+৳350.00', time: '11:45 AM' },
+        { type: 'payout', name: 'স্টাফ কমিশন পরিশোধ', meta: 'Cash Payout • Ihan', amount: '-৳3,000.00', time: '12:30 PM' },
+        { type: 'entry', name: 'গোল্ডেন ফেসিয়াল', meta: 'Cash • Ihan', amount: '+৳800.00', time: '02:15 PM' }
       ]
     },
-    xman: {
-      name: 'xMan',
+    atifah: {
+      name: 'Atifah',
       role: 'স্টাফ',
       rate: '৪০%',
       grossWork: '৳18,200.00',
@@ -2866,9 +2866,9 @@ function initTransactionsHistorySimulator() {
       payouts: '-৳5,000.00',
       netBalance: '৳3,080.00',
       transactions: [
-        { type: 'entry', name: 'গোল্ডেন ফেসিয়াল & শেভ', meta: 'Nagad • xMan', amount: '+৳880.00', time: '12:30 PM' },
-        { type: 'entry', name: 'হেয়ার কালার & স্পা', meta: 'bKash • xMan', amount: '+৳1,450.00', time: '01:20 PM' },
-        { type: 'payout', name: 'স্টাফ অগ্রিম প্রদান', meta: 'Cash Payout • xMan', amount: '-৳5,000.00', time: '03:00 PM' }
+        { type: 'entry', name: 'গোল্ডেন ফেসিয়াল & শেভ', meta: 'Nagad • Atifah', amount: '+৳880.00', time: '12:30 PM' },
+        { type: 'entry', name: 'হেয়ার কালার & স্পা', meta: 'bKash • Atifah', amount: '+৳1,450.00', time: '01:20 PM' },
+        { type: 'payout', name: 'স্টাফ অগ্রিম প্রদান', meta: 'Cash Payout • Atifah', amount: '-৳5,000.00', time: '03:00 PM' }
       ]
     },
     kabbo: {
@@ -2886,6 +2886,8 @@ function initTransactionsHistorySimulator() {
       ]
     }
   };
+  staffData.masum = staffData.ihan;
+  staffData.xman = staffData.atifah;
 
   // DOM Elements
   const empChips = document.querySelectorAll('.rn-emp-chip');
@@ -2905,7 +2907,7 @@ function initTransactionsHistorySimulator() {
   const txnCountEl = document.getElementById('rnTxnCount');
   const txnContainer = document.getElementById('rnTxnItemsContainer');
 
-  let currentEmployee = 'masum';
+  let currentEmployee = 'ihan';
 
   function renderView() {
     // 1. Check if 'all' or specific employee is selected
@@ -2915,8 +2917,8 @@ function initTransactionsHistorySimulator() {
 
       // Combine all transactions for 'all' view
       const allTxns = [
-        ...staffData.masum.transactions,
-        ...staffData.xman.transactions,
+        ...staffData.ihan.transactions,
+        ...staffData.atifah.transactions,
         ...staffData.kabbo.transactions,
         { type: 'expense', name: 'সেলুনের চা ও নাস্তা', meta: 'Cash • Expense', amount: '-৳180.00', time: '04:00 PM' }
       ];
@@ -3038,7 +3040,7 @@ function initExpensesScreenSimulator() {
   // Expenses Database
   let expensesList = [
     { id: 1, name: 'চা ও নাস্তা (কাস্টমার ও স্টাফ)', amount: 180, time: 'Today, 03:45 PM', creator: 'kabbo (মালিক)' },
-    { id: 2, name: 'ব্লেড ও কটন রোল প্যাক', amount: 450, time: 'Today, 01:20 PM', creator: 'masum (ম্যানেজার)' },
+    { id: 2, name: 'ব্লেড ও কটন রোল প্যাক', amount: 450, time: 'Today, 01:20 PM', creator: 'Ihan (ম্যানেজার)' },
     { id: 3, name: 'দোকান ভাড়া ও ক্লিনিং', amount: 12220, time: '20 Sep, 11:00 AM', creator: 'kabbo (মালিক)' }
   ];
 
@@ -3213,14 +3215,14 @@ function initSimulatorBottomNav() {
 function initStaffPayoutsSimulator() {
   // Staff Database
   const staffLedger = {
-    masum: {
-      name: 'masum',
+    ihan: {
+      name: 'Ihan',
       meta: '01712-345678 • ৩৫% কমিশন',
       paid: '৳9,840',
       due: 1790
     },
-    xman: {
-      name: 'xMan',
+    atifah: {
+      name: 'Atifah',
       meta: '01823-456789 • ৪০% কমিশন',
       paid: '৳14,200',
       due: 3080
@@ -3232,11 +3234,13 @@ function initStaffPayoutsSimulator() {
       due: 4500
     }
   };
+  staffLedger.masum = staffLedger.ihan;
+  staffLedger.xman = staffLedger.atifah;
 
   // Payout History Receipts
   let historyReceipts = [
-    { name: 'masum', initials: 'MA', meta: '[CASH] সাপ্তাহিক কমিশন সেটেলমেন্ট', amount: '৳3,000', time: 'Today, 12:30 PM' },
-    { name: 'xMan', initials: 'XM', meta: '[BKASH] অগ্রিম স্টাফ উইথড্রয়াল', amount: '৳5,000', time: 'Yesterday, 03:00 PM' },
+    { name: 'Ihan', initials: 'IH', meta: '[CASH] সাপ্তাহিক কমিশন সেটেলমেন্ট', amount: '৳3,000', time: 'Today, 12:30 PM' },
+    { name: 'Atifah', initials: 'AT', meta: '[BKASH] অগ্রিম স্টাফ উইথড্রয়াল', amount: '৳5,000', time: 'Yesterday, 03:00 PM' },
     { name: 'Farzana', initials: 'FA', meta: '[NAGAD] প্রোডাক্ট ইনসেনティブ বোনাস', amount: '৳2,500', time: '20 Sep, 06:15 PM' }
   ];
 
@@ -3256,7 +3260,7 @@ function initStaffPayoutsSimulator() {
   const submitTextEl = document.getElementById('rnPayoutSubmitText');
   const historyListEl = document.getElementById('rnPayoutHistoryList');
 
-  let currentStaffId = 'masum';
+  let currentStaffId = 'ihan';
   let activeMethod = 'CASH';
 
   // Render Selected Staff Details

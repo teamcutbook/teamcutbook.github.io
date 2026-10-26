@@ -13397,12 +13397,37 @@ button {
 .ecosystem-section {
   position: relative;
   width: 100%;
-  background: #02120B;
+  background: #020C08;
   padding: 0;
   margin: 0;
   overflow: hidden;
   text-align: center;
   scroll-margin-top: 80px;
+}
+
+/* Glowing Neon Horizon Rails at Top & Bottom */
+.ecosystem-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, rgba(52, 211, 153, 0.6) 50%, transparent 100%);
+  z-index: 15;
+  box-shadow: 0 0 20px rgba(52, 211, 153, 0.7);
+}
+
+.ecosystem-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, rgba(52, 211, 153, 0.5) 50%, transparent 100%);
+  z-index: 15;
+  box-shadow: 0 0 20px rgba(52, 211, 153, 0.6);
 }
 
 /* Cosmic immersive stage */
@@ -13412,8 +13437,9 @@ button {
   min-height: max(100vh, 880px);
   height: max(100vh, 880px);
   background:
-    radial-gradient(circle at 50% 62%, rgba(0, 40, 26, 0.85) 0%, rgba(2, 18, 11, 0.98) 70%),
-    linear-gradient(180deg, #010F09 0%, #002115 45%, #02140D 100%);
+    radial-gradient(ellipse 90% 65% at 50% 62%, rgba(0, 80, 56, 0.45) 0%, rgba(2, 34, 22, 0.28) 40%, transparent 75%),
+    radial-gradient(circle at 50% 18%, rgba(16, 185, 129, 0.14) 0%, transparent 50%),
+    linear-gradient(180deg, #02110A 0%, #010805 35%, #02120C 70%, #010704 100%);
   overflow: hidden;
   user-select: none;
 }
@@ -13423,8 +13449,10 @@ button {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(ellipse at 50% 64%, rgba(0, 80, 56, 0.22) 0%, rgba(2, 44, 29, 0.12) 45%, transparent 75%);
-  filter: blur(90px);
+  background-image:
+    radial-gradient(circle at 50% 62%, rgba(0, 80, 56, 0.32) 0%, transparent 60%),
+    radial-gradient(rgba(111, 251, 190, 0.08) 1.2px, transparent 1.2px);
+  background-size: auto, 40px 40px;
   z-index: 1;
 }
 
@@ -13432,10 +13460,10 @@ button {
   position: absolute;
   top: 15%;
   left: 8%;
-  width: 550px;
-  height: 550px;
+  width: 580px;
+  height: 580px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.16) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.22) 0%, rgba(5, 150, 105, 0.06) 50%, transparent 70%);
   filter: blur(100px);
   pointer-events: none;
   z-index: 1;
@@ -13446,10 +13474,10 @@ button {
   position: absolute;
   bottom: 12%;
   right: 10%;
-  width: 520px;
-  height: 520px;
+  width: 540px;
+  height: 540px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(217, 119, 6, 0.12) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(217, 119, 6, 0.16) 0%, rgba(245, 158, 11, 0.05) 50%, transparent 70%);
   filter: blur(110px);
   pointer-events: none;
   z-index: 1;
@@ -13460,10 +13488,10 @@ button {
   position: absolute;
   top: 30%;
   right: 18%;
-  width: 480px;
-  height: 480px;
+  width: 500px;
+  height: 500px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(111, 251, 190, 0.14) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(111, 251, 190, 0.18) 0%, transparent 70%);
   filter: blur(95px);
   pointer-events: none;
   z-index: 1;
@@ -13507,16 +13535,16 @@ button {
 }
 
 .cosmic-tag {
-  background: rgba(147, 51, 234, 0.12);
-  border: 1px solid rgba(168, 85, 247, 0.35);
-  color: #C084FC;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(52, 211, 153, 0.35);
+  color: #34D399;
   font-weight: 750;
   font-size: 0.76rem;
   padding: 5px 15px;
   border-radius: 100px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  box-shadow: 0 0 24px rgba(168, 85, 247, 0.16);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.18);
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -13527,8 +13555,8 @@ button {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #C084FC;
-  box-shadow: 0 0 8px #C084FC, 0 0 16px rgba(192, 132, 252, 0.7);
+  background: #34D399;
+  box-shadow: 0 0 8px #34D399, 0 0 16px rgba(52, 211, 153, 0.7);
   animation: cosmicPipGlow 2s infinite ease-in-out;
 }
 
@@ -13538,13 +13566,13 @@ button {
 }
 
 .cosmic-sync-status {
-  background: rgba(10, 8, 24, 0.85);
+  background: rgba(3, 20, 14, 0.88);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(111, 251, 190, 0.22);
   border-radius: 100px;
   padding: 5px 14px;
-  color: #94A3B8;
+  color: #CBD5E1;
   font-size: 0.76rem;
   font-weight: 650;
   letter-spacing: 0.02em;
@@ -13567,13 +13595,13 @@ button {
 
 .ecosystem-stage-title {
   font-family: var(--font-heading);
-  font-size: clamp(1.9rem, 3.4vw, 3.2rem);
+  font-size: clamp(2rem, 3.6vw, 3.4rem);
   font-weight: 900;
-  color: #F8FAFC;
+  color: #FFFFFF;
   line-height: 1.15;
   letter-spacing: -0.03em;
   margin-bottom: 12px;
-  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.9), 0 0 60px rgba(168, 85, 247, 0.15);
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.9), 0 0 60px rgba(16, 185, 129, 0.22);
 }
 
 .ecosystem-stage-desc {
@@ -13684,11 +13712,11 @@ button {
   width: 136px;
   height: 136px;
   border-radius: 50%;
-  background: radial-gradient(circle at 45% 35%, #241c42 0%, #100b24 100%);
-  border: 2px solid rgba(16, 185, 129, 0.55);
+  background: radial-gradient(circle at 45% 35%, #0B3324 0%, #03170F 100%);
+  border: 2px solid rgba(52, 211, 153, 0.65);
   box-shadow:
-    0 0 32px -4px rgba(16, 185, 129, 0.45),
-    0 16px 36px rgba(0, 0, 0, 0.75),
+    0 0 36px -4px rgba(16, 185, 129, 0.5),
+    0 16px 36px rgba(0, 0, 0, 0.85),
     inset 0 2px 4px rgba(255, 255, 255, 0.25);
   display: flex;
   align-items: center;
@@ -13699,10 +13727,10 @@ button {
 
 .cosmic-center-owner:hover .owner-portal-disc {
   transform: scale(1.06);
-  border-color: rgba(52, 211, 153, 0.85);
+  border-color: rgba(52, 211, 153, 0.9);
   box-shadow:
-    0 0 45px rgba(16, 185, 129, 0.65),
-    0 20px 40px rgba(0, 0, 0, 0.85),
+    0 0 48px rgba(16, 185, 129, 0.7),
+    0 20px 42px rgba(0, 0, 0, 0.9),
     inset 0 2px 4px rgba(255, 255, 255, 0.4);
 }
 
@@ -13767,10 +13795,10 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  background: rgba(14, 18, 30, 0.88);
+  background: rgba(3, 20, 14, 0.92);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(16, 185, 129, 0.45);
+  border: 1px solid rgba(16, 185, 129, 0.5);
   padding: 5px 14px;
   border-radius: 9999px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6), 0 0 16px rgba(16, 185, 129, 0.25);
@@ -13813,14 +13841,14 @@ button {
   gap: 11px;
   padding: 10px 20px 10px 14px;
   border-radius: 9999px;
-  background: rgba(14, 11, 26, 0.86);
+  background: rgba(3, 22, 15, 0.9);
   backdrop-filter: blur(28px);
   -webkit-backdrop-filter: blur(28px);
-  border: 1.5px solid rgba(255, 255, 255, 0.16);
+  border: 1.5px solid rgba(111, 251, 190, 0.28);
   box-shadow:
-    0 14px 34px -4px rgba(0, 0, 0, 0.8),
+    0 14px 34px -4px rgba(0, 0, 0, 0.85),
     inset 0 1px 1.5px rgba(255, 255, 255, 0.22),
-    0 0 24px -2px var(--node-glow, rgba(96, 165, 250, 0.35));
+    0 0 24px -2px var(--node-glow, rgba(16, 185, 129, 0.35));
   transition:
     transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
     border-color 0.28s ease,
@@ -13831,11 +13859,11 @@ button {
 .cosmic-glass-pill:hover,
 .orbit-cosmic-node.is-focused .cosmic-glass-pill {
   transform: scale(1.08) translateY(-3px);
-  border-color: rgba(255, 255, 255, 0.36);
+  border-color: rgba(111, 251, 190, 0.6);
   box-shadow:
     0 20px 42px -4px rgba(0, 0, 0, 0.92),
-    inset 0 1px 2px rgba(255, 255, 255, 0.3),
-    0 0 34px 2px var(--node-glow, rgba(96, 165, 250, 0.55));
+    inset 0 1px 2px rgba(255, 255, 255, 0.35),
+    0 0 34px 2px var(--node-glow, rgba(16, 185, 129, 0.55));
 }
 
 /* Micro Status Pip */
@@ -13904,8 +13932,8 @@ button {
   --node-glow: rgba(250, 204, 21, 0.30);
 }
 .pill-reports {
-  --node-color: #A78BFA;
-  --node-glow: rgba(167, 139, 250, 0.30);
+  --node-color: #34D399;
+  --node-glow: rgba(52, 211, 153, 0.35);
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
@@ -13926,12 +13954,12 @@ button {
   gap: 8px;
   z-index: 30;
   pointer-events: auto;
-  background: rgba(10, 8, 20, 0.85);
+  background: rgba(3, 20, 14, 0.88);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   padding: 6px 12px;
   border-radius: 100px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(111, 251, 190, 0.22);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
 }
 
@@ -13951,18 +13979,18 @@ button {
 }
 
 .eco-ctrl-btn:hover {
-  background: rgba(168, 85, 247, 0.2);
-  border-color: rgba(168, 85, 247, 0.5);
+  background: rgba(16, 185, 129, 0.2);
+  border-color: rgba(52, 211, 153, 0.5);
   color: #FFF;
-  box-shadow: 0 0 18px rgba(168, 85, 247, 0.3);
+  box-shadow: 0 0 18px rgba(16, 185, 129, 0.3);
   transform: translateY(-1px);
 }
 
 .eco-ctrl-btn.active {
-  background: rgba(168, 85, 247, 0.3);
-  border-color: #A855F7;
+  background: rgba(16, 185, 129, 0.3);
+  border-color: #34D399;
   color: #FFF;
-  box-shadow: 0 0 20px rgba(168, 85, 247, 0.45);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.45);
 }
 
 .eco-quick-chips {
@@ -13970,13 +13998,13 @@ button {
   align-items: center;
   gap: 4px;
   padding-left: 8px;
-  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .eco-chip {
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  color: #64748B;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #94A3B8;
   font-size: 0.72rem;
   font-weight: 650;
   padding: 4px 10px;
@@ -13987,9 +14015,9 @@ button {
 
 .eco-chip:hover,
 .eco-chip.active {
-  background: rgba(168, 85, 247, 0.14);
-  border-color: rgba(168, 85, 247, 0.45);
-  color: #C084FC;
+  background: rgba(16, 185, 129, 0.16);
+  border-color: rgba(52, 211, 153, 0.45);
+  color: #6FFBBE;
 }
 
 /* ── Responsive Adaptations ── */
@@ -17872,13 +17900,17 @@ button {
 
 /* ── High-Impact Emerald CTA Banner ── */
 .cost-banner-cta {
-  background: linear-gradient(135deg, #005038 0%, #0d6a4d 50%, #006c49 100%);
+  background:
+    radial-gradient(120% 120% at 50% 0%, rgba(16, 185, 129, 0.24) 0%, transparent 60%),
+    radial-gradient(80% 80% at 100% 100%, rgba(217, 119, 6, 0.12) 0%, transparent 50%),
+    linear-gradient(145deg, #053324 0%, #022419 50%, #01150f 100%);
+  border: 1px solid rgba(111, 251, 190, 0.25);
   border-radius: 32px;
   padding: clamp(38px, 5vw, 64px) clamp(22px, 4vw, 50px);
   color: #FFFFFF;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 16px 40px -8px rgba(0, 80, 56, 0.35);
+  box-shadow: 0 24px 60px -12px rgba(0, 24, 16, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.14);
   margin-top: 36px;
   text-align: center;
 }
@@ -17921,19 +17953,32 @@ button {
 .cost-banner-tag-pill {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(8px);
-  padding: 6px 16px;
+  gap: 9px;
+  background: rgba(0, 0, 0, 0.42);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 7px 18px;
   border-radius: 9999px;
-  font-size: 0.85rem;
+  border: 1px solid rgba(111, 251, 190, 0.35);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  font-size: 0.88rem;
   font-weight: 750;
-  color: #96e7c2;
+  color: #FFFFFF;
+  letter-spacing: 0.01em;
+  transition: all 0.25s ease;
+}
+
+.cost-banner-tag-pill:hover {
+  background: rgba(0, 0, 0, 0.55);
+  border-color: rgba(111, 251, 190, 0.6);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35), 0 0 16px rgba(111, 251, 190, 0.25);
+  transform: translateY(-1px);
 }
 
 .cost-banner-tag-pill .text-gold {
-  color: #ffb95f;
-  font-size: 16px;
+  color: #FBBF24;
+  font-size: 18px;
+  filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.5));
 }
 
 .cost-banner-heading {
