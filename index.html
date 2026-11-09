@@ -171,7 +171,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
 
   <!-- Stylesheets (Minified Production Bundle) -->
-  <link rel="stylesheet" href="css/style.min.css?v=speed227">
+  <link rel="stylesheet" href="css/style.min.css?v=speed229">
 </head>
 <body>
 
@@ -192,6 +192,7 @@
         <a href="#payroll" class="nav-link">কারিগর ও কমিশন</a>
         <a href="#analytics" class="nav-link">লাভের হিসাব</a>
         <a href="#ecosystem" class="nav-link">এক ছাতার নিচে</a>
+        <a href="#tutorials" class="nav-link">ভিডিও গাইড</a>
         <a href="#pricing" class="nav-link">চার্জ ও কয়েন</a>
         <a href="#faq" class="nav-link">প্রশ্নোত্তর</a>
       </nav>
@@ -297,6 +298,7 @@
       <a href="#payroll" class="mobile-nav-link">কারিগর ও কমিশন</a>
       <a href="#analytics" class="mobile-nav-link">লাভের হিসাব</a>
       <a href="#ecosystem" class="mobile-nav-link">এক ছাতার নিচে</a>
+      <a href="#tutorials" class="mobile-nav-link">ভিডিও গাইড</a>
       <a href="#pricing" class="mobile-nav-link">চার্জ ও কয়েন</a>
       <a href="#faq" class="mobile-nav-link">প্রশ্নোত্তর</a>
       <a href="https://cutbookapp.web.app/" target="_blank" rel="noopener noreferrer" class="mobile-nav-link" style="color: #005038; font-weight: 750; display: flex; align-items: center; justify-content: space-between;">
@@ -377,6 +379,12 @@
             </svg>
             <span>১০০ ফ্রি কয়েন নিয়ে শুরু করুন</span>
           </a>
+          <button type="button" class="btn btn-hero-video btn-lg btn-pill" id="heroWatchVideoBtn" data-open-video="A_u5V8ibCFo" aria-label="কাটবুক পরিচিতি ভিডিও দেখুন">
+            <span class="hero-video-play-icon">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+            </span>
+            <span>ভিডিও দেখুন (১ মিনিট)</span>
+          </button>
           <a href="#features" class="btn btn-secondary btn-lg btn-pill">
             কীভাবে কাজ করে দেখুন
           </a>
@@ -3564,6 +3572,154 @@
 
     </div>
   </section>
+
+  <!-- ==========================================================================
+       SECTION 07 OF 10 — VIDEO TUTORIALS & USER GUIDES
+       ========================================================================== -->
+  <section class="section tutorial-section" id="tutorials">
+    <div class="tutorial-bg-glow glow-1"></div>
+    <div class="tutorial-bg-glow glow-2"></div>
+
+    <div class="container tutorial-container">
+      <!-- Section Header -->
+      <div class="section-header tutorial-header reveal-on-scroll">
+        <div class="section-tag-wrap" style="display: flex; justify-content: center; margin-bottom: 12px;">
+          <span class="section-tag tag-green">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: -2px; margin-right: 5px;"><path d="M21.58 7.19a2.7 2.7 0 0 0-1.9-1.9C18 5 12 5 12 5s-6 0-7.68.29a2.7 2.7 0 0 0-1.9 1.9C2 8.87 2 12 2 12s0 3.13.42 4.81a2.7 2.7 0 0 0 1.9 1.9C5.99 19 12 19 12 19s6 0 7.68-.29a2.7 2.7 0 0 0 1.9-1.9C22 15.13 22 12 22 12s0-3.13-.42-4.81zM10 15.5v-7l6 3.5-6 3.5z"/></svg>
+            সহজ ভিডিও টিউটোরিয়াল
+          </span>
+        </div>
+        <h2 class="section-title">চোখের পলকে শিখুন কাটবুক।<br><span class="highlight-green">দেখে নিন কীভাবে সেলুন চালাবেন।</span></h2>
+        <p class="section-desc">কাটবুক চালানো পানির মতো সহজ। ৩টি ছোট ভিডিও দেখলেই আপনি নিজে নিজে আপনার সেলুন রেজিস্টার করতে পারবেন এবং প্রতিদিনের কাজের ডিজিটাল খাতা পরিচালনা করতে পারবেন।</p>
+      </div>
+
+      <!-- Video Studio Grid (Cinema Player on Left, Step Cards on Right) -->
+      <div class="tutorial-studio-grid reveal-on-scroll">
+        <!-- Cinema Player Card -->
+        <div class="tutorial-player-card">
+          <div class="tutorial-player-viewport" id="tutorialPlayerViewport">
+            <!-- Thumbnail Poster (Loaded initially for zero-lag page load) -->
+            <div class="tutorial-poster" id="tutorialPoster" data-video-id="A_u5V8ibCFo">
+              <img src="https://img.youtube.com/vi/A_u5V8ibCFo/hqdefault.jpg" alt="কাটবুক কী? ভিডিও থাম্বনেইল" class="tutorial-poster-img" id="tutorialPosterImg" loading="lazy">
+              <div class="tutorial-poster-overlay">
+                <button type="button" class="tutorial-big-play-btn" id="tutorialBigPlayBtn" aria-label="ভিডিও চালু করুন">
+                  <span class="play-pulse-ring"></span>
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="#FFFFFF"><polygon points="7 4 20 12 7 20 7 4"/></svg>
+                </button>
+                <div class="tutorial-active-meta">
+                  <span class="active-step-badge" id="tutorialActiveBadge">ভিডিও ১ • পরিচিতি</span>
+                  <h3 class="active-video-title" id="tutorialActiveTitle">কাটবুক কী? | What is CutBook?</h3>
+                  <span class="active-video-duration">⏱️ ১ মিনিট টিউটোরিয়াল</span>
+                </div>
+              </div>
+            </div>
+            <!-- Dynamic Iframe Container -->
+            <div class="tutorial-iframe-container" id="tutorialIframeWrap" style="display: none;"></div>
+          </div>
+
+          <!-- Video Player Sub-bar -->
+          <div class="tutorial-player-footer">
+            <div class="player-footer-info">
+              <span class="channel-badge">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="#EF4444"><path d="M21.58 7.19a2.7 2.7 0 0 0-1.9-1.9C18 5 12 5 12 5s-6 0-7.68.29a2.7 2.7 0 0 0-1.9 1.9C2 8.87 2 12 2 12s0 3.13.42 4.81a2.7 2.7 0 0 0 1.9 1.9C5.99 19 12 19 12 19s6 0 7.68-.29a2.7 2.7 0 0 0 1.9-1.9C22 15.13 22 12 22 12s0-3.13-.42-4.81zM10 15.5v-7l6 3.5-6 3.5z"/></svg>
+                <span>অফিসিয়াল ইউটিউব চ্যানেল • @teamcutbook</span>
+              </span>
+            </div>
+            <a href="https://youtu.be/A_u5V8ibCFo" target="_blank" rel="noopener noreferrer" class="tutorial-yt-link" id="tutorialDirectYtLink">
+              <span>ইউটিউবে সরাসরি দেখুন</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 3 Interactive Step Cards -->
+        <div class="tutorial-steps-list">
+          <!-- Step 1 Card -->
+          <div class="tutorial-step-card active" data-video-id="A_u5V8ibCFo" data-title="কাটবুক কী? | What is CutBook?" data-badge="ভিডিও ১ • পরিচিতি" data-duration="১ মিনিট" data-yt-url="https://youtu.be/A_u5V8ibCFo" data-thumb="https://img.youtube.com/vi/A_u5V8ibCFo/hqdefault.jpg">
+            <div class="step-card-num">০১</div>
+            <div class="step-card-content">
+              <div class="step-card-top">
+                <span class="step-tag tag-intro">পরিচিতি ও ধারণা</span>
+                <span class="step-time">⏱️ ১ মিনিট</span>
+              </div>
+              <h4 class="step-title">কাটবুক কী ও কেন?</h4>
+              <p class="step-desc">খাতা-কলমের দিন শেষ! কাটবুক কীভাবে আপনার সেলুনের হিসাব, কারিগরের কমিশন ও লাভ-লোকসান সবচেয়ে সহজ করে তা জেনে নিন।</p>
+            </div>
+            <div class="step-card-action">
+              <span class="step-play-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+              </span>
+            </div>
+          </div>
+
+          <!-- Step 2 Card -->
+          <div class="tutorial-step-card" data-video-id="edjTrMea3aA" data-title="সেলুন মালিক হিসেবে CutBook ব্যবহার শুরু করবেন যেভাবে" data-badge="ভিডিও ২ • মালিকদের সেটআপ" data-duration="২ মিনিট" data-yt-url="https://youtu.be/edjTrMea3aA" data-thumb="https://img.youtube.com/vi/edjTrMea3aA/hqdefault.jpg">
+            <div class="step-card-num">০২</div>
+            <div class="step-card-content">
+              <div class="step-card-top">
+                <span class="step-tag tag-setup">দোকান সেটআপ</span>
+                <span class="step-time">⏱️ ২ মিনিট</span>
+              </div>
+              <h4 class="step-title">সেলুন অ্যাকাউন্ট কীভাবে খুলবেন?</h4>
+              <p class="step-desc">সেলুন মালিক হিসেবে সাইন-আপ, দোকানের নাম দেওয়া, চেয়ার এবং কারিগর বা স্টাফদের প্রোফাইল যুক্ত করার সম্পূর্ণ সহজ নিয়ম।</p>
+            </div>
+            <div class="step-card-action">
+              <span class="step-play-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+              </span>
+            </div>
+          </div>
+
+          <!-- Step 3 Card -->
+          <div class="tutorial-step-card" data-video-id="TIwWJ7EPQpM" data-title="সেলুনের হিসাব রাখুন সহজেই! | কাটবুক ব্যবহারের সম্পূর্ণ নিয়ম" data-badge="ভিডিও ৩ • সেলুন পরিচালনা" data-duration="৩ মিনিট" data-yt-url="https://youtu.be/TIwWJ7EPQpM" data-thumb="https://img.youtube.com/vi/TIwWJ7EPQpM/hqdefault.jpg">
+            <div class="step-card-num">০৩</div>
+            <div class="step-card-content">
+              <div class="step-card-top">
+                <span class="step-tag tag-daily">দৈনন্দিন ব্যবহার</span>
+                <span class="step-time">⏱️ ৩ মিনিট</span>
+              </div>
+              <h4 class="step-title">কাটবুক কীভাবে ব্যবহার করবেন?</h4>
+              <p class="step-desc">কাস্টমারকে সার্ভিস দেওয়া, বিল তৈরি, বকশিশ যোগ করা এবং কারিগরের কমিশন স্বয়ংক্রিয়ভাবে হিসাব করার প্র্যাকটিক্যাল গাইড।</p>
+            </div>
+            <div class="step-card-action">
+              <span class="step-play-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- YouTube Master Playlist Banner -->
+      <div class="tutorial-playlist-banner reveal-on-scroll">
+        <div class="playlist-banner-glow"></div>
+        <div class="playlist-banner-left">
+          <div class="playlist-yt-icon-box">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="#EF4444"><path d="M21.58 7.19a2.7 2.7 0 0 0-1.9-1.9C18 5 12 5 12 5s-6 0-7.68.29a2.7 2.7 0 0 0-1.9 1.9C2 8.87 2 12 2 12s0 3.13.42 4.81a2.7 2.7 0 0 0 1.9 1.9C5.99 19 12 19 12 19s6 0 7.68-.29a2.7 2.7 0 0 0 1.9-1.9C22 15.13 22 12 22 12s0-3.13-.42-4.81zM10 15.5v-7l6 3.5-6 3.5z"/></svg>
+          </div>
+          <div class="playlist-banner-text">
+            <div class="playlist-badge">
+              <span class="playlist-dot"></span>
+              <span>অফিসিয়াল প্লেলিস্ট • সব পর্ব একসাথে</span>
+            </div>
+            <h3 class="playlist-heading">কাটবুকের সম্পূর্ণ ভিডিও টিউটোরিয়াল প্লেলিস্ট</h3>
+            <p class="playlist-subtext">দোকান খরচ এন্ট্রি, কারিগরের হাওলাত/অগ্রিম কর্তন, ডেইলি রিপোর্ট চেক ও কয়েন রিচার্জ সহ সব ফিচার একসাথে শিখতে আমাদের ইউটিউব প্লেলিস্টটি দেখে নিন।</p>
+          </div>
+        </div>
+        <div class="playlist-banner-actions">
+          <a href="https://youtube.com/playlist?list=PLeJ3iL8vQNTc&si=Ci4tqvJTD6CDSYJV" target="_blank" rel="noopener noreferrer" class="btn btn-playlist-yt">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M21.58 7.19a2.7 2.7 0 0 0-1.9-1.9C18 5 12 5 12 5s-6 0-7.68.29a2.7 2.7 0 0 0-1.9 1.9C2 8.87 2 12 2 12s0 3.13.42 4.81a2.7 2.7 0 0 0 1.9 1.9C5.99 19 12 19 12 19s6 0 7.68-.29a2.7 2.7 0 0 0 1.9-1.9C22 15.13 22 12 22 12s0-3.13-.42-4.81zM10 15.5v-7l6 3.5-6 3.5z"/></svg>
+            <span>সম্পূর্ণ প্লেলিস্ট দেখুন (YouTube)</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+          </a>
+          <a href="https://wa.me/8801936853626?text=আসসালামু%20আলাইকুম,%20আমি%20কাটবুক%20টিউটোরিয়াল%20সম্পর্কে%20জানতে%20চাই।" target="_blank" rel="noopener noreferrer" class="btn btn-playlist-wa">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.392-10.416c-4.409 0-8 3.59-8 8 0 1.411.368 2.738 1.01 3.891l-1.074 3.924 4.024-1.056c1.115.608 2.392.941 3.75.941 4.409 0 8-3.59 8-8s-3.591-8-8-8zm0 14.5c-1.18 0-2.316-.339-3.295-.944l-.235-.145-2.443.641.652-2.38-.154-.246c-.664-.993-1.025-2.189-1.025-3.426 0-3.584 2.916-6.5 6.5-6.5s6.5 2.916 6.5 6.5-2.916 6.5-6.5 6.5z"/></svg>
+            <span>ফোনে সরাসরি বুঝে নিন</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
   <!-- ==========================================================================
        SECTION 07 OF 09 — SIMPLE AND CLEAR COSTS (CHARGES & COINS)
        ========================================================================== -->
@@ -3978,6 +4134,10 @@
           <div class="faq-answer-pane">
             <div class="faq-answer-inner">
               মাত্র ৫ থেকে ১০ মিনিটেই আপনার সেলুনের নাম, স্টাফদের নাম ও সেবার তালিকা যুক্ত করে কাজ শুরু করতে পারবেন। অ্যাপটি খুবই সহজ বাংলায় তৈরি, তাই যে কেউ খুব সহজে চালাতে পারে। এছাড়া প্রয়োজনে আমাদের টিম সরাসরি ফোনে বা হোয়াটসঅ্যাপে আপনাকে ফ্রিতে বুঝিয়ে দেবে।
+              <br>
+              <a href="#tutorials" style="display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; color: #10B981; font-weight: 750; text-decoration: underline;">
+                <span>📺 মাত্র ৩ মিনিটে সহজে শিখতে আমাদের ভিডিও টিউটোরিয়াল দেখুন →</span>
+              </a>
             </div>
           </div>
         </div>
@@ -4087,6 +4247,9 @@
             <a href="https://www.tiktok.com/@teamcutbook?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer" class="social-icon-btn social-tt" aria-label="Follow CutBook on TikTok" title="TikTok">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
             </a>
+            <a href="https://www.youtube.com/@teamcutbook" target="_blank" rel="noopener noreferrer" class="social-icon-btn social-yt" aria-label="Subscribe to CutBook on YouTube" title="YouTube">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
             <a href="https://www.pinterest.com/teamcutbook/" target="_blank" rel="noopener noreferrer" class="social-icon-btn social-pin" aria-label="Follow CutBook on Pinterest" title="Pinterest">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.372 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345-.09.375-.291 1.199-.334 1.357-.057.241-.188.291-.437.175-1.644-.766-2.67-3.169-2.67-5.101 0-4.155 3.018-7.971 8.706-7.971 4.57 0 8.12 3.257 8.12 7.607 0 4.541-2.863 8.196-6.837 8.196-1.335 0-2.59-.694-3.02-1.513l-.823 3.136c-.298 1.146-1.107 2.582-1.651 3.456 1.175.363 2.428.56 3.729.56 6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/></svg>
             </a>
@@ -4128,6 +4291,14 @@
           <h4 class="footer-col-title" role="heading" aria-level="2">কোম্পানি</h4>
           <div class="footer-links-list">
             <a href="#features">কাটবুক সম্পর্কে</a>
+            <a href="#tutorials" style="color: #6EE7B7; font-weight: 700; display: inline-flex; align-items: center; gap: 5px;">
+              <span>ভিডিও গাইড ও টিউটোরিয়াল</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+            </a>
+            <a href="https://youtube.com/playlist?list=PLeJ3iL8vQNTc&si=Ci4tqvJTD6CDSYJV" target="_blank" rel="noopener noreferrer" style="color: #F87171; font-weight: 700; display: inline-flex; align-items: center; gap: 5px;">
+              <span>ইউটিউব প্লেলিস্ট</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+            </a>
             <a href="#pricing">চার্জ ও কয়েন</a>
             <a href="#faq">প্রশ্নোত্তর ও সহায়তা</a>
             <a href="Privacy/index.html">প্রাইভেসি পলিসি</a>
@@ -4231,10 +4402,49 @@
     </a>
   </aside>
 
+  <!-- ==========================================================================
+       GLOBAL VIDEO PLAYER MODAL
+       ========================================================================== -->
+  <div class="video-modal-backdrop" id="globalVideoModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="video-modal-card">
+      <div class="video-modal-header">
+        <div class="video-modal-title-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#EF4444"><path d="M21.58 7.19a2.7 2.7 0 0 0-1.9-1.9C18 5 12 5 12 5s-6 0-7.68.29a2.7 2.7 0 0 0-1.9 1.9C2 8.87 2 12 2 12s0 3.13.42 4.81a2.7 2.7 0 0 0 1.9 1.9C5.99 19 12 19 12 19s6 0 7.68-.29a2.7 2.7 0 0 0 1.9-1.9C22 15.13 22 12 22 12s0-3.13-.42-4.81zM10 15.5v-7l6 3.5-6 3.5z"/></svg>
+          <span class="video-modal-title" id="videoModalTitle">কাটবুক ভিডিও টিউটোরিয়াল</span>
+        </div>
+        <button type="button" class="video-modal-close" id="videoModalCloseBtn" aria-label="Close video">&times;</button>
+      </div>
+
+      <div class="video-modal-body">
+        <div class="video-modal-iframe-wrapper">
+          <iframe id="videoModalIframe" src="" title="CutBook Video Tutorial" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <!-- Quick switcher inside modal -->
+      <div class="video-modal-footer">
+        <div class="video-modal-pills">
+          <button type="button" class="video-modal-pill active" data-modal-video="A_u5V8ibCFo" data-modal-title="কাটবুক কী? | What is CutBook?">
+            🎬 ১. কাটবুক কী?
+          </button>
+          <button type="button" class="video-modal-pill" data-modal-video="edjTrMea3aA" data-modal-title="সেলুন মালিক হিসেবে CutBook ব্যবহার শুরু করবেন যেভাবে">
+            🏪 ২. সেলুন অ্যাকাউন্ট খোলা
+          </button>
+          <button type="button" class="video-modal-pill" data-modal-video="TIwWJ7EPQpM" data-modal-title="সেলুনের হিসাব রাখুন সহজেই! | কাটবুক ব্যবহারের সম্পূর্ণ নিয়ম">
+            ✂️ ৩. ব্যবহারের নিয়ম
+          </button>
+        </div>
+        <a href="https://youtube.com/playlist?list=PLeJ3iL8vQNTc&si=Ci4tqvJTD6CDSYJV" target="_blank" rel="noopener noreferrer" class="video-modal-playlist-link">
+          <span>সম্পূর্ণ প্লেলিস্ট (YouTube) ↗</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
   <!-- Hidden Google Translate Element -->
   <div id="google_translate_element" style="display:none;" class="notranslate"></div>
 
   <!-- Master JavaScript (Minified & Deferred) -->
-  <script src="js/script.min.js?v=speed217" defer></script>
+  <script src="js/script.min.js?v=speed229" defer></script>
 </body>
 </html>

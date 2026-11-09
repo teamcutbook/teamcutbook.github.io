@@ -67,6 +67,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Mobile Sticky Download Pill Dock
   initMobileStickyDock();
+
+  // Video Tutorials & Interactive Hub
+  initVideoTutorials();
 });
 
 /* --------------------------------------------------------------------------
@@ -815,22 +818,20 @@ function initGalaxyOrbit() {
   }
 
   // 3. Celestial Starlight & Cosmic Dust Particles (Subtle glowing dust motes)
-  const DUST_COUNT = window.innerWidth < 768 ? 75 : 150;
+  const DUST_COUNT = window.innerWidth < 768 ? 60 : 110;
   const dustParticles = [];
   for (let i = 0; i < DUST_COUNT; i++) {
-    const isGold = Math.random() < 0.28;
-    const isMint = Math.random() < 0.32;
-    const isEmerald = Math.random() < 0.22;
-    let color = 'rgba(255, 255, 255, ';
-    if (isGold) color = 'rgba(251, 191, 36, ';
-    else if (isMint) color = 'rgba(111, 251, 190, ';
-    else if (isEmerald) color = 'rgba(52, 211, 153, ';
+    const isGold = Math.random() < 0.35;
+    const isMint = Math.random() < 0.35;
+    let color = 'rgba(16, 185, 129, ';
+    if (isGold) color = 'rgba(217, 119, 6, ';
+    else if (isMint) color = 'rgba(5, 150, 105, ';
 
     dustParticles.push({
       x: Math.random(),
       y: Math.random(),
-      radius: 0.6 + Math.random() * 1.5,
-      baseAlpha: 0.12 + Math.random() * 0.45,
+      radius: 0.8 + Math.random() * 1.5,
+      baseAlpha: 0.12 + Math.random() * 0.35,
       twinkleSpeed: 0.8 + Math.random() * 2.2,
       phase: Math.random() * Math.PI * 2,
       driftX: (Math.random() - 0.5) * 0.003,
@@ -844,9 +845,9 @@ function initGalaxyOrbit() {
   // Orbit 1 (Mid track):       semiMajor: 335, semiMinor: 165, tiltZ: +0.20 rad
   // Orbit 2 (Outer track):     semiMajor: 435, semiMinor: 205, tiltZ: -0.10 rad
   const ORBIT_TRACKS = [
-    { semiMajor: 230, semiMinor: 118, tiltZ: -0.24, speed: 0.15,  dir: 1,  photons: [0.15, 0.65], stroke: 'rgba(245, 158, 11, 0.20)' },
-    { semiMajor: 335, semiMinor: 165, tiltZ: 0.20,  speed: -0.10, dir: -1, photons: [0.05, 0.45, 0.80], stroke: 'rgba(111, 251, 190, 0.22)' },
-    { semiMajor: 435, semiMinor: 205, tiltZ: -0.10, speed: 0.075, dir: 1,  photons: [0.30, 0.75], stroke: 'rgba(16, 185, 129, 0.18)' }
+    { semiMajor: 230, semiMinor: 118, tiltZ: -0.24, speed: 0.15,  dir: 1,  photons: [0.15, 0.65], stroke: 'rgba(217, 119, 6, 0.35)', photonColor: 'rgba(217, 119, 6, ' },
+    { semiMajor: 335, semiMinor: 165, tiltZ: 0.20,  speed: -0.10, dir: -1, photons: [0.05, 0.45, 0.80], stroke: 'rgba(16, 185, 129, 0.38)', photonColor: 'rgba(16, 185, 129, ' },
+    { semiMajor: 435, semiMinor: 205, tiltZ: -0.10, speed: 0.075, dir: 1,  photons: [0.30, 0.75], stroke: 'rgba(5, 150, 105, 0.32)', photonColor: 'rgba(5, 150, 105, ' }
   ];
 
   // 5. Initialize the 7 Orbiting Salon Operation Nodes
@@ -990,18 +991,18 @@ function initGalaxyOrbit() {
       const py = cy + y3 * sc;
 
       const depth = Math.max(0, Math.min(1, (z3 + a) / (2 * a)));
-      const alpha = 0.35 + depth * 0.55;
+      const alpha = 0.45 + depth * 0.5;
 
       ctx.beginPath();
-      ctx.arc(px, py, 2.2, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255, 255, 255, ${alpha.toFixed(2)})`;
+      ctx.arc(px, py, 2.6, 0, Math.PI * 2);
+      ctx.fillStyle = (track.photonColor || 'rgba(16, 185, 129, ') + alpha.toFixed(2) + ')';
       ctx.fill();
 
-      const grad = ctx.createRadialGradient(px, py, 0, px, py, 7.0);
-      grad.addColorStop(0, `rgba(255, 255, 255, ${(alpha * 0.6).toFixed(2)})`);
-      grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+      const grad = ctx.createRadialGradient(px, py, 0, px, py, 7.5);
+      grad.addColorStop(0, (track.photonColor || 'rgba(16, 185, 129, ') + (alpha * 0.7).toFixed(2) + ')');
+      grad.addColorStop(1, (track.photonColor || 'rgba(16, 185, 129, ') + '0)');
       ctx.beginPath();
-      ctx.arc(px, py, 7.0, 0, Math.PI * 2);
+      ctx.arc(px, py, 7.5, 0, Math.PI * 2);
       ctx.fillStyle = grad;
       ctx.fill();
     });
@@ -4092,3 +4093,174 @@ function initLanguageSwitcher() {
   }
 }
 
+
+
+/* --------------------------------------------------------------------------
+   Video Tutorials & Interactive Hub
+   -------------------------------------------------------------------------- */
+function initVideoTutorials() {
+  const poster = document.getElementById('tutorialPoster');
+  const posterImg = document.getElementById('tutorialPosterImg');
+  const activeBadge = document.getElementById('tutorialActiveBadge');
+  const activeTitle = document.getElementById('tutorialActiveTitle');
+  const directYtLink = document.getElementById('tutorialDirectYtLink');
+  const iframeWrap = document.getElementById('tutorialIframeWrap');
+  const stepCards = document.querySelectorAll('.tutorial-step-card');
+  const bigPlayBtn = document.getElementById('tutorialBigPlayBtn');
+
+  // Video Data lookup
+  const videos = {
+    'A_u5V8ibCFo': {
+      id: 'A_u5V8ibCFo',
+      title: 'কাটবুক কী? | What is CutBook?',
+      badge: 'ভিডিও ১ • পরিচিতি',
+      duration: '১ মিনিট',
+      ytUrl: 'https://youtu.be/A_u5V8ibCFo',
+      thumb: 'https://img.youtube.com/vi/A_u5V8ibCFo/hqdefault.jpg'
+    },
+    'edjTrMea3aA': {
+      id: 'edjTrMea3aA',
+      title: 'সেলুন মালিক হিসেবে CutBook ব্যবহার শুরু করবেন যেভাবে',
+      badge: 'ভিডিও ২ • মালিকদের সেটআপ',
+      duration: '২ মিনিট',
+      ytUrl: 'https://youtu.be/edjTrMea3aA',
+      thumb: 'https://img.youtube.com/vi/edjTrMea3aA/hqdefault.jpg'
+    },
+    'TIwWJ7EPQpM': {
+      id: 'TIwWJ7EPQpM',
+      title: 'সেলুনের হিসাব রাখুন সহজেই! | কাটবুক ব্যবহারের সম্পূর্ণ নিয়ম',
+      badge: 'ভিডিও ৩ • সেলুন পরিচালনা',
+      duration: '৩ মিনিট',
+      ytUrl: 'https://youtu.be/TIwWJ7EPQpM',
+      thumb: 'https://img.youtube.com/vi/TIwWJ7EPQpM/hqdefault.jpg'
+    }
+  };
+
+  let currentVideoId = 'A_u5V8ibCFo';
+  let isPlaying = false;
+
+  function loadPlayerVideo(vid, autoPlay = false) {
+    const data = videos[vid];
+    if (!data) return;
+    currentVideoId = vid;
+
+    if (activeBadge) activeBadge.textContent = data.badge;
+    if (activeTitle) activeTitle.textContent = data.title;
+    if (directYtLink) directYtLink.href = data.ytUrl;
+    if (posterImg) posterImg.src = data.thumb;
+
+    stepCards.forEach(card => {
+      card.classList.toggle('active', card.getAttribute('data-video-id') === vid);
+    });
+
+    if (autoPlay || isPlaying) {
+      playCinemaVideo(vid);
+    } else {
+      if (iframeWrap) {
+        iframeWrap.style.display = 'none';
+        iframeWrap.innerHTML = '';
+      }
+      if (poster) poster.style.display = 'block';
+      isPlaying = false;
+    }
+  }
+
+  function playCinemaVideo(vid) {
+    if (!iframeWrap) return;
+    isPlaying = true;
+    if (poster) poster.style.display = 'none';
+    iframeWrap.style.display = 'block';
+    iframeWrap.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${vid}?autoplay=1&rel=0" title="CutBook Video Tutorial" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="width: 100%; height: 100%; border: none;"></iframe>`;
+  }
+
+  if (bigPlayBtn) {
+    bigPlayBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      playCinemaVideo(currentVideoId);
+    });
+  }
+
+  if (poster) {
+    poster.addEventListener('click', () => {
+      playCinemaVideo(currentVideoId);
+    });
+  }
+
+  stepCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const vid = card.getAttribute('data-video-id');
+      if (vid) {
+        loadPlayerVideo(vid, true);
+      }
+    });
+  });
+
+  // Global Video Modal
+  const modal = document.getElementById('globalVideoModal');
+  const modalIframe = document.getElementById('videoModalIframe');
+  const modalTitle = document.getElementById('videoModalTitle');
+  const modalCloseBtn = document.getElementById('videoModalCloseBtn');
+  const modalPills = document.querySelectorAll('.video-modal-pill');
+
+  function openVideoModal(vid, title) {
+    if (!modal || !modalIframe) return;
+    const vData = videos[vid] || { title: title || 'কাটবুক ভিডিও টিউটোরিয়াল' };
+    modalIframe.src = `https://www.youtube-nocookie.com/embed/${vid}?autoplay=1&rel=0`;
+    if (modalTitle) modalTitle.textContent = vData.title || title;
+
+    modalPills.forEach(pill => {
+      pill.classList.toggle('active', pill.getAttribute('data-modal-video') === vid);
+    });
+
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeVideoModal() {
+    if (!modal || !modalIframe) return;
+    modalIframe.src = '';
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  if (modalCloseBtn) {
+    modalCloseBtn.addEventListener('click', closeVideoModal);
+  }
+
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeVideoModal();
+      }
+    });
+  }
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
+      closeVideoModal();
+    }
+  });
+
+  modalPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      const vid = pill.getAttribute('data-modal-video');
+      const title = pill.getAttribute('data-modal-title');
+      if (vid) {
+        openVideoModal(vid, title);
+      }
+    });
+  });
+
+  // Wire all buttons that trigger video modal (e.g. Hero button)
+  const triggerBtns = document.querySelectorAll('[data-open-video]');
+  triggerBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const vid = btn.getAttribute('data-open-video') || 'A_u5V8ibCFo';
+      const vData = videos[vid];
+      openVideoModal(vid, vData ? vData.title : 'কাটবুক পরিচিতি');
+    });
+  });
+}
